@@ -1,4 +1,4 @@
-
+var getGoals;
 var selectTab;
 $(document).ready(function(){
 
@@ -499,12 +499,9 @@ $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFDE15","col
     });
     
     
-    function getGoals(moods){
-
-		  var local=[]; 
-		
+    getGoals = function (moods){
+        var local=[]; 
         switch(moods){
-                
             case "Broke": 
                 
                 local=Broke.slice(0);
@@ -533,14 +530,10 @@ $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFDE15","col
             case "Social": 
                
                 local=Social.slice(0);
-                break;
-                
+                break;       
         }
-     
-		return local;
-
-	
-	}
+		return local;	
+	};
    
 
     
@@ -784,127 +777,127 @@ var $smartGoals = "smartGoals";
         }
     
 
-    $(".emergency-funds > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
-        
-    });
+        $(".emergency-funds > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $emergencyFunds + "&smood=" + sipMood;
+
+        });
+
+
+        $(".tax-savings > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $taxSavings + "&smood=" + sipMood;
+
+        });
+
+
+        $(".build-wealth > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $buildWealth + "&smood=" + sipMood;
+
+        });
+
+
+        $(".smart-goals > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $smartGoals + "&smood=" + sipMood;
+
+        });
     
-    
-        $(".tax-savings > p").click(function(){
+    // $(".emergency-funds > img")
+    //     .on
+    // ({
         
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$emergencyFunds+$onHover+$imgExtension);
+    //     }, 
         
-    });
-    
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$emergencyFunds+$imgExtension);
+    //     }, 
         
-        $(".build-wealth > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
-        
-    });
-    
-    
-            $(".smart-goals > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
-        
-    });
-    
-    $(".emergency-funds > img")
-        .on
-    ({
-        
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$emergencyFunds+$onHover+$imgExtension);
-        }, 
-        
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$emergencyFunds+$imgExtension);
-        }, 
-        
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
          
-        }
+    //     }
           
           
-    });
+    // });
     
-    $(".tax-savings > img")
-        .on
-    ({
+    // $(".tax-savings > img")
+    //     .on
+    // ({
+    //     mouseenter: function() 
+    //     {
+    //         debugger;
+    //         $(this).attr("src", $imgLink+$taxSavings+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$taxSavings+$imgExtension);
+    //     }, 
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$taxSavings+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$taxSavings+$imgExtension);
-        }, 
-        
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
     
         
-    $(".build-wealth > img")
-        .on
-    ({
+    // $(".build-wealth > img")
+    //     .on
+    // ({
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$buildWealth+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$buildWealth+$imgExtension);
-        }, 
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$buildWealth+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$buildWealth+$imgExtension);
+    //     }, 
         
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
     
-    $(".smart-goals > img")
-        .on
-    ({
+    // $(".smart-goals > img")
+    //     .on
+    // ({
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$smartGoals+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$smartGoals+$imgExtension);
-        }, 
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$smartGoals+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$smartGoals+$imgExtension);
+    //     }, 
         
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
 
     
    $(".how-it-works .panel").click(function(){ 
@@ -958,8 +951,9 @@ var $smartGoals = "smartGoals";
             goal.substr(goal);
             goal = goal.substr(goal);
             var mood = $('.frogImageMoods #setMood').attr('src');
-            mood = mood.slice(0, -4)
-            sessionStorage.setItem('tempGoals', JSON.stringify({"goal": goal, "mood": mood}));
+            var moodText = $('.frogImageMoods #setMoodText').html();
+            moodText = moodText.substring(moodText.indexOf(" ") + 1);
+            sessionStorage.setItem('tempGoals', JSON.stringify({"goal": goal, "mood": mood, "moodText": moodText}));
             console.log(sessionStorage.getItem("tempGoals"));
         }
     });
@@ -983,7 +977,6 @@ var $smartGoals = "smartGoals";
          var goalImg = $("#mood",this).text(); 
       currentMood = $("img", this).attr("mood");
         var currentImg =  $("img", this).attr("src");
-            
         $("img", this).attr("src",   $GoalimgLink+currentMood+"/"+goalImg+$onHover+$imgExtension);     
 }
         

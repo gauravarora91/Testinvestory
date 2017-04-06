@@ -49,9 +49,9 @@ textarea { resize: none }
 .btn-hr-wrapper .dropdown-menu { top: 25px; left: 6px }
 .btn-hr-wrapper-left { text-align: left; margin-left: 0 }
 .btn-hr-wrapper.clean { margin-right: 0; margin-left: 0 }
-
-
-
+input { outline: none }
+.contentMood #Indicator { display: block!important; padding: 10px }
+.yourMood h1, .yourMood h4, .yourMood p { font-family: mermaid }
 
 /* Avatar */
 .avatar{ position: relative; padding: 0; width: auto; margin-top: -0.8em }
@@ -1125,9 +1125,8 @@ h2.h2hstyle
 
 .contentMood .page2 .login-btn {
     position: absolute;
-    top: 0px!important;
-    left: 300px;
-    
+    top: 30px!important;
+    left: 340px;
 }
 
 svg circle {

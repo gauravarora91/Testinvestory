@@ -487,11 +487,11 @@
                                <div id="" class="page2">
 <!--                        <h2>Education</h2>-->
 								   <br />
-                       <p>I need INR<input class="blankInput"  name="amount" id="amount" placeholder="" min="1000" max="10000000" value=""/>
+                       <p>I need INR <input style="box-shadow: -2px 5px 0px -3px #333; border: 0; margin: 0 10px" class="blankInput"  name="amount" id="amount" placeholder="" min="1000" max="10000000" value=""/>
 						  
                        <!-- <span ng-show="signUpForm.mnumber.$touched && signUpForm.mnumber.$invalid">Phone number is invalid.</span>-->
 						   
-						   in<input class="blankInput" type="number"  min="1" max="50" placeholder="" id="time"   value=""/> (Years)</p>
+						   in<input style="margin: 0 10px" class="blankInput" type="number"  min="1" max="50" placeholder="" id="time"   value=""/> (Years)</p>
                     <div class="login-btn">
                                  
                 <button type="button" id="go" class="btn btn-lg moodNav go" onclick="setProfile(0,1,0);" > Go </button> 
@@ -1439,7 +1439,6 @@ var txt1 = "<tr><td>"+data[0][i].name+"</td><td>"+data[0][i].category+"</td><td>
 		
 function myinit(riskRate, chooseTable, storeAllocation)
         {
-            debugger;
 			// alert(localStorage.sipInvestment);
 			if(localStorage.sipInvestment){
 				 
@@ -2089,7 +2088,8 @@ $(document).ready(function() {
         var initializeTabs = function() {
             if(loggedIn ) {
                 var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals')); 
-                selectTab(tempGoals.currentPage);     
+                selectTab(tempGoals.currentPage);
+                $('.frogImageMoods #setMood').attr('src', tempGoals.mood);
                 document.getElementById("eqAmt").innerHTML=tempGoals.amt1;
                 document.getElementById("hybAmt").innerHTML=tempGoals.amt2;
                 document.getElementById("debAmt").innerHTML=tempGoals.amt3;   
@@ -2105,7 +2105,24 @@ $(document).ready(function() {
                 $("#amount").val(tempGoals.goalAmount);
                 $('#time').val(Number(tempGoals.time));
                 console.log(JSON.parse(sessionStorage.getItem('sessionStorage')));
-                sessionStorage.removeItem('tempGoals');
+                
+
+                
+                var moodId = tempGoals.moodText;
+                var local;
+                local = getGoals(moodId);
+                // $(".frogImageMoods img").attr("src", "images/" + moodImgName + $imgExtension);
+                $(".frogImageMoods img").attr("src", tempGoals.mood);
+                $(".frogImageMoods h1").html("Feeling "+ moodId);
+                $(".below").empty();
+                for (i = 0; i < local.length; i++) {
+                    $(".below").append("<div class='goal' id=''><img src='images/goals/" + moodId + "/" + local[i] + ".png' mood=" + moodId + " alt='Home view'><p id='mood'><span></span>" + local[i] + "</p></div>");
+                }
+                $('p:contains('+tempGoals.goal+')').children('span').css('background', 'yellow');
+                $('span#goalSelected').html(tempGoals.goal);
+
+                // sessionStorage.removeItem('tempGoals');
+
             }
         }
 

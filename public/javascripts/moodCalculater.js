@@ -1,6 +1,5 @@
   
 function setProfile(profileRate, table, storeAllocation){
-debugger;
 	var riskProfile = "";
 	var tableNo = "";
 	
