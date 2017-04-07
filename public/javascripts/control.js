@@ -1,5 +1,5 @@
-
-
+var getGoals;
+var selectTab;
 $(document).ready(function(){
 
 
@@ -499,12 +499,9 @@ $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFDE15","col
     });
     
     
-    function getGoals(moods){
-
-		  var local=[]; 
-		
+    getGoals = function (moods){
+        var local=[]; 
         switch(moods){
-                
             case "Broke": 
                 
                 local=Broke.slice(0);
@@ -533,14 +530,10 @@ $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFDE15","col
             case "Social": 
                
                 local=Social.slice(0);
-                break;
-                
+                break;       
         }
-     
-		return local;
-
-	
-	}
+		return local;	
+	};
    
 
     
@@ -636,7 +629,7 @@ var sourceGoal = getParameterByName('goal');
         
         for(i=local.length-1; i>= 0; i--){
             if(i==sourceGoal){
-           	alert(i);
+        
                 $(".below").prepend("<div class='goal' id='activ'><img src='"+$GoalimgLink+source+"/"+local[i]+$onHover+$imgExtension+"' mood="+source+" alt='Home view'><p id='mood'><span style='background-color: #FFDE15'></span>"+local[i]+"</p></div>");
                 
              
@@ -701,31 +694,29 @@ function setFrogMood(mood){
     
 //Moods 
   
-    $(".moods .slider .change").click(function(){
+$(".moods .slider .change").click(function () {
 
-    
+
     var moodId = $(this).attr("id");
-    
-		 window.location.href = "/GoalSelection?mood="+moodId;
-		
+
+    // window.location.href = "/GoalSelection?mood=" + moodId;
     var moodImgName = moodId.toUpperCase();
-    
-      
-          var local;
-		local = getGoals(moodId);
-		
-    $(".frogImageMoods img").attr("src", $imgLink+moodImgName+$imgExtension);
-    
-    $(".frogImageMoods h1").html($Feeling+" "+moodId);
-        
-         $(".below").empty();
- 
-              for(i=0; i < local.length; i++){
-            
-               $(".below").append("<div class='goal' id=''><img src='"+$GoalimgLink+moodId+"/"+local[i]+$imgExtension+"' mood="+moodId+" alt='Home view'><p id='mood'><span></span>"+local[i]+"</p></div>");
-        }
-        
-    
+
+    var local;
+    local = getGoals(moodId);
+
+    $(".frogImageMoods img").attr("src", $imgLink + moodImgName + $imgExtension);
+
+    $(".frogImageMoods h1").html($Feeling + " " + moodId);
+
+    $(".below").empty();
+
+    for (i = 0; i < local.length; i++) {
+
+        $(".below").append("<div class='goal' id=''><img src='" + $GoalimgLink + moodId + "/" + local[i] + $imgExtension + "' mood=" + moodId + " alt='Home view'><p id='mood'><span></span>" + local[i] + "</p></div>");
+    }
+
+
 });    
   
     
@@ -786,127 +777,127 @@ var $smartGoals = "smartGoals";
         }
     
 
-    $(".emergency-funds > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
-        
-    });
+        $(".emergency-funds > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $emergencyFunds + "&smood=" + sipMood;
+
+        });
+
+
+        $(".tax-savings > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $taxSavings + "&smood=" + sipMood;
+
+        });
+
+
+        $(".build-wealth > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $buildWealth + "&smood=" + sipMood;
+
+        });
+
+
+        $(".smart-goals > p").click(function () {
+
+            var sipMood = $(this).attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $smartGoals + "&smood=" + sipMood;
+
+        });
     
-    
-        $(".tax-savings > p").click(function(){
+    // $(".emergency-funds > img")
+    //     .on
+    // ({
         
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$emergencyFunds+$onHover+$imgExtension);
+    //     }, 
         
-    });
-    
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$emergencyFunds+$imgExtension);
+    //     }, 
         
-        $(".build-wealth > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
-        
-    });
-    
-    
-            $(".smart-goals > p").click(function(){
-        
-        var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
-        
-    });
-    
-    $(".emergency-funds > img")
-        .on
-    ({
-        
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$emergencyFunds+$onHover+$imgExtension);
-        }, 
-        
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$emergencyFunds+$imgExtension);
-        }, 
-        
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
          
-        }
+    //     }
           
           
-    });
+    // });
     
-    $(".tax-savings > img")
-        .on
-    ({
+    // $(".tax-savings > img")
+    //     .on
+    // ({
+    //     mouseenter: function() 
+    //     {
+    //         debugger;
+    //         $(this).attr("src", $imgLink+$taxSavings+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$taxSavings+$imgExtension);
+    //     }, 
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$taxSavings+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$taxSavings+$imgExtension);
-        }, 
-        
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$taxSavings+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
     
         
-    $(".build-wealth > img")
-        .on
-    ({
+    // $(".build-wealth > img")
+    //     .on
+    // ({
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$buildWealth+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$buildWealth+$imgExtension);
-        }, 
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$buildWealth+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$buildWealth+$imgExtension);
+    //     }, 
         
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$buildWealth+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
     
-    $(".smart-goals > img")
-        .on
-    ({
+    // $(".smart-goals > img")
+    //     .on
+    // ({
         
-        mouseenter: function() 
-        {
-            $(this).attr("src", $imgLink+$smartGoals+$onHover+$imgExtension);
-        },         
-        mouseleave: function()
-        {
-            $(this).attr("src", $imgLink+$smartGoals+$imgExtension);
-        }, 
+    //     mouseenter: function() 
+    //     {
+    //         $(this).attr("src", $imgLink+$smartGoals+$onHover+$imgExtension);
+    //     },         
+    //     mouseleave: function()
+    //     {
+    //         $(this).attr("src", $imgLink+$smartGoals+$imgExtension);
+    //     }, 
         
-        click: function()
-        {
-             var sipMood = $(this).attr("id");
-             window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
+    //     click: function()
+    //     {
+    //          var sipMood = $(this).attr("id");
+    //          window.location.href = "GoalSelection?smartGoal="+$smartGoals+"&smood="+sipMood;
          
-        }
+    //     }
           
-    });
+    // });
 
     
    $(".how-it-works .panel").click(function(){ 
@@ -948,27 +939,34 @@ var $smartGoals = "smartGoals";
 }
     
 
-     $(document).on("click", '.below .goal',function(){
-        
-         $(this).attr("id","activ");
-          $("#mood span").css("background-color","#FFFFFF");
-        
-        $("#mood span",this).css("background-color","#FFDE15");
-         moodFile =  $("#mood",this).text(); 
-         
- goalName(moodFile);
-$('.page1 .next').removeAttr('disabled');
-     });
-    
+    $(document).on("click", '.below .goal', function () {
+        $(this).attr("id", "activ");
+        $("#mood span").css("background-color", "#FFFFFF");
+        $("#mood span", this).css("background-color", "#FFDE15");
+        moodFile = $("#mood", this).text();
+        goalName(moodFile);
+        $('.page1 .next').removeAttr('disabled');
+        if(!loggedIn) {
+            var goal = moodFile;
+            goal.substr(goal);
+            goal = goal.substr(goal);
+            var mood = $('.frogImageMoods #setMood').attr('src');
+            var moodText = $('.frogImageMoods #setMoodText').html();
+            moodText = moodText.substring(moodText.indexOf(" ") + 1);
+            sessionStorage.setItem('tempGoals', JSON.stringify({"goal": goal, "mood": mood, "moodText": moodText}));
+            console.log(sessionStorage.getItem("tempGoals"));
+        }
+    });
+
     var currentMood;
-    
-     $(document).on("mouseenter", '.below .goal',function(){
-        
-//          $("#mood span").css("background-color","#FFFFFF");
-//        
-//        $("#mood span",this).css("background-color","#FFDE15");
-         
-         var clickActive = $(this).attr("id");
+
+    $(document).on("mouseenter", '.below .goal', function () {
+
+        //          $("#mood span").css("background-color","#FFFFFF");
+        //        
+        //        $("#mood span",this).css("background-color","#FFDE15");
+
+        var clickActive = $(this).attr("id");
          
          
          
@@ -979,7 +977,6 @@ $('.page1 .next').removeAttr('disabled');
          var goalImg = $("#mood",this).text(); 
       currentMood = $("img", this).attr("mood");
         var currentImg =  $("img", this).attr("src");
-            
         $("img", this).attr("src",   $GoalimgLink+currentMood+"/"+goalImg+$onHover+$imgExtension);     
 }
         
@@ -1014,110 +1011,104 @@ var movingTo= 0;
     
 
     
+ $(".page2 .go").click(function(){ });
+    
     $(".page1 .next, .page1 .skip").click(function(){ 
+        
+        selectTab(2);
 
-        $(".contentMood .page1, #btm").hide();
-        currentPage=2;
-      
-         $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
-        
-        $(".pagination li:nth-child(2) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
-        
-         $("#goalSelected").text(moodFile);
-		//document.getElementById("setGoal").value = moodFile;
-		//document.getElementById("getMoodG").value = moodsss;
-        
-        //$(".page2 > h2").text(moodFile);
-        
-        $(".contentMood .page2, #Indicator").show();
-        
-        $(".contentMood .page2 .login-btn").css("top","65%"); 
- });
- 
-
-var once = true;
-    
-    $(".page2 .go").click(function(){ 
-    
-         currentPage=3;
-        $(".contentMood .page2 .login-btn").css("top","15%"); 
-        
-        if(once){
-             
-        $("#displayModal").modal("show");
-		
-         $(".contentMood .page3, .page3Sub, #rpText").show();
-        
-   $(".pagination li:nth-child(2) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
-        
-        $(".pagination li:nth-child(3) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
-        
-//         $(".contentMood .go").css({"background-color":"#FFFFFF","color":"#35BFD3","border-color":"#35BFD3"});
-//        
-              $(".page2 .dotHr").hide();
-            
-         $(".contentMood .page3> p").css("color","#35BFD3");
-        
-            once = false;
+    });
+    $(".page2 .next").click(function() { selectTab(4) });
+    $(".page2 .go").click(function(){ selectTab(3) });
+    $(".page4 .selectMode button").click( function() { selectTab(5, this) });
+    var once = true;
+    selectTab = function(tabNo, e) {
+        currentPage = tabNo;
+        var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
+        if(tempGoals) {
+            tempGoals.currentPage = currentPage;
         }
-        
-        
-     });
-    
-    
-      $(".page2 .next").click(function(){ 
-    
-         currentPage=4;
-        
-         $(".contentMood .page2,.contentMood .page3, .page3Sub,.contentMood .page4 .sub-page4").hide();
-    
-          
-             $(".pagination li:nth-child(3) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
-        
-        $(".pagination li:nth-child(4) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
-          
-           $(".contentMood .page4 #invest").css("color","#35BFD3");
-          
-              $(".contentMood .page4,.contentMood .page4 .selectMode").show();
-          
-          
-               });
-    
-var page4Risk;
-    $(".page4 .selectMode button").click(function(){ 
-        
-           
-        
-        var risk = $(this).attr("id");
-       page4Risk = risk;
-       
-        
-        if(risk == "dontKnow" ){
-             currentPage=4;
-            $(".contentMood .page4 .selectMode").hide();
+        sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+        switch (tabNo) {
+            case 2:
+                $('.contentMood > div').not('.page2').hide();
+                $('.contentMood .page2').show();
+                $(".contentMood .page1, #btm").hide();
+                $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
+                $(".pagination li:nth-child(2) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
+                $("#goalSelected").text(moodFile);
+                $(".contentMood .page2, #Indicator").show();
+                $(".contentMood .page2 .login-btn").css("top","65%"); 
+                break;
+
+            case 3:
+                currentPage = 3;
+                $(".contentMood .page2 .login-btn").css("top", "15%");
+
+                if (once) {
+                    $('.contentMood > div').not('.page2, .page3').hide();
+                    $("#displayModal").modal("show");
+                    $(".contentMood .page3, .page3Sub, #rpText").show();
+                    $(".pagination li:nth-child(2) a").css({ "background-color": "#FFFFFF", "color": "#FFDE15", "border-color": "#FFDE15" });
+                    $(".pagination li:nth-child(3) a").css({ "background-color": "#FFDE15", "color": "#35BFD3", "border-color": "#FFDE15" });    
+                    $(".page2 .dotHr").hide();
+                    $(".contentMood .page3> p").css("color", "#35BFD3");
+                    $('.contentMood .page2, .contentMood .page2 .page3').show();
+                    once = false;
+                }
+                break;
+
+            case 4:
+            $('.contentMood > div').not('.page4').hide();
+            $('.contentMood .page4').show();
+                $(".contentMood .page2,.contentMood .page3, .page3Sub,.contentMood .page4 .sub-page4").hide();
+                $(".pagination li:nth-child(3) a").css({ "background-color": "#FFFFFF", "color": "#FFDE15", "border-color": "#FFDE15" });
+                $(".pagination li:nth-child(4) a").css({ "background-color": "#FFDE15", "color": "#35BFD3", "border-color": "#FFDE15" });
+                $(".contentMood .page4 #invest").css("color", "#35BFD3");
+                $(".contentMood .page4,.contentMood .page4 .selectMode").show();
+                break;    
             
-            $(".contentMood .page4 .sub-page4").show();
-            
-}else{
-	currentPage=5;
-	 $("#riskSelected").text(rp);
-  localStorage.clear();
-     $("#displayModal").modal("show");
-	$("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
-     $(".contentMood .page4").hide();
-        
-        $(".pagination li:nth-child(4) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
-        
-        $(".pagination li:nth-child(5) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
-          
-           
-     $(".contentMood .page5, #yp, #riskSelected").show();
-          
-        
-}
+            case 5:
+                var page4Risk;
+                    
+                // debugger;
+                    
+                 var risk = $(e).attr("id");
+                    page4Risk = risk;
+                
+                    
+                //     if(risk == "dontKnow" ){
+                //         currentPage=4;
+                //         $(".contentMood .page4 .selectMode").hide();
+                        
+                //         $(".contentMood .page4 .sub-page4").show();
+                        
+                // }else{
+                    currentPage=5;
+                    $('.contentMood > div').not('.page5').hide();
+                    $('.contentMood .page5').show();
+                    $('.contentMood > div').not('.page4').hide();
+                    $('.contentMood .page4').show();
+                    $("#riskSelected").text(rp);
+                    localStorage.clear();
+                    $("#displayModal").modal("show");
+                    $("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
+                    $(".contentMood .page4").hide();
+                        
+                        $(".pagination li:nth-child(4) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
+                        
+                        $(".pagination li:nth-child(5) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
+                        
+                        
+                    $(".contentMood .page5, #yp, #riskSelected").show();
+                        
+                        
+                // }
+            }
+        }
  
-        
-      });
+    
+// $(".page4 .selectMode button").click(function () { selectTab5 });
     
     
     $(".page4 .sub-page4 .done").click(function(){ 
@@ -1214,7 +1205,6 @@ if(pathname != '/GoalSelection'){
 	//alert(pathname);
 	localStorage.clear();
 }
-
 	//localStorage.clear()
 
 var height = $( window ).height(); 
@@ -1225,6 +1215,4 @@ function resizeContent() {
  $("#section1,#section2,#section3,#section4").css("height",height);
    
 }
-
-
 

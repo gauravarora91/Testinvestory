@@ -531,22 +531,22 @@ app.get('/KnowUs',isLoggedIn, function(req, res){
 });
 
 	
-app.post("/PANStatus", function (req, res) {
-
+app.post("/PANStatus", function(req, res){
+	
 	currentPage = req.session.activePage = "/PANStatus";
 
 
 	loginStatus = checkLoginStatus(req);
-
-	if (loginStatus) {
-
-	} else {
-
+	
+	if(loginStatus){
+	
+	}else {
+		
 		console.log("end");
-
+		
 	}
 
-
+	
 });	
 	
 
@@ -800,6 +800,14 @@ function(paid,assets,callback){
 	})
 	
 	
+	app.get('/user_data', isLoggedIn, function(req, res) {
+		console.log(req.session);
+		loginStatus = checkLoginStatus(req);
+		console.log(checkLoginStatus(req));
+		res.setHeader('Content-Type', 'application/json');
+    	res.send(req.session);
+	})
+
 	app.get('/GoalSelection',isLoggedIn,function(req, res){
 		
 		
@@ -1382,32 +1390,29 @@ async.waterfall([
 	
 	app.post('/InsertOrders',isLoggedIn,function(req, res){
 		
-		
 	var userID = "109401";
-var memberID = "10940";
-var password = "123456";
-var passKey = "test";
+	var memberID = "10940";
+	var password = "123456";
+	var passKey = "test";
 	
+	async.waterfall([
+		function(callback){
 		
-async.waterfall([
-	function(callback){
-		
-		
-		//user investments header
-		var userId = req.session.savedplanheader.userid;
-		var goalId = req.session.savedplanheader.goalid;
-		var riskProfile = req.session.savedplanheader.riskprofile;
-		var masterAmount = req.session.savedplanheader.masteramount;
-		var totalYears = req.session.savedplanheader.totalyears;
-		var sip = req.session.savedplanheader.sip;
-		var status = "pending";
-		
+			//user investments header
+			var userId = req.session.savedplanheader.userid;
+			var goalId = req.session.savedplanheader.goalid;
+			var riskProfile = req.session.savedplanheader.riskprofile;
+			var masterAmount = req.session.savedplanheader.masteramount;
+			var totalYears = req.session.savedplanheader.totalyears;
+			var sip = req.session.savedplanheader.sip;
+			var status = "pending";
+			
 
-		creation_date = new Date();
-		modified_date = new Date();
+			creation_date = new Date();
+			modified_date = new Date();
 		
-		//Header table insert
-				 var query=client.query("INSERT INTO userinvestmentsheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING userinvestmentheaderid",[userId,goalId,riskProfile,masterAmount,totalYears,sip,status,
+			//Header table insert
+			var query=client.query("INSERT INTO userinvestmentsheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING userinvestmentheaderid",[userId,goalId,riskProfile,masterAmount,totalYears,sip,status,
 			 creation_date,modified_date,req.session.user.name],function(err, result) {
                     if(err){
 						console.log("cant insert assets header allocation data",err);
@@ -1416,20 +1421,10 @@ async.waterfall([
 						 //res.send(1);
 						 console.log("savedplanid"+result.rows[0]['userinvestmentheaderid']);
 						
-						
 						req.session.userinvestmentheaderid = result.rows[0]['userinvestmentheaderid'];
 						callback(null,req.session.userinvestmentheaderid)
-						
-						
-						 
 					}
-                                    
-                  
             });
-		
-		
-		
-		
 	},function(userid,callback){
 		
 			var len = req.session.savedplandetail.length;
@@ -2526,7 +2521,7 @@ var ePass = ""; //= "FjFMCDg4YPtsxrGRtJmeVQ%3d%3d";
 		})
 		
 	
-	app.post('/SavedPlansHeader',isLoggedIn,function(req, res){
+app.post('/SavedPlansHeader',isLoggedIn,function(req, res){
 		
 		loginStatus = checkLoginStatus(req);
 		
@@ -3076,7 +3071,7 @@ amtagg+=amtamount1;
 	sdata[0]=scheme;
 					
 					sdata[1]=amount;
-	console.log("lumpsum amount"+req.session.savedplandetail[0].allocationamount)
+//	console.log("lumpsum amount"+req.session.savedplandetail[0].allocationamount)
 	res.send(sdata)
 			//callback(null,headerData,asetDataDetail)
 			})		
@@ -3105,6 +3100,41 @@ amtagg+=amtamount1;
 				
 	});
 		
+app.post('/showScheme',isLoggedIn,function(req,res){
+	
+	req.session.showscheme = req.body.showScheme;
+		
+		console.log("scheme pa = "+req.session.showscheme);
+	
+	res.send(true);
+	//res.redirect('/GoalSelection');
+	
+})
+
+
+
+app.post('/setData',function(req,res){
+	
+		 
+	req.session.offlinegoalName = req.body.goalName;
+		req.session.offlineriskProfile = req.body.riskProfile;
+		req.session.offlinemasterAmount = req.body.masterAmount;
+		req.session.offlinetotalYears = req.body.totalYears;
+		req.session.offlinesip = req.body.sip;
+		req.session.offlineequityAmount = req.body.equityAmount;
+		req.session.offlinehybridAmount = req.body.hybridAmount;
+		req.session.offlinedebtAmount = req.body.debtAmount;
+		req.session.offlineequityPercentage = req.body.equityPercentage;
+		req.session.offlinehybridPercentage = req.body.hybridPercentage;
+		req.session.offlinedebtPercentage = req.body.debtPercentage;
+	
+	
+		req.session.save();
+		console.log("offline = "+req.session.offlinegoalName);
+	 console.log("offline = "+req.session.offlineriskProfile);
+	
+})
+	
 app.post('/showScheme',isLoggedIn,function(req,res){
 	
 	req.session.showscheme = req.body.showScheme;
@@ -3725,6 +3755,14 @@ app.get('/profile',isLoggedIn, function(req, res){
 		failureRedirect : '/tocurrent', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
+	
+	       app.post('/adminLogin', passport.authenticate('local-admin',{
+  
+       successRedirect : 'admin/index', // redirect to the secure profile section
+		failureRedirect : 'admin/login', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+})
+           );
 
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect : '/saveAssetOffline', // redirect to the secure profile section
@@ -3777,7 +3815,9 @@ app.get('/myStory',isLoggedIn, function(req, res){
 		 
 	
 	loginStatus = checkLoginStatus(req);
-	
+	if(loginStatus==true){
+        
+    
 	
 				var query=client.query("SELECT goal.name,count(userinvestmentsheader.goalid) FROM userinvestmentsheader inner join goal on userinvestmentsheader.goalid = goal.goalid where userinvestmentsheader.userid=$1 group by  goal.name ",[req.session.user.userid], 
                                  function(err, result){
@@ -3786,12 +3826,13 @@ app.get('/myStory',isLoggedIn, function(req, res){
 			
 				
 			//console.log("details header"+result.rows[0]['count']);
-				
+				if(result.rows.length>0){
 				if(result.rows[0]['count'] > 0){
 					investmentData = result.rows;
 					console.log(investmentData[0].count);
 					
-					}else{
+					}
+                }else{
 						
 						investmentData = false;
 					}
@@ -3799,7 +3840,25 @@ app.get('/myStory',isLoggedIn, function(req, res){
 					  res.render(pageName,{
 	  
 	  user : req.user ,
-						  invest:investmentData,
+     invest:investmentData,
+     selectorDisplay: "show",
+     loggedIn: loginStatus,
+     smessage: req.flash('signupMessage'),
+     lmessage: req.flash('loginMessage'),
+	  path:'myStoryData',
+     footerDisplay: "hide",
+	  footerData1: "Blog",
+	  footerData2: "FAQs"
+  });
+
+				
+				})
+    }
+    else{
+        res.render(pageName,{
+	  
+	  user : req.user ,
+						  invest:"",
 	  	  selectorDisplay: "show",
 	  		loggedIn: loginStatus,
 	   smessage: req.flash('signupMessage'),
@@ -3809,9 +3868,8 @@ app.get('/myStory',isLoggedIn, function(req, res){
 	  footerData1: "Blog",
 	  footerData2: "FAQs"
   });
-
-				
-				})
+        
+    }
 	
 	});
 	

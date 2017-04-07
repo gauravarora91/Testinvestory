@@ -22,7 +22,7 @@ function showSIP(){
 	
 	$("#setMood").attr("src", "images/emergencyFundsMood.png");  
 	$("#setMoodText").hide(); 
-	$(" .moodGoals > img,.page5 > p,.page6 > p").css("visibility","hidden");  
+	$(" .moodGoals > img").css("visibility","hidden");  
 	$(" .slider").css("visibility","hidden");
 	$(" .contentMood .page4 #invest").css("visibility","hidden");
 	  $(".contentMood .page1, .contentMood .page2,.contentMood .page3, .page3Sub,.contentMood .page4 .sub-page4").hide();

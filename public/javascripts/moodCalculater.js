@@ -1,6 +1,6 @@
   
 function setProfile(profileRate, table, storeAllocation){
-
+	// debugger;
 	var riskProfile = "";
 	var tableNo = "";
 	
@@ -22,7 +22,14 @@ function setProfile(profileRate, table, storeAllocation){
 			default: riskProfile="Conservative";
 				
 		}
-	
+
+	if(!loggedIn) {
+			var tempGoals = JSON.parse(sessionStorage.getItem("tempGoals"));
+			tempGoals.riskProfile = riskProfile;
+			sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+	}
+
+
 	showRiskProfile(riskProfile);
 	myinit(riskProfile, tableNo,storeAllocation);
 	

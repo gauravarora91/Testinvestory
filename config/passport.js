@@ -124,9 +124,10 @@ var newUser= new User();
             else
                 {
                     
-                    
-                    newUser.password=req.body.password;
-                    newUser.passwordhashed=password; //decrypt password
+                  
+                    var psw=req.body.password;
+
+                    newUser.password= bcrypt.hashSync(psw, bcrypt.genSaltSync(8), null);
                     newUser.email = email;
                     newUser.name = req.body.username;
                     newUser.mobile=req.body.mnumber;
@@ -134,7 +135,7 @@ var newUser= new User();
                     newUser.modified_date=new Date();
                    // console.log(name,password,mobile,creation_date,modified_date);
                     
-                    var query=client.query("INSERT INTO users(email,password,mobile,name,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7) RETURNING userid",[newUser.email,newUser.passwordhashed,newUser.mobile,newUser.name,newUser.creation_date,newUser.modified_date,newUser.name],function(err, result) {
+                    var query=client.query("INSERT INTO users(email,password,mobile,name,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7) RETURNING userid",[newUser.email,newUser.password,newUser.mobile,newUser.name,newUser.creation_date,newUser.modified_date,newUser.name],function(err, result) {
                     if(err)
                         console.log("cant create new user",err);
                         
@@ -236,7 +237,7 @@ var newUser= new User();
                
                 }
 
-             if (!(password==user.password)){
+              if (!bcrypt.compareSync(password,user.password)){
                  console.log(password,user.password);
                  
 					console.log("Wrong password");
@@ -258,6 +259,57 @@ var newUser= new User();
 		
     }));
 	
+	//Admin login
+    
+    passport.use('local-admin', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'uname',
+        passwordField : 'psw',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, uname, psw, next) { // callback with email and password from our form
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        var query= client.query("SELECT * FROM users where name=$1",[uname], function(err, result)
+            {
+        // if there are any errors, return the error before anything else
+            
+            if (err)
+                return next(err);
+            
+              
+              if(result.rows.length==0)
+              {
+                console.log("No user found");
+				return next(null, false, req.flash('loginMessage', 'No user found.'));
+
+			  }
+            else
+              {
+                    console.log(result.rows[0] + ' user is found login!');
+                    user.password = result.rows[0]['password'];
+               
+                }
+
+             if (!(psw==user.password)){
+                 console.log(psw,user.password);
+                 
+					console.log("Wrong password");
+                return next(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+			}
+             					
+                			 
+            return next(null,result.rows[0]);
+               
+         
+         	
+          });
+                
+                    					 			
+		
+    }));
+    	
 	
 	
       var newUser=new User();
