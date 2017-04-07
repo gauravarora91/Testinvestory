@@ -5,6 +5,17 @@ How it works
 */
 
 
+#myPanModal button {
+    height: 30px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #35BFD3;    
+}
+
+#myPanModal input {
+    height: 30px;
+}
+
 
 
 .how-it-works .panel-heading {
@@ -1447,3 +1458,68 @@ button.btn.btn-lg.moodNav.InvoicesButtons{
 
 }
 .settingsForm .form-group { margin-top: 15px }
+
+
+/*Pan Model CSS*/
+.formPan, textarea.addressPAn{
+   border-radius: 8px;
+   color: #333333;
+    border: 1px solid #35BFD3;
+    border-spacing: 1em;
+    font-size: 0.9em;
+    padding-bottom: 0px;
+    padding-top: 0px;
+  
+        padding-left: 10px;
+
+}
+.formPan{
+     width: 73%;
+    height:2em;
+}
+textarea.addressPAn{
+   width:72%;
+    padding-bottom: 0px;
+    padding-top: 0px;
+     resize: none;
+}
+
+.inputfile + label {
+ background-color: #35BFD3;
+    border: 1px #35BFD3 solid;
+    color: #F2F5FB;
+    padding: 2px 0px;
+        width: 35%;
+    text-align: center;
+    border-radius: 6px;
+}
+
+#myPanModal .form-group {
+    margin: 10px 0!important;
+}
+
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor 
+}
+.captureButton, .proceedPan {
+    background-color: #35BFD3;
+    border: 1px #35BFD3 solid;
+    color: #F2F5FB;
+    padding: 2px 0px;
+        width: 35%;
+    border-radius: 6px;
+}
+.modal-content {
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-bottom: 3em;
+    border: 1px solid #35BFD3;
+    box-shadow: none;
+    background-color: #ffffff;
+}
+
+label{
+    width:25%;
+}
+

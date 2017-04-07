@@ -94,7 +94,7 @@ function getTransactionID(userid) {
 
 
 
-var conString = "postgres://development:123@localhost:5433/investory";
+var conString = "postgres://development:123@localhost:5432/investory";
 
 var client = new pg.Client(conString);
 client.connect();
@@ -1390,32 +1390,29 @@ async.waterfall([
 	
 	app.post('/InsertOrders',isLoggedIn,function(req, res){
 		
-		
 	var userID = "109401";
-var memberID = "10940";
-var password = "123456";
-var passKey = "test";
+	var memberID = "10940";
+	var password = "123456";
+	var passKey = "test";
 	
+	async.waterfall([
+		function(callback){
 		
-async.waterfall([
-	function(callback){
-		
-		
-		//user investments header
-		var userId = req.session.savedplanheader.userid;
-		var goalId = req.session.savedplanheader.goalid;
-		var riskProfile = req.session.savedplanheader.riskprofile;
-		var masterAmount = req.session.savedplanheader.masteramount;
-		var totalYears = req.session.savedplanheader.totalyears;
-		var sip = req.session.savedplanheader.sip;
-		var status = "pending";
-		
+			//user investments header
+			var userId = req.session.savedplanheader.userid;
+			var goalId = req.session.savedplanheader.goalid;
+			var riskProfile = req.session.savedplanheader.riskprofile;
+			var masterAmount = req.session.savedplanheader.masteramount;
+			var totalYears = req.session.savedplanheader.totalyears;
+			var sip = req.session.savedplanheader.sip;
+			var status = "pending";
+			
 
-		creation_date = new Date();
-		modified_date = new Date();
+			creation_date = new Date();
+			modified_date = new Date();
 		
-		//Header table insert
-				 var query=client.query("INSERT INTO userinvestmentsheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING userinvestmentheaderid",[userId,goalId,riskProfile,masterAmount,totalYears,sip,status,
+			//Header table insert
+			var query=client.query("INSERT INTO userinvestmentsheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING userinvestmentheaderid",[userId,goalId,riskProfile,masterAmount,totalYears,sip,status,
 			 creation_date,modified_date,req.session.user.name],function(err, result) {
                     if(err){
 						console.log("cant insert assets header allocation data",err);
@@ -1424,20 +1421,10 @@ async.waterfall([
 						 //res.send(1);
 						 console.log("savedplanid"+result.rows[0]['userinvestmentheaderid']);
 						
-						
 						req.session.userinvestmentheaderid = result.rows[0]['userinvestmentheaderid'];
 						callback(null,req.session.userinvestmentheaderid)
-						
-						
-						 
 					}
-                                    
-                  
             });
-		
-		
-		
-		
 	},function(userid,callback){
 		
 			var len = req.session.savedplandetail.length;
@@ -2555,7 +2542,7 @@ var ePass = ""; //= "FjFMCDg4YPtsxrGRtJmeVQ%3d%3d";
 						res.send("false");
 					}else{
 						 //res.send(1);
-						 console.log("goalid"+result.rows[0]['goalid']);
+						//  console.log("goalid"+result.rows[0]['goalid']);
 						
 						callback(null,result.rows[0]['goalid'])
 					}

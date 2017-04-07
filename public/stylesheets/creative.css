@@ -2861,7 +2861,6 @@ div#savedPlans.row/*removed from line 2502*/
 	
 
 #ProfileColumn1.{
-    
 }
    .blankInput {
   -moz-appearance:textfield;
@@ -2872,3 +2871,4 @@ div#savedPlans.row/*removed from line 2502*/
   -webkit-appearance: none;
   margin: 0;
 }
+

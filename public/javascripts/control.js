@@ -1071,22 +1071,26 @@ var movingTo= 0;
             case 5:
                 var page4Risk;
                     
-                
+                // debugger;
                     
                  var risk = $(e).attr("id");
                     page4Risk = risk;
                 
                     
-                    if(risk == "dontKnow" ){
-                        currentPage=4;
-                        $(".contentMood .page4 .selectMode").hide();
+                //     if(risk == "dontKnow" ){
+                //         currentPage=4;
+                //         $(".contentMood .page4 .selectMode").hide();
                         
-                        $(".contentMood .page4 .sub-page4").show();
+                //         $(".contentMood .page4 .sub-page4").show();
                         
-                }else{
+                // }else{
                     currentPage=5;
+                    $('.contentMood > div').not('.page5').hide();
+                    $('.contentMood .page5').show();
+                    $('.contentMood > div').not('.page4').hide();
+                    $('.contentMood .page4').show();
                     $("#riskSelected").text(rp);
-                localStorage.clear();
+                    localStorage.clear();
                     $("#displayModal").modal("show");
                     $("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
                     $(".contentMood .page4").hide();
@@ -1099,7 +1103,7 @@ var movingTo= 0;
                     $(".contentMood .page5, #yp, #riskSelected").show();
                         
                         
-                }
+                // }
             }
         }
  
