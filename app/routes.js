@@ -531,22 +531,22 @@ app.get('/KnowUs',isLoggedIn, function(req, res){
 });
 
 	
-app.post("/PANStatus", function(req, res){
-	
+app.post("/PANStatus", function (req, res) {
+
 	currentPage = req.session.activePage = "/PANStatus";
 
 
 	loginStatus = checkLoginStatus(req);
-	
-	if(loginStatus){
-	
-	}else {
-		
+
+	if (loginStatus) {
+
+	} else {
+
 		console.log("end");
-		
+
 	}
 
-	
+
 });	
 	
 
@@ -2622,8 +2622,15 @@ function(goalid,callback){
              console.log("Cant get assets values");
 			
 				
+			//console.log("saved plan header"+req.session.savedplanheader.sip);
 			
 				asetData = result.rows[0];
+				req.session.savedplanheader = asetData;
+					console.log("saved plan header"+req.session.savedplanheader.goalid);
+				console.log("saved plan header"+req.session.savedplanheader.riskprofile);
+				console.log("saved plan header"+req.session.savedplanheader.masteramount);
+				console.log("saved plan header"+req.session.savedplanheader.totalyears);
+				console.log("saved plan header"+req.session.savedplanheader.userid);
 			callback(null,asetData)
 			})
             
@@ -2642,6 +2649,7 @@ function(goalid,callback){
 				
 			
 				asetDataDetail = result.rows;
+			
 		console.log(asetDataDetail[1]);
 
 	
@@ -2654,7 +2662,6 @@ function(goalid,callback){
 	//store the data in a json
 	
 },function(headerData,detailData,callback){
-	
 	console.log("data",headerData.riskprofile);
 	//initialize query
 	//using the json data
@@ -2675,6 +2682,69 @@ function(goalid,callback){
 	// callback(null,query);
 	
 	
+	if(req.body.lumpsum){
+		
+		console.log("lumpsum"+req.body.lumpsum);
+		
+		var amt=[];
+		 amt[0]= req.body.masterAmount;
+	
+	
+		var query=client.query("select * from lumpsum_schemes where $1 between fromamount and toamount and $2 between fromyear and toyear and riskprofile = $3",[req.body.masterAmount,time,riskProfile], 
+                                 function(err, result){
+        if (err)
+             console.log("Cant get assets values");
+			
+		scheme = result.rows;
+			console.log("daadadadadadadad"+scheme.length)
+				for(i=0;i<scheme.length;i++){
+			
+						var percentage =100;
+						
+						var type = 'scheme';
+						var category =  scheme[i].category;
+						var schemeDescription = scheme[i].name;
+			var schemeCode = scheme[i].code;
+			var schemeId = scheme[i].lumpsumschemeid;
+			console.log(scheme[i].code);
+					// var schemeCode = scheme[i].code;
+			creation_date =new Date();
+			modified_date =new Date();
+						//console.log("amt="+amt[i]);
+					/*req.session.savedplandetail[i].allocationamount = amt[0];
+					 req.session.savedplandetail[i].schemecode = schemeCode;
+					req.session.savedplandetail[i].allocationdescription = schemeDescription;
+				req.session.savedplandetail[i].allocationcategory = category;
+					req.session.savedplandetail[i].allocationpercentage = percentage;
+req.session.savedplandetail[i].schemeid = schemeId;*/
+	
+				 var query=client.query("INSERT INTO savedplansdetail(savedplanid,allocationtype,allocationcategory, allocationdescription, allocationpercentage, allocationamount,created,modified,createdby,schemecode,schemeid) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",[headerData.savedplanid,type,category,schemeDescription,percentage,req.body.masterAmount,creation_date,modified_date,req.session.user.name,schemeCode,schemeId]
+							,function(err, result) {
+                    if(err){
+						console.log("cant insert assets detail allocation data",err);
+						//res.send("false");
+					}else{
+						 //res.send(1);
+						 console.log("result"+req.body.masterAmount);
+						
+						//callback(null)
+						
+					}
+                                    
+                  
+            });
+	
+		}
+		
+				
+				//calculateScheme();
+				//res.redirect("/Pricing");
+		callback(null,amt);
+		})
+		
+}else{
+	
+
 	var schemecamntde=0,schemecamnteq=0,schemecamnthy=0;
   var schememamntde=0,schememamnteq=0,schememamnthy=0;
   var schemeagamnthy=0,schemeagamnteq=0,schemeagamnteq=0;
@@ -2942,6 +3012,7 @@ amtagg+=amtamount1;
 					
 				var panJSON = JSON.stringify(data);	*/
 		
+						   
 		for(i=0;i<scheme.length;i++){
 			
 						var percentage =0;
@@ -2974,22 +3045,43 @@ amtagg+=amtamount1;
                                     
                   
             });
+	
 		}
-		
 		
 				
 				//calculateScheme();
 				//res.redirect("/Pricing");
 		callback(null,amt);
-			})
+		
+			
+				})
+	}
 	//fetch the scheme info
 	
-}],function(err, result){
-	var sdata = [];
-	sdata[0]=scheme;
-					sdata[1]=result;
+}],function(err, amount){
+					
+					
+					
+			
 	
+	var query=client.query("SELECT * FROM savedplansdetail where savedplanid=$1 and allocationtype=$2",[req.session.savedplanheader.savedplanid,'scheme'], 
+                                 function(err, result){
+        if (err)
+             console.log("Cant get assets values");
+	
+			var	asetDataDetail = result.rows;
+		req.session.savedplandetail = asetDataDetail;
+
+			var sdata = [];
+	sdata[0]=scheme;
+					
+					sdata[1]=amount;
+	console.log("lumpsum amount"+req.session.savedplandetail[0].allocationamount)
 	res.send(sdata)
+			//callback(null,headerData,asetDataDetail)
+			})		
+					
+
 	//dislay the scheme information
 })
 

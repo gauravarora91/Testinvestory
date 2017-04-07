@@ -1,24 +1,24 @@
 
 var totalYears;
-var sip;
-function getSIP(){
-	
-	//alert("dad");
-	totalYears = document.getElementById("years").value;
-	sip=document.getElementById("sip").value; 
+var lumpsum;
+function getLumpsum(){
 	
 	
-	 localStorage.sip = sip;
-	 localStorage.years = totalYears;
-	 localStorage.sipInvestment = true;	
-	console.log("years"+totalYears+"time"+sip);
+	totalYears = document.getElementById("lumpsumYears").value;
+	lumpsum=document.getElementById("lumpsum").value; 
+	
+	
+	 localStorage.lumpsum = lumpsum;
+	 localStorage.lumpYears = totalYears;
+	 localStorage.lumpsumInvestment = true;	
+	console.log("years"+totalYears+"amt"+lumpsum);
 	
 	window.location.href = "/GoalSelection";
 	
 }
 
 
-function showSIP(){
+function showLumpsum(){
 	
 	$("#setMood").attr("src", "images/emergencyFundsMood.png");  
 	$("#setMoodText").hide(); 

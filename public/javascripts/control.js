@@ -1198,14 +1198,22 @@ var page4Risk;
 		
 });
 
-		if (localStorage.sip) {
+		if (localStorage.sipInvestment) {
     showSIP();
 			
 }
-
+	/*<!--lumpsum sohan -- call for showing the riskprofile in goal selection-->*/
+		if (localStorage.lumpsumInvestment) {
+    showLumpsum();
+			
+}
 	
 });
-
+var pathname = window.location.pathname;
+if(pathname != '/GoalSelection'){
+	//alert(pathname);
+	localStorage.clear();
+}
 
 	//localStorage.clear()
 
@@ -1217,4 +1225,6 @@ function resizeContent() {
  $("#section1,#section2,#section3,#section4").css("height",height);
    
 }
+
+
 

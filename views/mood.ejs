@@ -7,6 +7,8 @@
      <link rel="stylesheet" href="stylesheets/responsive.css">
        <link rel="stylesheet" href="stylesheets/responsive2560.css"  media="screen and (width:2560px) and (height:1600px)">
 	 <script src="javascripts/sip.js"></script>
+	<!--lumpsum sohan include js file-->
+	<script src="javascripts/lumpsum.js"></script>
 </head>
 	
 <body>
@@ -1353,8 +1355,8 @@
 			   			
 
 			   if(once && store){
-			   
-			if(localStorage.sipInvestment){
+			   //alert(localStorage.lumpsumInvestment);
+			if(localStorage.sipInvestment || localStorage.lumpsumInvestment ){
 				
 				 var data = {};
 				   data.goalName = "Crorepati";
@@ -1368,6 +1370,10 @@
 			    data.equityPercentage = alloc1;
 			    data.hybridPercentage = alloc2;
 			    data.debtPercentage = alloc3;
+				if(localStorage.lumpsumInvestment){
+					data.lumpsum = localStorage.lumpsumInvestment;
+				}
+				
 				
 			}else{
 				   
@@ -1394,7 +1400,7 @@
                         success: function(data) {
                             console.log('success');
 							//var myObj = JSON.parse(data);
-							alert(data[1][0]);
+							console.log(data[1][0]);
 							for(i=0;i<data[0].length;i++){
 var txt1 = "<tr><td>"+data[0][i].name+"</td><td>"+data[0][i].category+"</td><td>"+data[1][i]+"</td></tr>";  
  $("#showDataSchemes").after(txt1); 
@@ -1439,10 +1445,92 @@ var txt1 = "<tr><td>"+data[0][i].name+"</td><td>"+data[0][i].category+"</td><td>
 		
 function myinit(riskRate, chooseTable, storeAllocation)
         {
-			alert(localStorage.sipInvestment);
+			/*lumpsum sohan start -- the alert is removed and else if for lumpsum is included.*/
+			if(storeAllocation == 1)
+				store = true;
+			else
+				store = false;
+			
+			if(localStorage.lumpsumInvestment){
+				 
+				
+				var riskProfile=riskRate;
+			var t = chooseTable;
+            var rate=10;
+            var per=12;
+			var totalYears = localStorage.lumpYears;
+            /*var nper=totalYears*per;
+            var pv=0;*/
+            var fv=localStorage.lumpsum;
+			var mn = 0;
+				
+				if(riskProfile == "Conservative"){
+					
+					var alloc1 =0;
+					var alloc2 = 0;
+					var alloc3 = 100;
+					
+					var amt1 = 0;
+					var amt2 = 0;
+					var amt3 = fv;
+					
+					 document.getElementById("eqAmt"+t).innerHTML=amt1;
+            document.getElementById("hybAmt"+t).innerHTML=amt2;
+            document.getElementById("debAmt"+t).innerHTML=amt3;
+					
+					 document.getElementById("eqPer"+t).innerHTML=alloc1+"%";
+            document.getElementById("hybPer"+t).innerHTML=alloc2+"%";
+            document.getElementById("debPer"+t).innerHTML=alloc3+"%";
+					
+					storeAssets("Broke", riskProfile, fv, totalYears, mn, alloc1, amt1, alloc2, amt2, alloc3, amt3);
+					
+				}else if(riskProfile == "Moderate" ){
+					
+							var alloc1 =0;
+					var alloc2 = 100;
+					var alloc3 = 0;
+					
+					var amt1 = 0;
+					var amt2 = fv;
+					var amt3 = 0;
+					
+							 document.getElementById("eqAmt"+t).innerHTML=amt1;
+            document.getElementById("hybAmt"+t).innerHTML=amt2;
+            document.getElementById("debAmt"+t).innerHTML=amt3;
+					
+					 document.getElementById("eqPer"+t).innerHTML=alloc1+"%";
+            document.getElementById("hybPer"+t).innerHTML=alloc2+"%";
+            document.getElementById("debPer"+t).innerHTML=alloc3+"%";
+					
+					storeAssets("Broke", riskProfile, fv, totalYears, mn, alloc1, amt1, alloc2, amt2, alloc3, amt3);
+					
+				}else {
+							var alloc1 =100;
+					var alloc2 = 0;
+					var alloc3 = 0;
+					
+					var amt1 = fv;
+					var amt2 = 0;
+					var amt3 = 0;
+					
+					 document.getElementById("eqAmt"+t).innerHTML=amt1;
+            document.getElementById("hybAmt"+t).innerHTML=amt2;
+            document.getElementById("debAmt"+t).innerHTML=amt3;
+					
+					 document.getElementById("eqPer"+t).innerHTML=alloc1+"%";
+            document.getElementById("hybPer"+t).innerHTML=alloc2+"%";
+            document.getElementById("debPer"+t).innerHTML=alloc3+"%";
+					
+					storeAssets("Broke", riskProfile, fv, totalYears, mn, alloc1, amt1, alloc2, amt2, alloc3, amt3);
+				}
+				
+				
+			} else {
+			
+			
 			if(localStorage.sipInvestment){
 				 
-				alert(localStorage.sipInvestment);
+				
 				var riskProfile=riskRate;
 			var t = chooseTable;
             var rate=10;
@@ -1453,7 +1541,8 @@ function myinit(riskRate, chooseTable, storeAllocation)
             var fv=localStorage.sip*nper;
 			var mn =  localStorage.sip;
 				
-			}else{
+			}
+			else{
 				
 			var riskProfile=riskRate;
 			var t = chooseTable;
@@ -1471,10 +1560,7 @@ function myinit(riskRate, chooseTable, storeAllocation)
 			}
 				console.log(riskProfile+nper);
 		
-			if(storeAllocation == 1)
-				store = true;
-			else
-				store = false;
+			
 			
                 
 			
@@ -1829,7 +1915,7 @@ function myinit(riskRate, chooseTable, storeAllocation)
 		}
           
 			
-            
+            }
  // storeAssets(goal,riskprofile, fv, time, sip, amtA1, amtA)
             
             

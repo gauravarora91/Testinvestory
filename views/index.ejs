@@ -96,6 +96,12 @@
 			<div class="btn-hr-wrapper">
 				<button type="" class="btn btn-white btn-lg moodNav getStarted" id="indexGetStarted" onClick="getSIP();" > Invest </button>
 			</div>
+		<!--lumpsum sohan start-->
+		<p>I have Rs. <input class="blankInput"  name="lumpsum" id="lumpsum" placeholder="" type="number" max="7" value=""/> &#8377; to invest now. I need it back in <input class="blankInput"  name="lumpsumYears" id="lumpsumYears" placeholder="" type="number"  value=""/> &#8377; years.</p>
+			<div class="btn-hr-wrapper">
+				<button type="" class="btn btn-white btn-lg moodNav getStarted" id="indexGetStarted" onClick="getLumpsum();" > Invest </button>
+			</div>
+		<!--lumpsum sohan end-->
 			<h2 class="indexHeadngLookingFor">Looking for?</h2>
 			<div class="container">
 				<div id="indexLookingFor" class="row" >
@@ -277,7 +283,8 @@
 <script src="javascripts/TextPlugin.min.js"></script>
          <script src="javascripts/main.js"></script>
 			 <script src="javascripts/sip.js"></script>
-	    
+			<!--lumpsum sohan include js file-->
+	     <script src="javascripts/lumpsum.js"></script>
     <script src="javascripts/control.js" type="text/javascript"></script>
 	
         <script>
