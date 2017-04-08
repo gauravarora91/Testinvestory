@@ -1,5 +1,6 @@
 var getGoals;
 var selectTab;
+var risk;
 $(document).ready(function(){
 
 
@@ -696,9 +697,8 @@ function setFrogMood(mood){
   
 $(".moods .slider .change").click(function () {
 
-
+    once = true;
     var moodId = $(this).attr("id");
-
     // window.location.href = "/GoalSelection?mood=" + moodId;
     var moodImgName = moodId.toUpperCase();
 
@@ -715,8 +715,10 @@ $(".moods .slider .change").click(function () {
 
         $(".below").append("<div class='goal' id=''><img src='" + $GoalimgLink + moodId + "/" + local[i] + $imgExtension + "' mood=" + moodId + " alt='Home view'><p id='mood'><span></span>" + local[i] + "</p></div>");
     }
-
-
+    $('#amount').val('');
+    $('time').val('');
+    selectTab(1);
+    sessionStorage.clear();
 });    
   
     
@@ -1019,8 +1021,11 @@ var movingTo= 0;
 
     });
     $(".page2 .next").click(function() { selectTab(4) });
-    $(".page2 .go").click(function(){ selectTab(3) });
-    $(".page4 .selectMode button").click( function() { selectTab(5, this) });
+    $(".page2 .go").click(function(){ 
+        setProfile(0,1,0);
+        selectTab(3); 
+    });
+    $(".page4 .selectMode button").not('#dontKnow').click( function() { selectTab(5, this) });
     var once = true;
     selectTab = function(tabNo, e) {
         currentPage = tabNo;
@@ -1029,8 +1034,23 @@ var movingTo= 0;
             tempGoals.currentPage = currentPage;
         }
         sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+        $('.pagination li a').removeClass('active');
+        $('.pagination li a').removeClass('done');
+        $('#Indicator span').removeClass('active');
+        $('#Indicator').show();
         switch (tabNo) {
+            case 1:
+                $('.pagination li:nth-child(1) a').addClass('active');
+
+                $('.contentMood > div').not('.page1').hide();
+                $('.contentMood .page1').show();
+                break;
+
             case 2:
+                $('#Indicator span:nth-child(1)').addClass('active');
+                $('.pagination li:nth-child(1) a').addClass('done');
+                $('.pagination li:nth-child(2) a').addClass('active');
+
                 $('.contentMood > div').not('.page2').hide();
                 $('.contentMood .page2').show();
                 $(".contentMood .page1, #btm").hide();
@@ -1043,6 +1063,11 @@ var movingTo= 0;
 
             case 3:
                 currentPage = 3;
+                $('#Indicator span:nth-child(1), #Indicator span:nth-child(2)').addClass('active');
+                $('.pagination li:nth-child(1) a').addClass('done');
+                $('.pagination li:nth-child(2) a').addClass('active');
+                $('.contentMood > div').not('.page3, .page2').hide();
+                $('.contentMood .page2, .contentMood .page3').show();        
                 $(".contentMood .page2 .login-btn").css("top", "15%");
 
                 if (once) {
@@ -1059,8 +1084,11 @@ var movingTo= 0;
                 break;
 
             case 4:
-            $('.contentMood > div').not('.page4').hide();
-            $('.contentMood .page4').show();
+                $('#Indicator span:nth-child(1), #Indicator span:nth-child(2), #Indicator span:nth-child(3)').addClass('active');            
+                $('.pagination li:nth-child(1) a, .pagination li:nth-child(2) a').addClass('done');
+                $('.pagination li:nth-child(3) a').addClass('active'); 
+                $('.contentMood > div').not('.page4').hide();
+                $('.contentMood .page4').show();
                 $(".contentMood .page2,.contentMood .page3, .page3Sub,.contentMood .page4 .sub-page4").hide();
                 $(".pagination li:nth-child(3) a").css({ "background-color": "#FFFFFF", "color": "#FFDE15", "border-color": "#FFDE15" });
                 $(".pagination li:nth-child(4) a").css({ "background-color": "#FFDE15", "color": "#35BFD3", "border-color": "#FFDE15" });
@@ -1069,41 +1097,44 @@ var movingTo= 0;
                 break;    
             
             case 5:
-                var page4Risk;
-                    
-                // debugger;
-                    
-                 var risk = $(e).attr("id");
-                    page4Risk = risk;
-                
-                    
+                // var page4Risk;
+                risk = $(e).attr("id");
+                page4Risk = risk;
                 //     if(risk == "dontKnow" ){
                 //         currentPage=4;
                 //         $(".contentMood .page4 .selectMode").hide();
-                        
                 //         $(".contentMood .page4 .sub-page4").show();
-                        
                 // }else{
-                    currentPage=5;
-                    $('.contentMood > div').not('.page5').hide();
-                    $('.contentMood .page5').show();
-                    $('.contentMood > div').not('.page4').hide();
-                    $('.contentMood .page4').show();
-                    $("#riskSelected").text(rp);
-                    localStorage.clear();
-                    $("#displayModal").modal("show");
-                    $("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
-                    $(".contentMood .page4").hide();
-                        
-                        $(".pagination li:nth-child(4) a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
-                        
-                        $(".pagination li:nth-child(5) a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
-                        
-                        
-                    $(".contentMood .page5, #yp, #riskSelected").show();
-                        
-                        
+                currentPage=5;
+                $('#Indicator span:nth-child(1), #Indicator span:nth-child(2), #Indicator span:nth-child(3), #Indicator span:nth-child(4)').addClass('active'); 
+                $('.pagination li:nth-child(1) a, .pagination li:nth-child(2) a, .pagination li:nth-child(3) a').addClass('done');
+                $('.pagination li:nth-child(4) a').addClass('active'); 
+                $('.contentMood > div').not('.page5').hide();
+                $('.contentMood .page5').show();
+                $("#riskSelected").text(rp);
+                localStorage.clear();
+                // $("#displayModal").modal("show");
+                // $("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
+                // $(".contentMood .page4").hide();
+                $(".contentMood .page5, #yp, #riskSelected").show();  
                 // }
+                break;
+
+            case 6:
+                $('#Indicator span:nth-child(1), #Indicator span:nth-child(2), #Indicator span:nth-child(3), #Indicator span:nth-child(4)').addClass('active'); 
+                $('.pagination li:nth-child(1) a, .pagination li:nth-child(2) a, .pagination li:nth-child(3) a, .pagination li:nth-child(3) a, .pagination li:nth-child(4) a').addClass('done');
+                $('.pagination li:nth-child(5) a').addClass('active'); 
+                $('.contentMood > div').not('.page6').hide();
+                $('.contentMood .page6').show();
+                break;
+            
+            case 7:
+                $('#Indicator span:nth-child(1), #Indicator span:nth-child(2), #Indicator span:nth-child(3), #Indicator span:nth-child(4)').addClass('active'); 
+                $('.pagination li:nth-child(1) a, .pagination li:nth-child(2) a, .pagination li:nth-child(3) a, .pagination li:nth-child(3) a, .pagination li:nth-child(4) a').addClass('done');
+                $('.pagination li:nth-child(5) a').addClass('active'); 
+                $('.contentMood > div').not('.page7').hide();
+                $('.contentMood .page7').show();
+                break;
             }
         }
  
@@ -1130,62 +1161,60 @@ var movingTo= 0;
 	
 	
 	$("#schemeNext").click(function(){
-		
-		$(" .moodGoals > img").css("visibility","hidden");
-		 $(".contentMood .page5").hide();
-		 $(".contentMood .page6, #IndicatorNew").show();
-		
+        selectTab(6);
+        $(" .moodGoals > img").css("visibility","hidden");
+        $(".contentMood .page5").hide();
+        $(".contentMood .page6, #IndicatorNew").show();
 	});
 	
 	
 	$(".moodGoals > img").click(function(){
-	movingTo= currentPage-1;
-	
-		
-		switch(movingTo){
+	movingTo = currentPage-1;	
+    selectTab(movingTo);
+// 		switch(movingTo){
 				
-			case 0: break;
-			case 1: 
-				$(".contentMood .page1").show();
+// 			case 0: break;
+// 			case 1: 
+// 				$(".contentMood .page1").show();
 		 
-		$(".contentMood .page2, #goalIndicator").hide();
-				currentPage=1;
-			break;
+// 		$(".contentMood .page2, #goalIndicator").hide();
+// 				currentPage=1;
+// 			break;
 				
-			case 2: 
-				$(".contentMood .page3, .page3Sub").hide();
-				$(".contentMood .page2 .login-btn").css("top","65%");
-				$(".contentMood .page2, #goalIndicator").show();
-				 $(".page2 .dotHr").show();
-				currentPage=2;
-				once = true;
-				break;
+// 			case 2: 
+// 				$(".contentMood .page3, .page3Sub").hide();
+// 				$(".contentMood .page2 .login-btn").css("top","65%");
+// 				$(".contentMood .page2, #goalIndicator").show();
+// 				 $(".page2 .dotHr").show();
+// 				currentPage=2;
+// 				once = true;
+// 				break;
 				
-			case 3:
-				$(".contentMood .page2, .contentMood .page3, .page3Sub").show();
-				 $(".contentMood .page4").hide();
-				currentPage=3;
-				once = true;
-				break;
+// 			case 3:
+// 				$(".contentMood .page2, .contentMood .page3, .page3Sub").show();
+// 				 $(".contentMood .page4").hide();
+// 				currentPage=3;
+// 				once = true;
+// 				break;
 				
-			case 4:
-				if(page4Risk == "dontKnow" ){
-             currentPage=4;
-            $(".contentMood .page4 .selectMode").hide();
+// 			case 4:
+// 				if(page4Risk == "dontKnow" ){
+//              currentPage=4;
+//             $(".contentMood .page4 .selectMode").hide();
             
-            $(".contentMood .page4 .sub-page4").show();
+//             $(".contentMood .page4 .sub-page4").show();
             
-}
-				$(".contentMood .page5").hide();
-				$(".contentMood .page4").show();
-				currentPage=4;
-				break;
-		}
+// }
+// 				$(".contentMood .page5").hide();
+// 				$(".contentMood .page4").show();
+// 				currentPage=4;
+// 				break;
+// 		}
 
-		nextPage = currentPage+1;
-		 $(".moods .pagination li:nth-child("+nextPage+") a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
+// 		nextPage = currentPage+1;
+// 		 $(".moods .pagination li:nth-child("+nextPage+") a").css({"background-color":"#FFFFFF","color":"#FFDE15","border-color":"#FFDE15"});
         
-        $(".pagination li:nth-child("+movingTo+") a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
+//         $(".pagination li:nth-child("+movingTo+") a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
 		
 });
 

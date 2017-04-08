@@ -137,7 +137,7 @@ position: absolute;
     text-align: left;
     font-weight: 600;
     margin-bottom: 0;
-    margin-top: 10px;
+    margin-bottom: 10px;
     
 }
 
@@ -256,9 +256,9 @@ background-color: #ffffff;;
 
 .sliderFaqs::-webkit-scrollbar-thumb:vertical{
 background-color:#35BFD3;
--webkit-border-radius:5px;
--webkit-width:5;
--webkit-height:4;
+border-radius:5px;
+width:5;
+height:4;
      
 }
 
@@ -268,11 +268,10 @@ background-color:#35BFD3;
 
 
 .sliderGoal .btn-circle {
-    
-     width: 20px;
+    width: 20px;
     height: 20px;
     line-height: 0.5;
-        border-color: #333;
+    border-color: #333;
     color: #333;
     margin-right: 5px;
     font-size: 1em;
@@ -289,7 +288,8 @@ background-color:#35BFD3;
      text-align: left;
      padding: 0;
      cursor: pointer;
-       }
+     display: block;
+}
    
 .sliderRiskProfile .riskProfiling  #mood:hover { 
 color: #333;
@@ -320,18 +320,19 @@ color: #333;
 }
 
 .sliderRiskProfile {
-    position: relative;
+    /*position: relative;
     left: -10em;
     width: 84%;
         height: 11.5em;
     margin-right: 0px;
-    margin-top: -0.8em;
+    margin-top: -0.8em;*/
 }
 
 #riskHeight {
-     overflow-y:scroll;
-             height: 12em;
+    overflow-y:scroll;
+    height: 170px;
     padding-top: 5px;
+    width: 100%
 }
 
 .sliderRiskProfile button.accordion {
@@ -1489,7 +1490,7 @@ textarea.addressPAn{
 
 
 .inputfile + label {
-	cursor: pointer; /* "hand" cursor 
+	cursor: pointer; 
 }
 .captureButton, .proceedPan {
     background-color: #35BFD3;
@@ -1506,9 +1507,5 @@ textarea.addressPAn{
     border: 1px solid #35BFD3;
     box-shadow: none;
     background-color: #ffffff;
-}
-
-label{
-    width:25%;
 }
 

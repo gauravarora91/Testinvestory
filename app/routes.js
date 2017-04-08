@@ -564,8 +564,8 @@ app.post("/PANStatus", function(req, res){
     if(mobile)
    		pageName = "moodMobile";
 	else
-		pageName = "scheme";
-		 
+		// pageName = "scheme";
+		 pageName = "mood";
 	if(req.session.bseStatus){
 	
 		panMsg = req.session.bseStatus;
@@ -2521,37 +2521,29 @@ var ePass = ""; //= "FjFMCDg4YPtsxrGRtJmeVQ%3d%3d";
 		})
 		
 	
-app.post('/SavedPlansHeader',isLoggedIn,function(req, res){
-		
+	app.post('/SavedPlansHeader', isLoggedIn, function (req, res) {
+
 		loginStatus = checkLoginStatus(req);
-		
-		if(loginStatus){
-			
-			  var   	creation_date=new Date();
-                var    modified_date=new Date();
+		if (loginStatus) {
+			var creation_date = new Date();
+			var modified_date = new Date();
 			var status = 'active';
-	console.log('body: ' + req.body);
-			
-		
+			console.log('body: ' + req.body);
+
 			async.waterfall([
-				function(callback){
-				
-								 var query=client.query("select goalid from goal where goal.name=$1",[req.body.goalName],function(err, result) {
-                    if(err){
-						console.log("cant insert assets header allocation data",err);
-						res.send("false");
-					}else{
-						 //res.send(1);
-						 console.log("goalid"+result.rows[0]['goalid']);
-						
-						callback(null,result.rows[0]['goalid'])
-					}
-                                    
-                  
-            });
-			
-					}, 
-				
+				function (callback) {
+
+					var query = client.query("select goalid from goal where goal.name=$1", [req.body.goalName], function (err, result) {
+						if (err) {
+							console.log("cant insert assets header allocation data", err);
+							res.send("false");
+						} else {
+							//res.send(1);
+							console.log("goalid" + result.rows[0]['goalid']);
+							callback(null, result.rows[0]['goalid'])
+						}
+					});
+				},
 			
 function(goalid,callback){
 	
