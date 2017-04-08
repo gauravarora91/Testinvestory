@@ -716,7 +716,7 @@ $(".moods .slider .change").click(function () {
         $(".below").append("<div class='goal' id=''><img src='" + $GoalimgLink + moodId + "/" + local[i] + $imgExtension + "' mood=" + moodId + " alt='Home view'><p id='mood'><span></span>" + local[i] + "</p></div>");
     }
     $('#amount').val('');
-    $('time').val('');
+    $('#time').val('');
     selectTab(1);
     sessionStorage.clear();
 });    
@@ -1013,17 +1013,28 @@ var movingTo= 0;
     
 
     
- $(".page2 .go").click(function(){ });
+
     
     $(".page1 .next, .page1 .skip").click(function(){ 
         
         selectTab(2);
 
     });
-    $(".page2 .next").click(function() { selectTab(4) });
+    $(".page2 .next").click(function() { 
+        if( $('#invest').html() >= 1000 ) {
+            selectTab(4);
+        }
+            
+    });
     $(".page2 .go").click(function(){ 
-        setProfile(0,1,0);
-        selectTab(3); 
+        if(  $('#time').val() <= 50 && $('#time').val() >= 1 ) {
+            setProfile(0,1,0);
+            selectTab(3);
+            $("#page2VldMsg2").slideUp();
+        } else {
+            $("#page2VldMsg2").slideDown();
+        }
+
     });
     $(".page4 .selectMode button").not('#dontKnow').click( function() { selectTab(5, this) });
     var once = true;
@@ -1069,6 +1080,7 @@ var movingTo= 0;
                 $('.contentMood > div').not('.page3, .page2').hide();
                 $('.contentMood .page2, .contentMood .page3').show();        
                 $(".contentMood .page2 .login-btn").css("top", "15%");
+                $(".contentMood .page3, .page3Sub, #rpText").show();
 
                 if (once) {
                     $('.contentMood > div').not('.page2, .page3').hide();

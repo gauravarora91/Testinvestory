@@ -236,6 +236,8 @@
                                     <button type="" class="btn btn-lg moodNav next page3Sub"> Next </button>
                                     <!--<button type="" class="btn btn-lg moodNav save page3Sub" > Save </button>-->
                                 </div>
+                                <p id="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
+                                <p id="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
                                 <div class="dotHr"></div>
                             </div>
 
@@ -587,7 +589,6 @@
                     contentType: 'application/json',
                     url: '/PANValidation',
                     success: function (data) {
-                        debugger;
                         // console.log('success');
                         $("#myPanModal .loader").html('');
                         var myObj = JSON.parse(data);
@@ -1195,7 +1196,7 @@
 
             if ((per == 0) || (nper == 0)) {
 
-                alert("Why do you want to test me with zeros?");
+                // alert("Why do you want to test me with zeros?");
 
                 return (0);
 
@@ -1255,7 +1256,7 @@
 
             if ((pmt == 0) || (nper == 0)) {
 
-                alert("Why do you want to test me with zeros?");
+                // alert("Why do you want to test me with zeros?");
 
                 return (0);
 
@@ -1339,6 +1340,14 @@
         });
 
         $(document).ready(function () {
+            $('#invest').bind("DOMSubtreeModified",function(){
+                if( $('#invest').html() >= 1000 ) {
+                    $('#page2VldMsg').slideUp();
+                } else {
+                    $('#page2VldMsg').slideDown();
+                }
+            });
+
             // Get User Status
             $.getJSON("user_data", function (data) {
             }).done(function (data) {
