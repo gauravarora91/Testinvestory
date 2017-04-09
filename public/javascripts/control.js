@@ -1109,6 +1109,7 @@ var movingTo= 0;
                 break;    
             
             case 5:
+            debugger;
                 // var page4Risk;
                 risk = $(e).attr("id");
                 page4Risk = risk;
@@ -1155,6 +1156,7 @@ var movingTo= 0;
     
     
     $(".page4 .sub-page4 .done").click(function(){ 
+        debugger;
         currentPage=5;
 		localStorage.clear();
 			 $("#riskSelected").text(rp);
@@ -1229,7 +1231,7 @@ var movingTo= 0;
 //         $(".pagination li:nth-child("+movingTo+") a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
 		
 });
-
+    debugger;
 		if (localStorage.sipInvestment) {
     showSIP();
 			
