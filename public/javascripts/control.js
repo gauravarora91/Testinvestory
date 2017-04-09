@@ -779,33 +779,32 @@ var $smartGoals = "smartGoals";
         }
     
 
-        $(".emergency-funds > p").click(function () {
-
-            var sipMood = $(this).attr("id");
+        $(".emergency-funds").click(function () {
+            var sipMood = $(this).children('p').attr("id");
             window.location.href = "GoalSelection?smartGoal=" + $emergencyFunds + "&smood=" + sipMood;
 
         });
 
 
-        $(".tax-savings > p").click(function () {
+        $(".tax-savings").click(function () {
 
-            var sipMood = $(this).attr("id");
+            var sipMood = $(this).children('p').attr("id");
             window.location.href = "GoalSelection?smartGoal=" + $taxSavings + "&smood=" + sipMood;
 
         });
 
 
-        $(".build-wealth > p").click(function () {
+        $(".build-wealth").click(function () {
 
-            var sipMood = $(this).attr("id");
+            var sipMood = $(this).children('p').attr("id");
             window.location.href = "GoalSelection?smartGoal=" + $buildWealth + "&smood=" + sipMood;
 
         });
 
 
-        $(".smart-goals > p").click(function () {
+        $(".smart-goals").click(function () {
 
-            var sipMood = $(this).attr("id");
+            var sipMood = $(this).children('p').attr("id");
             window.location.href = "GoalSelection?smartGoal=" + $smartGoals + "&smood=" + sipMood;
 
         });

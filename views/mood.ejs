@@ -1329,10 +1329,14 @@
 
             $('.page2 #time').change(function () {
                 var time = $('.page2 #time').val();
-                var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
-                tempGoals.time = time;
-                sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
-                console.log(sessionStorage.getItem("tempGoals"));
+                try{
+                    var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
+                    tempGoals.time = time;
+                    sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                    console.log(sessionStorage.getItem("tempGoals"));
+                } catch(e) {
+                    console.log(e);
+                }
             });
 
 

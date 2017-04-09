@@ -2,15 +2,27 @@ var totalYears;
 var sip;
 function getSIP(){
 	
-	// debugger;
+	// debugger;	
 	//alert("dad");
-	totalYears = document.getElementById("years").value;
-	sip=document.getElementById("sip").value; 
-	localStorage.sip = sip;
-	localStorage.years = totalYears;
-	localStorage.sipInvestment = true;	
-	console.log("years"+totalYears+"time"+sip);
-	window.location.href = "/GoalSelection";
+	var sipInvestValue = $('#sip').val();
+	var sipTime = $('#year').val();
+	if ( sipInvestValue < 1000 || sipInvestValue > 100000 ){ 
+		$('#sipInvestErr').slideDown();
+	} else if ( sipTime < 1 || sipTime > 50 ) {
+		$('#sipInvestErr').slideUp(); 
+		$('#sipTimeErr').slideDown();
+	} else {
+		debugger;
+		$('#sipInvestErr').slideUp; 
+		$('#sipTimeErr').slideUp();
+		totalYears = document.getElementById("years").value;
+		sip=document.getElementById("sip").value; 
+		localStorage.sip = sip;
+		localStorage.years = totalYears;
+		localStorage.sipInvestment = true;	
+		console.log("years"+totalYears+"time"+sip);
+		window.location.href = "/GoalSelection";
+	}
 }
 
 function showSIP(){	

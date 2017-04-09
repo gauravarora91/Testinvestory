@@ -93,11 +93,13 @@
 	<div class="container-fluid what-we-offer text-center">
 		<h2>Start your investment plan</h2>
 			<p>I want to invest  &#8377; <input class="blankInput"  name="sip" id="sip" placeholder="" type="number" max="7" value=""/> monthly for next <input class="blankInput"  name="years" id="years" placeholder="" type="number"  value=""/> years</p>
+			<p id = "sipInvestErr" style="display: none; color: red;"> Please enter amount between INR 1000 to 100000.</p>
+			<p id="sipTimeErr" style="display: none; color: red;"> Please enter time between 1 to 50 years.</p>
 			<div class="btn-hr-wrapper">
 				<button type="" class="btn btn-white btn-lg moodNav getStarted" id="indexGetStarted" onClick="getSIP();" > Invest </button>
 			</div>
 		<!--lumpsum sohan start-->
-		<p>I have Rs. <input class="blankInput"  name="lumpsum" id="lumpsum" placeholder="" type="number" max="7" value=""/> &#8377; to invest now. I need it back in <input class="blankInput"  name="lumpsumYears" id="lumpsumYears" placeholder="" type="number"  value=""/> &#8377; years.</p>
+		<p>I have Rs. <input class="blankInput"  name="lumpsum" id="lumpsum" placeholder="" type="number" max="7" value=""/> to invest now. I need it back in <input class="blankInput"  name="lumpsumYears" id="lumpsumYears" placeholder="" type="number"  value=""/> years.</p>
 			<div class="btn-hr-wrapper">
 				<button type="" class="btn btn-white btn-lg moodNav getStarted" id="indexGetStarted" onClick="getLumpsum();" > Invest </button>
 			</div>
@@ -128,7 +130,7 @@
 			</div>
 
 			<div class="btn-hr-wrapper">
-				<button type="" id="indexScriptYourStory"  class="btn btn-white btn-lg moodNav story" > Script your Story </button>
+				<a href="/GoalSelection" id="indexScriptYourStory"  class="btn btn-white btn-lg moodNav story" > Script your Story </a>
 			</div>
 		</section>
 		<section id="section3">
