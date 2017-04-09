@@ -2,7 +2,7 @@ var totalYears;
 var sip;
 function getSIP(){
 	
-	debugger;
+	// debugger;
 	//alert("dad");
 	totalYears = document.getElementById("years").value;
 	sip=document.getElementById("sip").value; 

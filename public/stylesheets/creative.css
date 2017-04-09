@@ -1187,7 +1187,7 @@ background-color: #ffffff;/* #F2F5FB;*/
 
 
 
-#tar1 p, #tar2 p,#tar3 p,#tar4 p,#tar5 p{
+#tar1 p, #tar2 p,#tar3 p,#tar4 p,#tar5 p, .tar p {
 position:relative;
 float: left;
 color: #35BFD3;
@@ -1210,11 +1210,11 @@ border-radius:10px;
 }
 
 #myBar1, #myBar2 ,#myBar3 {
-  position: absolute;
-  width: 0%;
-  height: 100%;
-  background-color: #FFDE15;
-border-radius:10px;
+    position: absolute;
+    width: 8%;
+    height: 100%;
+    background-color: #FFDE15;
+    border-radius:10px;
 }
 
 #myBar2 {
@@ -2872,3 +2872,5 @@ div#savedPlans.row/*removed from line 2502*/
 #Indicator span.active { display: inline!important }
 
 .sub-page4 { position: relative; z-index: 2 }
+
+.btn-Next-Pan-Modal{ display: none }

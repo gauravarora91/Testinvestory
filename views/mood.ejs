@@ -52,7 +52,7 @@
                     <button class="btn btn-lg moodNav  pricing RP1 pull-left submit " style="margin-top:2%;width:5.5em;display:none;" id="bseInvest"  type="submit">Proceed </button> 
             </form>	
             -->
-                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit " style="margin-top:2%;width:5.5em;" data-toggle="modal"
+                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit btn-Next-Pan-Modal" style="margin-top:2%;width:5.5em;" data-toggle="modal"
                         data-target="#uploadModal" data-dismiss="modal">Next </button>
 
                 </div>
@@ -116,27 +116,6 @@
 
 
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!--BSE Modal Window-->
-    <div class="modal fade" id="bseModal" role="dialog">
-        <div class="modal-dialog modal-sm" style=" width: 512px; margin-left: 36em;">
-            <!-- Modal content-->
-            <div class="modal-content PAN">
-                <div class="modal-body ">
-                    <h1 class="PANHead">Congratulations!</h1>
-                    <p>You Successfully copleted your payment</p>
-
-                    <!-- <form class="formmodel PANInfo" id="checkPANStatus" name="checkPANStatus" onsubmit="checkPanStaus();">-->
-                    <div class="bg-success" id="responseData">
-                        <p>Your Order Payment is Successfull </p>
-                        <a href="/Accounts">Click here to see your goal performance</a>
-                    </div>
-                    <br/> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                </div>
-                <!--</form>-->
             </div>
         </div>
     </div>
@@ -600,18 +579,16 @@
 
                         var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
                         document.getElementById("data1").innerHTML = displayMsg;
+                        $('.btn-Next-Pan-Modal').css('display', 'block');
                     }
-
                 })
                 <% }%>
-                
-            
         }
         
         
         function storeAssets(goalName, riskProfile, masterAmount, totalYears, sip, alloc1, amt1, alloc2, amt2, alloc3, amt3) {
 
-            debugger;
+            // debugger;
             if (once && store) {
 
                 if (localStorage.sipInvestment || localStorage.lumpsumInvestment) {
@@ -647,7 +624,7 @@
                     data.debtPercentage = alloc3;
                 }
                 <% if(loggedIn) {%>
-                debugger;
+                // debugger;
                     $.ajax({
                         type: 'POST',
                         data: JSON.stringify(data),
@@ -658,7 +635,8 @@
                             //var myObj = JSON.parse(data);
                             //alert(data[1][0]);
                             $(".page6 #invest1").html(sip);
-                            $(".page6 .table tbody > tr").empty();
+                            $(".page6 .table tbody > tr").not('$showDataSchemes').empty();
+                            // debugger;
                             for (i = 0; i < data[0].length; i++) {
                                 var txt1 = "<tr><td>" + data[0][i].name + "</td><td>" + data[0][i].category + "</td><td>" + data[1][i] + "</td></tr>";
                                 $("#showDataSchemes").after(txt1);
@@ -817,13 +795,19 @@
                 }
                 console.log(riskProfile + nper);
 
-
-
-                if (!loggedIn) {
-                    var tempGoals = JSON.parse(sessionStorage.getItem("tempGoals"));
-                    tempGoals.mn = mn;
-                    sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                try {
+                    if (!loggedIn) {
+                        var tempGoals = JSON.parse(sessionStorage.getItem("tempGoals"));
+                        if(tempGoals == undefined) {
+                            tempGoals = {};
+                        }
+                        tempGoals.mn = mn;
+                        sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                    }
+                } catch(e) {
+                    console.log("Session Storage thing didn't work >>> "+ e );
                 }
+
                 console.log(sessionStorage.getItem("tempGoals"));
                 document.getElementById("invest" + t).innerHTML = mn;
                 document.getElementById("invest2").innerHTML = mn;
@@ -1314,10 +1298,6 @@
             if(location.search.split('tab=')[1] == '6') {
                 selectTab(6);
             }
-            <% if (panMessage.length > 0) { %>
-                $("#bseModal").modal("show");
-                panMessage = "";
-            <% } %>
 
             $('#invest').bind("DOMSubtreeModified",function(){
                 if( $('#invest').html() >= 1000 ) {
