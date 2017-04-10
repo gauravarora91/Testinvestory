@@ -31,7 +31,7 @@ destination: function (req, file, callback)
 {
     if(pan)
       {
-        var name = '../panuploads/'+pan; //location for directory to store documents 
+        var name = '/home/ubuntu/panuploads/'+pan; //location for directory to store documents 
         fs.mkdir(name, 0777, true, function (err) 
         {
           if (err) 
@@ -209,7 +209,7 @@ router.get('/reconcile/get',function(req,res)
 router.get('/failedorders',function(req,res)
 {
     
-     res.render("Admin/failedorders");
+     res.render("Admin/failedOrders");
    
 });
 router.get('/failedorders/get',function(req,res)
@@ -270,7 +270,7 @@ var store =   multer.diskStorage({
                 destination: function (req, file, callback) 
                     {
 
-        				callback(null,'C:/document/dbfiles');
+        				callback(null,'/home/ubuntu/dbfiles');
                         //callback(null, '../dbfiles');
 
       
@@ -308,7 +308,7 @@ router.post('/uploadcamsfile',function(req,res,next)
                    console.log("in upload ",file_name);
                 
                 //var paths="../dbfiles/"+file_name;
-				 var paths="C:/document/dbfiles/"+file_name;
+				 var paths="/home/ubuntu/dbfiles/"+file_name;
                 callback(null,paths)
                 });
             
@@ -352,7 +352,7 @@ router.post('/uploadkarvysfile',function(req,res,next)
                     file_name=req.file.originalname;
 
                    console.log("in upload ",file_name);
-                var paths="C:/document/dbfiles/"+file_name;
+                var paths="/home/ubuntu/dbfiles/"+file_name;
               //  var paths="../dbfiles/"+file_name;
                 callback(null,paths)
                 });
@@ -397,7 +397,7 @@ router.post('/uploadftfile',function(req,res,next)
                     file_name=req.file.originalname;
 
                    console.log("in upload ",file_name);
-                var paths="C:/document/dbfiles/"+file_name;
+                var paths="/home/ubuntu/dbfiles/"+file_name;
                // var paths="../dbfiles/"+file_name;
                 callback(null,paths)
                 });

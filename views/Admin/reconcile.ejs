@@ -171,7 +171,7 @@
                         <a href="/admin/failedOrders"><i class="fa fa-fw fa-edit"></i> Failed Orders</a>
                     </li>
                     <li>
-                        <a href="/admin/reports"><i class="fa fa-fw fa-desktop"></i> Reprts</a>
+                        <a href="/admin/reports"><i class="fa fa-fw fa-desktop"></i> Reports</a>
                     </li>
                    <!-- <li>
                         <a href="/admin/bootstrap-grid"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
@@ -213,7 +213,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="/">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Tables
+                                <i class="fa fa-table"></i> Reconcile
                             </li>
                         </ol>
                     </div>
@@ -224,8 +224,8 @@
                       
       
                     <div class="col-lg-11">
-                        <h2>Reconcile Pending</h2>
-                        <div class="table-responsive">
+                        <h2>Reconciliation Pending</h2>
+                       <div class="table-responsive">
                            
                             <div ng-controller="checkBoxController">
                             <table class="table table-bordered table-hover">
@@ -251,18 +251,18 @@
 <!--                             </form>-->
                                     <tr>
                                         
-                                        <th>Pan</th>
+                                        <th>PAN</th>
                                      <!--<th ng-click="sort('OrderId')">OrderId
                 <span class="glyphicon sort-icon" ng-show="sortKey=='item.userinvestmentorderid'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>-->
                                          
                                        <th>  
                                          <!-- <a href="#" ng-click="sortType = 'OrderId'; sortReverse = !sortReverse">-->
-             OrderId 
+             Order ID 
             <!--<span ng-show="sortType == 'OrderId' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'OrderId' && sortReverse" class="fa fa-caret-up"></span>
 </a>--></th>
                                          
-                                       <th>Custmer Name</th>
+                                       <th>Customer Name</th>
                                       <!--  <th>Email</th>-->
                                         <!--<th>                                             
          <a href="#" ng-click="sortType = 'SchemeCode'; sortReverse = !sortReverse">
@@ -276,9 +276,9 @@
                                         <th>Ageing</th>
                                          <th>Status</th>
                                         
-                                         <th>Foliono</th>
-                                         <th>Transction Ref</th>
-                                        <th>Nav</th>
+                                         <th>Folio No</th>
+                                         <th>Transaction Ref</th>
+                                        <th>NAV</th>
                                         <th>Units</th>
                                         <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll(item.userinvestmentorderid)"/> Select All<br/></th>
                                     </tr>

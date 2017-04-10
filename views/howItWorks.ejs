@@ -20,7 +20,6 @@
 
 
 
-
           <h2 style="padding-top: 0;" class="">Pricing Packages</h2>
          <h4 style="margin-bottom: 0;">Choose your pack</h4>
 
@@ -148,11 +147,7 @@
       			  	 <button type="submit"  class="btn btn-white btn-lg moodNav pay" >Pay</button>
       			  </form>
       			 <%} else if(loggedIn && paid) {%>
-      <!--			 <form action="/GoalSelection" method="get">
-      			  <input type="hidden" id="askScheme" name="askScheme" value='true'>
-      			  	 <button type="submit"  class="btn btn-lg moodNav pay" >saved plans</button>
 
-      			  </form>-->
       			  <form action="/GoalSelection" method="get" >
                     <input type="hidden" name="tab" value="6" />
                     <button type="submit" class="btn btn-white btn-lg moodNav pay" >Invest</button>

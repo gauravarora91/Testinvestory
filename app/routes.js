@@ -427,7 +427,7 @@ module.exports = function (app, passport) {
 		else
 			pageName = "knowUs";
 
-		res.render('knowUs.ejs', {
+		res.render(pageName, {
 			user: req.user,
 			selectorDisplay: "show",
 			smessage: req.flash('signupMessage'),
@@ -455,7 +455,7 @@ module.exports = function (app, passport) {
 		loginStatus = checkLoginStatus(req);
 		mobile = req.useragent["isMobile"];
 		if (mobile)
-			pageName = "moodMobile";
+			pageName = "mobileMood";
 		else
 			// pageName = "scheme";
 			pageName = "mood";
@@ -689,7 +689,7 @@ module.exports = function (app, passport) {
 		loginStatus = checkLoginStatus(req);
 		mobile = req.useragent["isMobile"];
 		if (mobile)
-			pageName = "moodMobile";
+			pageName = "mobileMood";
 		else
 			pageName = "mood";
 		if (req.session.bseStatus) {

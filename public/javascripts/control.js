@@ -1,10 +1,16 @@
 var getGoals;
 var selectTab;
 var risk;
+
+function closeNav(){
+		//alert("dismiss");
+        	$("button.navbar-toggle").click();
+     
+		
+	}
+
 $(document).ready(function(){
 
-
-    
 
   resizeContent();
 
@@ -175,9 +181,7 @@ $(function(){
      
  }, function(){
          
-         
-         
-           $(".selectMode a.tooltips span#"+pr).hide();                      
+$(".selectMode a.tooltips span#"+pr).hide();                      
                                  
      });
     
@@ -464,14 +468,14 @@ circleColor = 	moodColorChange(moodId);
              $("a", this).css("color","#35BFD3");
     
    
-    $(".frogImage img").attr("src", $imgLink+moodImgName+$imgExtension);
+    $("#homeCircleImg img").attr("src", $imgLink+moodImgName+$imgExtension);
     
-    $(".frogImage h1").html($Feeling+" "+moodId);
+    $("#homeCircleImg h1").html($Feeling+" "+moodId);
     
 });    
     
     
-    $(".feelingCircularMenu ul li").click(function(){
+    $(".feelingCircularMenu ul li, .photosInner .change").click(function(){
   
 
     
@@ -479,9 +483,9 @@ circleColor = 	moodColorChange(moodId);
     
     var moodImgName = moodId;
     
-    $(".frogImage img").attr("src", $imgLink+moodImgName+$imgExtension);
+    $("#homeCircleImg img").attr("src", $imgLink+moodImgName+$imgExtension);
     
-    $(".frogImage h1").html($Feeling+" "+moodId);
+    $("#homeCircleImg h1").html($Feeling+" "+moodId);
     
 });    
    
@@ -490,7 +494,7 @@ $(".moods .pagination li:nth-child(1) a").css({"background-color":"#FFDE15","col
 //
 //    $(".frogImageMoods img").attr("src", $imgLink+frogMood+$imgExtension);
 
-    $(".frogImage img, .frogImage h1, .feelingCircularMenu ul li").click(function(){
+    $("#homeCircleImg img, #homeCircleImg h1,#homeCircleImg p, .feelingCircularMenu ul li").click(function(){
         
         frogMood=moodId;
          window.location.href = "GoalSelection?mood="+frogMood;
@@ -1257,4 +1261,8 @@ function resizeContent() {
  $("#section1,#section2,#section3,#section4").css("height",height);
    
 }
+
+/*sohan - navbar cancel button */
+
+/* Set the width of the side navigation to 250px */
 
