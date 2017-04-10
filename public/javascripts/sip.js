@@ -12,7 +12,7 @@ function getSIP(){
 		$('#sipInvestErr').slideUp(); 
 		$('#sipTimeErr').slideDown();
 	} else {
-		debugger;
+		// debugger;
 		$('#sipInvestErr').slideUp; 
 		$('#sipTimeErr').slideUp();
 		totalYears = document.getElementById("years").value;

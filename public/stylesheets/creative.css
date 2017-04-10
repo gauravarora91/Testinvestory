@@ -231,9 +231,8 @@ How it works
 margin-top: 0.7em;
 }
 #myStory .dotHr div{
-    
-   position: relative;
-    left: 28%;
+    position: relative;
+    /* left: 28%; */
 }
     
 .page4 .dotHr
@@ -1176,7 +1175,6 @@ background-color: #ffffff;/* #F2F5FB;*/
 
 .froggie{
     width: 9em;
-    
 }
 
 #myStory .panel-body {
@@ -1825,26 +1823,24 @@ div.col-md-8.selective {
 
 .goalReport .goalReportData #yCircle,
 .froggie #yCircle{
-   
-     border-radius: 50% !important;
-    background-color: #FFDE15;
-    color: #FFDE15;
-    font-size: 1.2em;
-    border-color: #FFDE15;
-    
-    font-weight: 700;
-    width: 1.2em;
-    height: 1.2em;
-    padding: 0;
-    margin: auto;
+   border-radius: 50% !important;
+   background-color: #b3b3a7;
+   color: #FFDE15;
+   font-size: 1.2em;
+   border-color: #FFDE15;
+   font-weight: 700;
+   width: 1.2em;
+   height: 1.2em;
+   padding: 0;
+   margin: auto;
 }
 .froggie #yCircle{
     cursor: pointer;
     position: absolute;
     z-index: 10;
-    left: -11.8em;
-
+    left: 0;
     top: 6.8em;
+    left: 43%;
 }
 
 
@@ -2375,9 +2371,8 @@ margin-top: 0.9em;
 }
 
 .g1{
-    
     top: -11em;
-    left: 9em;
+    left: 7em;
 }
 
 .g2{
@@ -2388,26 +2383,22 @@ margin-top: 0.9em;
 
 .g3{
     top: -1em;
-    left: 10em;
+    left: 11em;
 }
 
 .g4{
-       top: -7em;
-    left: 21em
+       top: -9em;
+       left: 18em;
 }
 
 .g5{
-    
     top: -1em;
-    left: 21.5em;
+    left: 30.5em;
 }
 
 .g6{
-    
-    top: -3.5em;
-
-    left: 29em;
-
+    top: -6.5em;
+    left: 27em;
 }
 
 .g7{
@@ -2418,53 +2409,59 @@ margin-top: 0.9em;
 }
 
 .g8{
-    
- top: -6.5em;
-    right: 37em;
+    top: -6.5em;
+    right: 31em;
 }
 
 .g9{
-    
     top: -10em;
-    right: 31em;
+    right: 26em;
 }
 
 .g10{
-    
     top: -1.5em;
-    right: 31em;
+    right: 28em;
 }
 
 .g11{
-    
-   top: -6.5em;
-    right: 23em;
+    top: -4.5em;
+    right: 19em;
 }
 
 .g12{
-    
-   top: -12em;
-    right: 21em;
+    top: -12em;
+    right: 17em;
 }
 
 .g13{
-    
-       top: -16.5em;
-    right: 14.5em;
+    top: -13.5em;
+    right: 11.5em;
 }
 .g14{
-    
-   top: -6.5em;
+    top: -7.5em;
     right: 13em;
-
 }
 
 
 .g15{
-    
-        top: -1em;
-    right: 15em;
-
+    top: -3em;
+    right: 56em;
+}
+.g16{
+    top: -10em;
+    right: 6em;
+}
+.g17{
+    top: -2em;
+    right: 16em;
+}
+.g18{
+    top: -6em;
+    right: 73em;
+}
+.g19{
+    top: -2em;
+    right: 37em;
 }
 
 .g15 #invest_withdraw .trackGoals,
@@ -2874,3 +2871,11 @@ div#savedPlans.row/*removed from line 2502*/
 .sub-page4 { position: relative; z-index: 2 }
 
 .btn-Next-Pan-Modal{ display: none }
+
+div#myStory {
+    margin: 60px 0px;
+}
+
+div#yCircle.yellow {
+    background-color: #FFDE15;
+}

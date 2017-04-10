@@ -905,9 +905,7 @@ module.exports = function (app, passport) {
 						callback(null, paid)
 					}
 				});
-			}
-			,
-			function (pay, callback) {
+			}, function (pay, callback) {
 				//Fetch Header 
 				//store the data in a json
 				async.waterfall([
@@ -935,7 +933,7 @@ module.exports = function (app, passport) {
 										lmessage: req.flash('loginMessage'),
 										footerDisplay: "hide",
 										footerData1: "Blog",
-										footerData2: "FAQs"
+										footerData2: "FAQs",
 									});
 								}
 							})
@@ -1005,7 +1003,6 @@ module.exports = function (app, passport) {
 												footerDisplay: "hide",
 												footerData1: "Blog",
 												footerData2: "FAQs"
-
 											});
 										}
 										x++;
@@ -2243,17 +2240,14 @@ module.exports = function (app, passport) {
 	});
 
 	app.post('/SavedPlansHeader', isLoggedIn, function (req, res) {
-
 		loginStatus = checkLoginStatus(req);
 		if (loginStatus) {
 			var creation_date = new Date();
 			var modified_date = new Date();
 			var status = 'active';
 			console.log('body: ' + req.body);
-
 			async.waterfall([
 				function (callback) {
-
 					var query = client.query("select goalid from goal where goal.name=$1", [req.body.goalName], function (err, result) {
 						if (err) {
 							console.log("cant insert assets header allocation data", err);
@@ -2267,10 +2261,15 @@ module.exports = function (app, passport) {
 				},
 
 				function (goalid, callback) {
-
+					console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SavedPlanHeader');
+					console.log(req.session.user.userid);
+					console.log(goalid);
+					console.log(req.body.riskProfile);
+					console.log(req.body.masterAmount);
+					console.log(req.body.totalYears);
+					console.log(req.body.sip);
 					//insert to the saved plans header
-					var query = client.query("INSERT INTO savedplansheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING savedplanid", [req.session.user.userid, goalid, req.body.riskProfile, req.body.masterAmount, req.body.totalYears, req.body.sip, status,
-						creation_date, modified_date, req.session.user.name], function (err, result) {
+					var query = client.query("INSERT INTO savedplansheader(userid,goalid,riskprofile, masteramount, totalyears, sip,status,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING savedplanid", [req.session.user.userid, goalid, req.body.riskProfile, req.body.masterAmount, req.body.totalYears, req.body.sip, status, creation_date, modified_date, req.session.user.name], function (err, result) {
 							if (err) {
 								console.log("cant insert assets header allocation data", err);
 								res.send("false");
@@ -2282,52 +2281,44 @@ module.exports = function (app, passport) {
 						});
 				},
 				function (savedPlanId, callback) {
-
 					//insert to the saved plans details
 					var percentage = [req.body.equityPercentage, req.body.hybridPercentage, req.body.debtPercentage];
 					var amount = [req.body.equityAmount, req.body.hybridAmount, req.body.debtAmount];
+					console.log('I m here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+					console.log(percentage[0]);
+					console.log(percentage[1]);
+					console.log(percentage[2]);
+					console.log(amount[0]);
+					console.log(amount[1]);
+					console.log(amount[2]);
+
 					var type = 'allocation';
 					var category = ['Equity', 'Hybrid', 'Debt'];
-
 					console.log("id=" + savedPlanId);
-
 					/*,(savedPlanId,type,category[1],category[1],percentage[1],amount[1],creation_date,modified_date,req.session.user.name),(savedPlanId,type,category[2],category[2],percentage[2],amount[2],creation_date,modified_date,req.session.user.name)*/
-
-					var query = client.query("INSERT INTO savedplansdetail(savedplanid,allocationtype,allocationcategory, allocationdescription, allocationpercentage, allocationamount,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9),($10,$11,$12,$13,$14,$15,$16,$17,$18),($19,$20,$21,$22,$23,$24,$25,$26,$27)", [savedPlanId, type, category[0], category[0], percentage[0], amount[0], creation_date, modified_date, req.session.user.name, savedPlanId, type, category[1], category[1], percentage[1], amount[1], creation_date, modified_date, req.session.user.name, savedPlanId, type, category[2], category[2], percentage[2], amount[2], creation_date, modified_date, req.session.user.name]
+					var query = client.query("INSERT INTO savedplansdetail(savedplanid,allocationtype,allocationcategory, allocationdescription, allocationpercentage, allocationamount,created,modified,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9),($10,$11,$12,$13,$14,$15,$16,$17,$18),($19,$20,$21,$22,$23,$24,$25,$26,$27)",[savedPlanId, type, category[0], category[0], percentage[0], amount[0], creation_date, modified_date, req.session.user.name, savedPlanId, type, category[1], category[1], percentage[1], amount[1], creation_date, modified_date, req.session.user.name, savedPlanId, type, category[2], category[2], percentage[2], amount[2], creation_date, modified_date, req.session.user.name]
 						, function (err, result) {
 							if (err) {
 								console.log("cant insert assets detail allocation data", err);
 								res.send("false");
 							} else {
-								//res.send(1);
-								// console.log(result.rows[0]);
-
+								console.log(result.rows);
 								callback(null)
-
 							}
-
-
 						});
-
-
 				}],
 				function (err, result) {
-
 					if (err)
 						throw err;
-
 					async.waterfall([function (callback) {
-
 						//Fetch Header 
 						//store the data in a json
 						var query = client.query("SELECT * FROM savedplansheader where userid=$1 ORDER BY created DESC LIMIT 1 ", [req.session.user.userid],
 							function (err, result) {
 								if (err)
 									console.log("Cant get assets values");
-
-
 								//console.log("saved plan header"+req.session.savedplanheader.sip);
-
+								
 								asetData = result.rows[0];
 								req.session.savedplanheader = asetData;
 								console.log("saved plan header" + req.session.savedplanheader.goalid);
@@ -2337,26 +2328,15 @@ module.exports = function (app, passport) {
 								console.log("saved plan header" + req.session.savedplanheader.userid);
 								callback(null, asetData)
 							})
-
-
 					},
 					function (headerData, callback) {
 						console.log(headerData)
-
-
-
 						var query = client.query("SELECT * FROM savedplansdetail where savedplanid=$1 and allocationtype=$2 ORDER BY created DESC LIMIT 3 ", [headerData.savedplanid, 'allocation'],
 							function (err, result) {
 								if (err)
 									console.log("Cant get assets values");
-
-
-
 								asetDataDetail = result.rows;
-
 								console.log(asetDataDetail[1]);
-
-
 								callback(null, headerData, asetDataDetail)
 							})
 
@@ -2389,10 +2369,8 @@ module.exports = function (app, passport) {
 						if (req.body.lumpsum) {
 
 							console.log("lumpsum" + req.body.lumpsum);
-
 							var amt = [];
 							amt[0] = req.body.masterAmount;
-
 
 							var query = client.query("select * from lumpsum_schemes where $1 between fromamount and toamount and $2 between fromyear and toyear and riskprofile = $3", [req.body.masterAmount, time, riskProfile],
 								function (err, result) {
@@ -2402,9 +2380,7 @@ module.exports = function (app, passport) {
 									scheme = result.rows;
 									console.log("daadadadadadadad" + scheme.length)
 									for (i = 0; i < scheme.length; i++) {
-
 										var percentage = 100;
-
 										var type = 'scheme';
 										var category = scheme[i].category;
 										var schemeDescription = scheme[i].name;
@@ -2414,41 +2390,31 @@ module.exports = function (app, passport) {
 										// var schemeCode = scheme[i].code;
 										creation_date = new Date();
 										modified_date = new Date();
-										//console.log("amt="+amt[i]);
+										console.log("amt="+amt[i]);
 										/*req.session.savedplandetail[i].allocationamount = amt[0];
 										 req.session.savedplandetail[i].schemecode = schemeCode;
 										req.session.savedplandetail[i].allocationdescription = schemeDescription;
-									req.session.savedplandetail[i].allocationcategory = category;
+										req.session.savedplandetail[i].allocationcategory = category;
 										req.session.savedplandetail[i].allocationpercentage = percentage;
-					req.session.savedplandetail[i].schemeid = schemeId;*/
+										req.session.savedplandetail[i].schemeid = schemeId;*/
 
 										var query = client.query("INSERT INTO savedplansdetail(savedplanid,allocationtype,allocationcategory, allocationdescription, allocationpercentage, allocationamount,created,modified,createdby,schemecode,schemeid) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)", [headerData.savedplanid, type, category, schemeDescription, percentage, req.body.masterAmount, creation_date, modified_date, req.session.user.name, schemeCode, schemeId]
 											, function (err, result) {
 												if (err) {
 													console.log("cant insert assets detail allocation data", err);
-													//res.send("false");
+													// res.send("false");
 												} else {
 													//res.send(1);
 													console.log("result" + req.body.masterAmount);
-
 													//callback(null)
-
 												}
-
-
 											});
-
 									}
-
-
 									//calculateScheme();
 									//res.redirect("/Pricing");
 									callback(null, amt);
 								})
-
 						} else {
-
-
 							var schemecamntde = 0, schemecamnteq = 0, schemecamnthy = 0;
 							var schememamntde = 0, schememamnteq = 0, schememamnthy = 0;
 							var schemeagamnthy = 0, schemeagamnteq = 0, schemeagamnteq = 0;
@@ -2458,13 +2424,10 @@ module.exports = function (app, passport) {
 								function (err, result) {
 									if (err)
 										console.log("Cant get assets values");
-
 									scheme = result.rows;
 									//console.log(scheme.length+"scheme"+scheme[1].name+scheme[1].category+"schemecode"+scheme[1].code);
 
-
 									for (i = 0; i < scheme.length; i++) {
-
 
 										if ((scheme[i].category) == "Equity") {
 											j = j + 1;
@@ -2766,13 +2729,11 @@ module.exports = function (app, passport) {
 
 
 
-
-
 						var query = client.query("SELECT * FROM savedplansdetail where savedplanid=$1 and allocationtype=$2", [req.session.savedplanheader.savedplanid, 'scheme'],
 							function (err, result) {
 								if (err)
 									console.log("Cant get assets values");
-
+								
 								var asetDataDetail = result.rows;
 								req.session.savedplandetail = asetDataDetail;
 
@@ -2928,10 +2889,7 @@ module.exports = function (app, passport) {
 
 									callback(null, result.rows[0]['savedplanid'])
 								}
-
-
 							});
-
 					},
 					function (savedPlanId, callback) {
 
@@ -2953,15 +2911,9 @@ module.exports = function (app, passport) {
 								} else {
 									//res.send(1);
 									// console.log(result.rows[0]);
-
 									callback(null)
-
 								}
-
-
 							});
-
-
 					}],
 					function (err, result) {
 
@@ -3516,7 +3468,7 @@ module.exports = function (app, passport) {
 			pageName = "yourStory";
 		loginStatus = checkLoginStatus(req);
 		if (loginStatus == true) {
-			var query = client.query("SELECT goal.name,count(userinvestmentsheader.goalid) FROM userinvestmentsheader inner join goal on userinvestmentsheader.goalid = goal.goalid where userinvestmentsheader.userid=$1 group by  goal.name ", [req.session.user.userid],
+			var query = client.query("SELECT goal.name,count(userinvestmentsheader.goalid) FROM userinvestmentsheader INNER JOIN goal ON userinvestmentsheader.goalid = goal.goalid WHERE userinvestmentsheader.userid=$1 and status in ('pending', 'reconciled') GROUP BY  goal.name ", [req.session.user.userid],
 			function (err, result) {
 				if (err)
 					console.log("Cant get assets values");

@@ -620,20 +620,20 @@
                     data.debtPercentage = alloc3;
                 }
                 <% if(loggedIn) {%>
-                debugger;
+                // debugger;
                     $.ajax({
                         type: 'POST',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         url: '/SavedPlansHeader',
                         success: function (data) {
-                            debugger;
+                            // debugger;
                             console.log('success');
                             //var myObj = JSON.parse(data);
                             //alert(data[1][0]);
                             $(".page6 #invest1").html(sip);
                             $(".page6 .table tbody > tr").not('#showDataSchemes').empty();
-                            debugger;
+                            // debugger;
                             for (i = 0; i < data[0].length; i++) {
                                 var txt1 = "<tr><td>" + data[0][i].name + "</td><td>" + data[0][i].category + "</td><td>" + data[1][i] + "</td></tr>";
                                 $("#showDataSchemes").after(txt1);
