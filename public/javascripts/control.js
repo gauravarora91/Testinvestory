@@ -1037,8 +1037,8 @@ var movingTo= 0;
         } else {
             $(".page2VldMsg2").slideDown();
         }
-
     });
+
     $(".page4 .selectMode button, .sub-page4 .done").not('#dontKnow').click( function() { selectTab(5, this) });
     var once = true;
     selectTab = function(tabNo, e) {
@@ -1055,7 +1055,6 @@ var movingTo= 0;
         switch (tabNo) {
             case 1:
                 $('.pagination li:nth-child(1) a').addClass('active');
-
                 $('.contentMood > div').not('.page1').hide();
                 $('.contentMood .page1').show();
                 break;

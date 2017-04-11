@@ -34,7 +34,8 @@
                         <p id="data1" style></p>
                     </div>
 
-                    <input class="form-control PANnumber" placeholder="PAN number" type="text" id="pan" name="pan" maxlength="10">
+                    <input class="form-control PANnumber panNumber" placeholder="PAN number" type="text" id="pan" name="pan" maxlength="10">
+                    <p class="panErr" style="display: none; color: red" >Please Enter a valid Pan Number</p>
                     <div class="dotHr loader">
                         <button class="btn btn-lg moodNav  pricing RP1 pull-left submit submitPan" style="margin-top:10%;width:5.5em;" id="panCheck" type="submit"
                             onclick="checkPanStaus()"> Submit </button>
@@ -726,37 +727,41 @@
     
         
         function checkPanStaus() {
+            if($('.panNumber').val().length == 10){
+                $('.panErr').slideUp();
+                $('.btn.pricing.RP1.submitPan').parent().html('<img src = "images/loader.gif" >');
+                var data = {};
+                data.pan = document.getElementById("pan").value;
+                console.log("pan" + data.pan);
+                //alert(data.pan);
 
-            $('.btn.pricing.RP1.submitPan').parent().html('<img src = "images/loader.gif" >');
-            var data = {};
-            data.pan = document.getElementById("pan").value;
-            console.log("pan" + data.pan);
-            //alert(data.pan);
+                <% if(loggedIn) {%>
+                    
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/PANValidation',
+                        success: function (data) {
+                            // console.log('success');
+                            $("#myPanModal .loader").html('');
+                            var myObj = JSON.parse(data);
 
-            <% if(loggedIn) {%>
-                
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    url: '/PANValidation',
-                    success: function (data) {
-                        // console.log('success');
-                        $("#myPanModal .loader").html('');
-                        var myObj = JSON.parse(data);
+                            //document.getElementById("responseData").style.display='none';
+                            document.getElementById("bseInvest").style.display = 'block';
+                            document.getElementById("pan").style.display = 'none';
+                            // document.getElementById("panCheck").style.display = 'none';
 
-                        //document.getElementById("responseData").style.display='none';
-                        document.getElementById("bseInvest").style.display = 'block';
-                        document.getElementById("pan").style.display = 'none';
-                        // document.getElementById("panCheck").style.display = 'none';
+                            var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
+                            document.getElementById("data1").innerHTML = displayMsg;
+                            $('.btn-Next-Pan-Modal').css('display', 'block');
+                        }
+                    })
+                    <% }%>
+            } else {
+                $('.panErr').slideDown();
+            }
 
-                        var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
-                        document.getElementById("data1").innerHTML = displayMsg;
-                        $('#responseData').show();
-                        $('.btn-Next-Pan-Modal').css('display', 'block');
-                    }
-                })
-                <% }%>
         }
         
         
