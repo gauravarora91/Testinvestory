@@ -1,7 +1,7 @@
 var totalYears;
 var sip;
 function getSIP(){
-	
+	debugger;
 	// debugger;	
 	//alert("dad");
 	var sipInvestValue = $('#sip').val();

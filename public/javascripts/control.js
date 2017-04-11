@@ -1234,7 +1234,6 @@ var movingTo= 0;
 //         $(".pagination li:nth-child("+movingTo+") a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
 		
 });
-    // debugger;
 		if (localStorage.sipInvestment) {
     showSIP();
 			
