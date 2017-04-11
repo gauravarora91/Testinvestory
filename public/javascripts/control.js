@@ -1039,7 +1039,7 @@ var movingTo= 0;
         }
 
     });
-    $(".page4 .selectMode button").not('#dontKnow').click( function() { selectTab(5, this) });
+    $(".page4 .selectMode button, .sub-page4 .done").not('#dontKnow').click( function() { selectTab(5, this) });
     var once = true;
     selectTab = function(tabNo, e) {
         currentPage = tabNo;
