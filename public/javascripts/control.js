@@ -1033,9 +1033,9 @@ var movingTo= 0;
         if(  $('#time').val() <= 50 && $('#time').val() >= 1 ) {
             setProfile(0,1,0);
             selectTab(3);
-            $("#page2VldMsg2").slideUp();
+            $(".page2VldMsg2").slideUp();
         } else {
-            $("#page2VldMsg2").slideDown();
+            $(".page2VldMsg2").slideDown();
         }
 
     });

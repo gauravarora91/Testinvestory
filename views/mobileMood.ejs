@@ -29,8 +29,8 @@
                     <h2 class="PANHead">Enter PAN</h2>
 
                     <!-- <form class="formmodel PANInfo" id="checkPANStatus" name="checkPANStatus" onsubmit="checkPanStaus();">-->
-                    <div class="bg-success" id="responseData">
-                        <p id="data1"></p>
+                    <div class="bg-success" id="responseData" style="display: none">
+                        <p id="data1" style></p>
                     </div>
 
                     <input class="form-control PANnumber" placeholder="PAN number" type="text" id="pan" name="pan" maxlength="10">
@@ -56,8 +56,7 @@
                     <button class="btn btn-lg moodNav  pricing RP1 pull-left submit " style="margin-top:2%;width:5.5em;display:none;" id="bseInvest"  type="submit">Proceed </button> 
             </form>	
             -->
-                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit btn-Next-Pan-Modal" style="margin-top:2%;width:5.5em;" data-toggle="modal"
-                        data-target="#uploadModal" data-dismiss="modal">Next </button>
+                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit btn-Next-Pan-Modal" style="margin-top:2%;width:5.5em;" data-toggle="modal"data-target="#uploadModal" data-dismiss="modal">Next </button><div class="clearfix"></div>
 
                 </div>
             </div>
@@ -113,8 +112,7 @@
                     </form>
 
                     <form action="/InsertOrders" method="post">
-                        <button class="btn btn-lg moodNav  pricing RP1 pull-left submit " style="margin-top:2%;width:5.5em;display:none;" id="bseInvest"
-                            type="submit">Proceed </button>
+                        <button class="btn btn-lg moodNav  pricing RP1 pull-left submit " style="margin-top:2%;width:5.5em;display:none;" id="bseInvest" type="submit">Proceed </button><div class="clearfix"></div>
                     </form>
 
 
@@ -131,7 +129,7 @@
 <!--    <section id="section1">-->
         
  
-     <div class="container-fluid moods text-center" style="    height: initial;">
+     <div class="container-fluid moods text-center pageGoalSelection" style="    height: initial;">
           
            
         <div class="container" style=" ">
@@ -142,50 +140,32 @@
                  
              <div class="col-md-4">
                  
-                 
-                 <div class="row slider" style="padding-top:25%;">
-            
-            
-                     <div class="photos">
-                         
-                          
-                         
-                    <div class="photosInner">
-                     
-                        <img class="change" id="Broke" src="images/smallBroke.png" alt="Home view" >
-                     
-                      <img class="change" id="Loved" src="images/smallLoved.png" alt="Home view" >
-                     
-                      <img class="change" id="Nerdy" src="images/smallNerdy.png" alt="Home view" >
-                     
-                     <img class="change" id="Responsible" src="images/smallResponsible.png" alt="Home view" >
-                     
-                      <img class="change" id="Rich" src="images/smallRich.png" alt="Home view" >
-                     
-                      <img class="change" id="Social" src="images/smallSocial.png" alt="Home view" >
-                     
-                     </div> 
-                         
-                 
-                     </div>
-                     <div class="slider-control">
-                         <img class="left" src="images/leftArrow.png" alt="Home view" >
-                        <img class="right" src="images/rightArrow.png" alt="Home view" >  
-                        
-                     </div>
-                          
-                    
-                 </div>
-                 
-                 
+                <div class="row rowIndexSlider">
+                    <div class="slider">
+                        <div class="photos">
+                            <div class="photosInner">
+                                <img class="change" id="Broke" src="images/smallBroke.png" alt="Home view">
+                                <img class="change" id="Loved" src="images/smallLoved.png" alt="Home view">
+                                <img class="change" id="Nerdy" src="images/smallNerdy.png" alt="Home view">
+                                <img class="change" id="Responsible" src="images/smallResponsible.png" alt="Home view">
+                                <img class="change" id="Rich" src="images/smallRich.png" alt="Home view">
+                                <img class="change" id="Social" src="images/smallSocial.png" alt="Home view">
+                            </div>
+                        </div>
+                        <div class="slider-control">
+                            <img class="left" src="images/leftArrow.png" alt="Home view">
+                            <img class="right" src="images/rightArrow.png" alt="Home view">
+                        </div>
+                    </div>
+                </div>
             </div>
                 
                    <div class="col-xs-12 ">
                  
                   
                   
-                       <div class="contentMood" style="    border-bottom: 2px #35BFD3 dotted;">
-                           <p id="Indicator" style="margin-top:30%;">Goal Selection >
+                       <div class="contentMood">
+                           <p id="Indicator" style="margin: 30px -10px 23px;">Goal Selection >
 						   
 						   <span id="goalSelected"></span>
 							<span id="rpText">> Risk Profiling ></span>	
@@ -197,32 +177,29 @@
                         <h2>Please select your goal</h2>
                        <p>You can always add or change a goal after you have signed up</p>
                        
-              <div class="col-sm-12 ">
-				  <div class="below">
-                      <div class="goal" id="" >
-                        <img src="images/goals/Rich/Crorepati.png" mood="Rich" alt="Home view"   >
-                        <p id="mood"><span></span>Crorepati</p>
-                      </div>
+                    <div class="col-sm-12 ">
+                        <div class="row">
+                            <div class="below">
+                                <div class="goal" id="">
+                                    <img src="images/goals/Rich/Crorepati.png" mood="Rich" alt="Home view">
+                                    <p id="mood"><span></span>Crorepati</p>
+                                </div>
 
-                                        
-                     <div class="goal" id="" > 
-                        <img src="images/goals/Rich/Fancy%20Car.png" mood="Rich" alt="Home view">
-                        <p id="mood"><span></span>Fancy Car</p>
-                    </div>
-                
-                    <div class="goal" id="" >
-                        <img src="images/goals/Rich/Double%20the%20money.png" mood="Rich" alt="Home view" >
-                        <p id="mood"><span></span>Double the money</p>
-                    </div>
-                 
-                </div>  
-                         <div class="worksBtn" style="    margin-top: 12%;">
-           
-                <button type="" class="btn btn-lg moodNav next" style="    position: relative;
-    top: -1em;"> Next </button> 
-               
-            </div>  
-                           </div>              
+                                <div class="goal" id="">
+                                    <img src="images/goals/Rich/Fancy%20Car.png" mood="Rich" alt="Home view">
+                                    <p id="mood"><span></span>Fancy Car</p>
+                                </div>
+
+                                <div class="goal" id="">
+                                    <img src="images/goals/Rich/Double%20the%20money.png" mood="Rich" alt="Home view">
+                                    <p id="mood"><span></span>Double the money</p>
+                                </div>
+                            </div>
+                            <div class="btn-hr-wrapper clean" style="margin-top: 30px">
+                                <button type="" class="btn btn-lg moodNav next"> Next </button> 
+                            </div>  
+                        </div>
+                    </div>              
             
                       
         </div>
@@ -234,95 +211,82 @@
                                <div id="" class="page2">
 <!--                        <h2>Education</h2>-->
 								   <br />
-                       <p>I need INR<input class="blankInput"  name="amount" id="amount" placeholder="" type="number" max="7" value=""/>in<input class="blankInput" placeholder="" type="number" id="time" max="99" value=""/> (Years)</p>
-                                   
-                                   <div class="buttonSetUp">
-                    <div class="login-btn" style="top:90%;">
-                                 
-                <button type="button" id="go" class="btn btn-lg moodNav go" onclick="setProfile(0,1);" > Go </button> 
-               
-                    <button type="" class="btn btn-lg moodNav next page3Sub" > Next </button>     
-            </div>
-                          </div>         
-                      <br>             
-                                   
-                   <div class="page3" style="    margin-top: 12%;">
-                                   <p>So, you need to invest INR <span id="invest"></span> Monthly</p>
-                       <div class="row">
-                           <div  class="col-12-sm">
+                    <p class="row">I need INR<input class="blankInput"  name="amount" id="amount" placeholder="" type="number" max="7" value=""/>in<input class="blankInput" placeholder="" type="number" id="time" max="99" value=""/> (Years)</p>
+                    <p class="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
+                    <p class="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
+                    <div class="buttonSetUp">
+                        <div class="login-btn" style="top:90%;">
+                            <button type="button" id="go" class="btn btn-lg moodNav go" style="display: inline-block" > Go </button> 
+                            <button type="" class="btn btn-lg moodNav next page3Sub" > Next </button>     
+                        </div>
+                    </div>         
+        <!-- Tab 3 -->
+        <div class="page3" style="    margin-top: 12%;">
+            <p>So, you need to invest INR <span id="invest"></span> Monthly</p>
+                <div class="row">
+                    <div  class="col-12-sm">
                            
                            <!--table Equity-->
                         <table class="table">
-                                 
-                             <thead>
-                                     <tr>
-                                      <th colspan="2">Equity</th>
-                                     
-                                     </tr>
-                                </thead>
-                                 <tbody>
-                                     <tr>
-                                        
-                                         <td>Allocation percent</td>
-                                      <td style="border-right: none;">Amount (&#x20B9;)</td>
-                                        </tr>
-                                        <tr>
-                                          <td id="eqPer">25%</td>
-                                          <td id="eqAmt" style="border-right: none;">NA</td>
-                                        </tr>
-                                 </tbody>
-                          </table>
-                           
-                           <!--table Hybrid-->
-                           <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Hybrid</th>
-                                    
-                                    </tr>
-                                </thead>
-                               <tbody>
-                                   <tr>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Equity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
                                     <td>Allocation percent</td>
-                                        <td style="border-right: none;">Amount (&#x20B9;)</td>
-                                   </tr>
-                                    <tr>
-                                        <td id="hybPer">10% </td>
-                                        <td id="hybAmt" style="border-right: none;">NA</td>
-                                    </tr>
-                               </tbody>
-                               </table>
-                           
-                           <!--table Debt-->
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Debt</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td>Allocation percent</td>
-                                            <td style="border-right: none;">Amount (&#x20B9;)</td></tr>
-                                        <tr>
-                                            <td id="debPer">65%</td>
-                                            <td id="debAmt" style="border-right: none;">NA</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                               
-                               <br/>
-                               <br/>
-                               <br/>
-                               <br/>
-                               </div>
-                       </div>    
-					    <p style="text-align: center;">* Risk Profile - Conservative</p>    
-                                   </div>                
-                
-                              
-                       </div>
+                                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                                </tr>
+                                <tr>
+                                    <td id="eqPer">25%</td>
+                                    <td id="eqAmt" style="border-right: none;">NA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--table Hybrid-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Hybrid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Allocation percent</td>
+                                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                                </tr>
+                                <tr>
+                                    <td id="hybPer">10% </td>
+                                    <td id="hybAmt" style="border-right: none;">NA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--table Debt-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Debt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Allocation percent</td>
+                                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                                </tr>
+                                <tr>
+                                    <td id="debPer">65%</td>
+                                    <td id="debAmt" style="border-right: none;">NA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
+				<p style="text-align: right;">* Risk Profile - Conservative</p>    
+            </div>                
+        </div>
                            
                            <div id="" class="page4">
                                    <p id="invest">You need to invest INR <span id="invest2"></span> monthly in Conservative mode.</p>
@@ -396,9 +360,9 @@
                 
            
 <div class="riskProfiling">
-     <p id="mood">  <input type="Radio" id="Q1" name="Q1" value="0"  checked>Low risk taker</p>
-    <p id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</p>
-    <p id="mood"> <input type="Radio" id="Q1" name="Q1"  value="2">High risk taker</p>
+     <label id="mood">  <input type="Radio" id="Q1" name="Q1" value="0"  checked>Low risk taker</label>
+    <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</label>
+    <label id="mood"> <input type="Radio" id="Q1" name="Q1"  value="2">High risk taker</label>
 </div>
                     </div>
                             
@@ -408,9 +372,9 @@
                 
        
 <div class="riskProfiling">
-     <p id="mood"> <input type="Radio" id="Q2" name="Q2"  value="0" checked>Danger</p>
-    <p id="mood"><input type="Radio" id="Q2" name="Q2"  value="1" >Uncertainty</p>
-    <p id="mood"> <input type="Radio" id="Q2"  name="Q2" value="2">Opportunity</p>
+     <label id="mood"> <input type="Radio" id="Q2" name="Q2"  value="0" checked>Danger</label>
+    <label id="mood"><input type="Radio" id="Q2" name="Q2"  value="1" >Uncertainty</label>
+    <label id="mood"> <input type="Radio" id="Q2"  name="Q2" value="2">Opportunity</label>
 </div>
                 
                 </div>
@@ -421,22 +385,22 @@
                 
            
 <div class="riskProfiling">
-     <p id="mood"> <input type="Radio" id="Q3" name="Q3" value="0" checked>Always the possible losses</p>
-    <p id="mood"><input type="Radio" id="Q3" name="Q3"  value="1" >Usually the possible losses</p>
-    <p id="mood"> <input type="Radio" id="Q3" name="Q3"  value="2">Always the possible gains</p>
+     <label id="mood"> <input type="Radio" id="Q3" name="Q3" value="0" checked>Always the possible losses</label>
+    <label id="mood"><input type="Radio" id="Q3" name="Q3"  value="1" >Usually the possible losses</label>
+    <label id="mood"> <input type="Radio" id="Q3" name="Q3"  value="2">Always the possible gains</label>
 </div>
                 
                                                              
                </div>
                   <div class="item">
-              <label for="Q4"><p class="circleRisk">4</p>4.Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label>
+              <label for="Q4"><p class="circleRisk">4</p>Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label>
                  
                 
              
 <div class="riskProfiling">
-     <p id="mood"><input type="Radio" id="Q4" name="Q4" value="0" checked>About the same rate as from bank fixed deposits</p>
-    <p id="mood"><input type="Radio" id="Q4" name="Q4"  value="1" >About one and half time the rate from bank fixed deposits</p>
-    <p id="mood"><input type="Radio" id="Q4" name="Q4"  value="2">About twice the rate from bank fixed deposits</p>
+     <label id="mood"><input type="Radio" id="Q4" name="Q4" value="0" checked>About the same rate as from bank fixed deposits</label>
+    <label id="mood"><input type="Radio" id="Q4" name="Q4"  value="1" >About one and half time the rate from bank fixed deposits</label>
+    <label id="mood"><input type="Radio" id="Q4" name="Q4"  value="2">About twice the rate from bank fixed deposits</label>
 </div>
                 
                      </div>
@@ -447,9 +411,9 @@
                 
             
 <div class="riskProfiling">
-     <p id="mood"><input type="Radio" id="Q5" name="Q5"  value="0" checked>I would have a concern with any sort of loss</p>
-    <p id="mood"><input type="Radio" id="Q5" name="Q5"  value="1" >I'd get concerned if the loss was greater than 10%</p>
-    <p id="mood"><input type="Radio" id="Q5" name="Q5"  value="2">I wouldn't worry about losses in that time frame</p>
+     <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="0" checked>I would have a concern with any sort of loss</label>
+    <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="1" >I'd get concerned if the loss was greater than 10%</label>
+    <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="2">I wouldn't worry about losses in that time frame</label>
 </div>  
                        </div>
                  
@@ -470,17 +434,19 @@
             <img src="images/Right.png" style="width: 5%;
     height: 15%;">
     <span class="sr-only">Next</span>
-  </a> 
-                      
-                                                                        
-            <div class="worksBtn" >
+  </a>   <a class="left  "style=" position: relative;
+    top: initial;" href="#myCarousel" role="button" data-slide="previous">
+<!--    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+            <img src="images/Left.png" style="width: 5%;
+    height: 15%;">
+    <span class="sr-only">Next</span>
+  </a>
             
             <div class="login-btn text-center page-buttons">
                                  
-                <button type="" class="btn btn-lg moodNav done " onclick="myScore();" style="position:relative;top:-1em;"> Done </button>
+                <button type="" class="btn btn-lg moodNav done " onclick="myScore();" style= "float: none; margin-top: -45px"> Done </button>
             </div>
-            
-        </div>
+        
                            
                            
                            </div> 
@@ -553,168 +519,159 @@
                                             <td id="debAmt1" style="border-right: none;">NA</td>
                                         </tr>
                                     </tbody>
-                                </table>
-													   
-<br/>
-                                                       <br/>
-                                                       <br/>
-                                                       <br/>
-													   
+                                </table><br/>			   
                        </div>
 							     
 							
                   <div class="btn-hr-wrapper clean showDataSchemes">
                                     <% if(loggedIn && paid){ %>
-                                        <button type="submit" class="btn btn-lg moodNav signUp pull-left" id="schemeNext"> Next </button>
+                                        <button type="submit" class="btn btn-lg moodNav signUp" id="schemeNext"> Next </button>
                                     <%  } else if(loggedIn && !paid) { %>
                                         <form action="/Pricing" method="get">
-                                            <button type="submit" class="btn btn-lg moodNav signUp pull-left">Pay </button>
+                                            <button type="submit" class="btn btn-lg moodNav signUp">Pay </button>
                                         </form>
                                     <%  } else { %>
-                                        <button type="" data-toggle="modal" data-target="#loginModal" class="btn btn-lg moodNav signUp pull-left"> login </button>
+                                        <button type="" data-toggle="modal" data-target="#loginModal" class="btn btn-lg moodNav signUp"> login </button>
                                     <% } %>
                                 <div class="clearfix"></div></div>
                            </div>
 								
-								   <!--Tab 6-->
-                            <% if(paid) {%>
-	
-	   <div  class="page6" style="display: none">
-                        <button type="" data-toggle="modal" data-target="#myPanModal" class="btn btn-lg moodNav go" id="initInvest" style="top: 25px;"> Invest </button>
-<p>So, you need to invest INR <span id="invest1"><%=assetFromDb.sip %></span> Monthly</p>
-                            
-		   
-		    <div class="row">
-                           <div  class="col-12-sm">
-                           
-                           <!--table Equity-->
-							    <% for(i=0;i<asetDataDetail.length;i++) {%>
-                        <table class="table">
-                                 
-                             <thead>
-                                     <tr>
-                                      <th colspan="2"><%=schemeData[i].allocationdescription %></th>
-                                     
-                                     </tr>
-                                </thead>
-                                 <tbody>
-                                     <tr>
-                                        
-                                         <td>Allocation Category</td>
-                                      <td style="border-right: none;">Amount (&#x20B9;)</td>
-                                        </tr>
-                                        <tr>
-                                          <td ><%=schemeData[i].allocationcategory %></td>
-                                          <td style="border-right: none;"><%=schemeData[i].allocationamount %></td>
-                                        </tr>
-                                 </tbody>
-                          </table>
-							   <br />
-							   <br />
-							    <%}%>  
-				</div>
-		   </div>
-		   
-         
-                      
-                           </div>
-						   
-						   
-                            <!--Tab 7-->
-                            <div class="page7" style="display: none">
-                                <p>So, you need to invest INR <span id="invest1"></span> Monthly</p>
-                                                                   <div class="table-responsive">
-                        <table class="table">
-    <thead>
-      <tr>
-  		
-       <th colspan="2" style="border-right: none;">Equity</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-                                        
-                                         <td>Allocation percent</td>
-                                      <td style="border-right: none;">Amount (&#x20B9;)</td>
-                                        </tr>
-                                      
-        <tr>
-  
-       
-            <td id="eqPer1">25%</td>
-            <td id="eqAmt1" style="border-right: none;">NA</td>
-      </tr>
-                            </tbody>
-                                                       </table>
-                                                       <br>
-      <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" style="border-right: none;">Hybrid</th>
-                                    
-                                    </tr>
-                                </thead>
-                               <tbody>
-                                   <tr>
-                                    <td>Allocation percent</td>
-                                        <td style="border-right: none;">Amount (&#x20B9;)</td>
-                                   </tr>
-                                    <tr>
-                                        <td id="hybPer1">10% </td>
-                                        <td id="hybAmt1" style="border-right: none;">NA</td>
-                                    </tr>
-                               </tbody>
-                               </table>                                             
-                                                       
-    <br>
-<table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2" style="border-right: none;">Debt</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td>Allocation percent</td>
-                                            <td style="border-right: none;">Amount (&#x20B9;)</td></tr>
-                                        <tr>
-                                            <td id="debPer1">65%</td>
-                                            <td id="debAmt1" style="border-right: none;">NA</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-													   
-<br/>
-                                                       <br/>
-                                                       <br/>
-                                                       <br/>
-													   
-                       </div>
-                                <div class="dotHr">
-                                    <div class="login-btn">
-                                <% if(loggedIn && paid){ %>
-                                        <button type="submit" class="btn btn-lg moodNav signUp" id="schemeNext"> Next </button>
-                                <%  } else if(loggedIn && !paid) { %>
-                                        <form action="/Pricing" method="get">
-                                            <button type="submit" class="btn btn-lg moodNav signUp">Pay </button>
-                                        </form>
-                                <%  } else { %>
-                                            <button type="" data-toggle="modal" data-target="#loginModal" class="btn btn-lg moodNav signUp"> login </button>
-                                <% } %>
-                                        </div>
-                                    </div>
-                                </div>
-						   <% } %>
-
-             </div>
-   
+    <!--Tab 6-->
+    <% if(paid) {%>
+	<div  class="page6" style="display: none">
+        <button type="" data-toggle="modal" data-target="#myPanModal" class="btn btn-lg moodNav go" id="initInvest" style="top: 0;left: 0;margin: 25px auto;"> Invest </button>
+        <p>So, you need to invest INR <span id="invest1"><%=assetFromDb.sip %></span> Monthly</p>   
+        <div class="row">
+            <div class="col-12-sm table-wrapper">
+                <!--table Equity-->
+                <% for(i=0;i<asetDataDetail.length;i++) {%>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">
+                                    <%=schemeData[i].allocationdescription %>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Allocation Category</td>
+                                <td style="border-right: none;">Amount (&#x20B9;)</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <%=schemeData[i].allocationcategory %>
+                                </td>
+                                <td style="border-right: none;">
+                                    <%=schemeData[i].allocationamount %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                    <%}%>
             </div>
-         </div>
-        
-         
-             
         </div>
+    </div>
+
+
+<!--Tab 7-->
+<div class="page7" style="display: none">
+    <p>So, you need to invest INR <span id="invest1"></span> Monthly</p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th colspan="2" style="border-right: none;">Equity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>Allocation percent</td>
+                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                </tr>
+
+                <tr>
+
+
+                    <td id="eqPer1">25%</td>
+                    <td id="eqAmt1" style="border-right: none;">NA</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" style="border-right: none;">Hybrid</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Allocation percent</td>
+                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                </tr>
+                <tr>
+                    <td id="hybPer1">10% </td>
+                    <td id="hybAmt1" style="border-right: none;">NA</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" style="border-right: none;">Debt</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Allocation percent</td>
+                    <td style="border-right: none;">Amount (&#x20B9;)</td>
+                </tr>
+                <tr>
+                    <td id="debPer1">65%</td>
+                    <td id="debAmt1" style="border-right: none;">NA</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+    </div>
+    <div class="dotHr">
+        <div class="login-btn">
+            <% if(loggedIn && paid){ %>
+                <button type="submit" class="btn btn-lg moodNav signUp" id="schemeNext"> Next </button>
+                <%  } else if(loggedIn && !paid) { %>
+                    <form action="/Pricing" method="get">
+                        <button type="submit" class="btn btn-lg moodNav signUp">Pay </button>
+                    </form>
+                    <%  } else { %>
+                        <button type="" data-toggle="modal" data-target="#loginModal" class="btn btn-lg moodNav signUp"> login </button>
+                        <% } %>
+        </div>
+    </div>
+</div>
+<% } %>
+
+    </div>
+
+    </div>
+    </div>
+
+
+
+    </div>
 <!--    </section>-->
  
             </div>
@@ -794,6 +751,7 @@
 
                         var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
                         document.getElementById("data1").innerHTML = displayMsg;
+                        $('#responseData').show();
                         $('.btn-Next-Pan-Modal').css('display', 'block');
                     }
                 })
@@ -835,7 +793,6 @@
                     data.debtPercentage = alloc3;
                 }
                 <% if(loggedIn) {%>
-                // debugger;
                     $.ajax({
                         type: 'POST',
                         data: JSON.stringify(data),
@@ -848,10 +805,12 @@
                             //alert(data[1][0]);
                             $(".page6 #invest1").html(sip);
                             $(".page6 .table tbody > tr").not('#showDataSchemes').empty();
-                            // debugger;
+                            $('.page6 .table-wrapper').html('');
                             for (i = 0; i < data[0].length; i++) {
-                                var txt1 = "<tr><td>" + data[0][i].name + "</td><td>" + data[0][i].category + "</td><td>" + data[1][i] + "</td></tr>";
-                                $("#showDataSchemes").after(txt1);
+                                var txt1 = '<table class="table"><thead><tr><th colspan="2">'+data[0][i].name+'</th></tr></thead><tbody><tr><td>'+data[0][i].name+'</td><td>'+data[1][i]+'</td></tr></tbody></table>';
+                                $('.page6 .table-wrapper').append(txt1);
+                                // var txt1 = "<tr><td>" + data[0][i].name + "</td><td>" + data[0][i].category + "</td><td>" + data[1][i] + "</td></tr>";
+                                // $("#showDataSchemes").after(txt1);
                             }
                         }
                         //console.log(data[0].name);
@@ -1019,7 +978,7 @@
                 } catch(e) {
                     console.log("Session Storage thing didn't work >>> "+ e );
                 }
-
+                // debugger;
                 console.log(sessionStorage.getItem("tempGoals"));
                 document.getElementById("invest" + t).innerHTML = mn;
                 document.getElementById("invest2").innerHTML = mn;
@@ -1513,9 +1472,9 @@
 
             $('#invest').bind("DOMSubtreeModified",function(){
                 if( $('#invest').html() >= 1000 ) {
-                    $('#page2VldMsg').slideUp();
+                    $('.page2VldMsg').slideUp();
                 } else {
-                    $('#page2VldMsg').slideDown();
+                    $('.page2VldMsg').slideDown();
                 }
             });
 

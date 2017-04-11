@@ -215,8 +215,8 @@
                                     <button type="" class="btn btn-lg moodNav next page3Sub"> Next </button>
                                     <!--<button type="" class="btn btn-lg moodNav save page3Sub" > Save </button>-->
                                 </div>
-                                <p id="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
-                                <p id="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
+                                <p class="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
+                                <p class="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
                                 <div class="dotHr"></div>
                             </div>
 
@@ -326,7 +326,7 @@
                                             </button>
                                             <div class="riskProfiling">
                                                 <label id="mood">  <input type="Radio" id="Q1" name="Q1" value="0" >Low risk taker</label>
-                                                <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</labe;>
+                                                <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</label>
                                                 <label id="mood"> <input type="Radio" id="Q1" name="Q1"  value="2">High risk taker</label>
                                             </div>
                                             <button class="accordion">
@@ -349,7 +349,7 @@
                                             </div>
                                             <button class="accordion">
                                                 <div class="col-sm-1 btn btn-default btn-circle">4</div>
-                                                <div class="col-sm-11"><label for="Q4">4.Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label></div>
+                                                <div class="col-sm-11"><label for="Q4">Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label></div>
                                             </button>
                                             <div class="riskProfiling">
                                                 <label id="mood"><input type="Radio" id="Q4" name="Q4" value="0" >About the same rate as from bank fixed deposits</label>
@@ -1298,9 +1298,9 @@
 
             $('#invest').bind("DOMSubtreeModified",function(){
                 if( $('#invest').html() >= 1000 ) {
-                    $('#page2VldMsg').slideUp();
+                    $('.page2VldMsg').slideUp();
                 } else {
-                    $('#page2VldMsg').slideDown();
+                    $('.page2VldMsg').slideDown();
                 }
             });
 

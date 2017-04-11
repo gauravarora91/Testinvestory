@@ -3614,7 +3614,7 @@ module.exports = function (app, passport) {
 
 
 		console.log("invoices", req.session.user.userid);
-		var query = client.query("select to_char(a.userinvestmentorderdate,'dd-Mon-yyyy') as investdate, b.name, a.amount,NULLIF(a.units,0) as units from userinvestmentorders a, schemesmaster b where a.schemeid = b.schemeid and a.userid=$1 order by 1 desc", [req.session.user.userid], function (err, result) {
+		var query = client.query("select to_char(a.userinvestmentorderdate,'dd-Mon-yyyy') as investdate, b.name, a.amount,NULLIF(a.units,0) as units from userinvestmentorders a, schemesmaster b where a.schemeid = b.schemeid and a.amount > 0 and a.userid=$1 order by 1 desc", [req.session.user.userid], function (err, result) {
 			if (err)
 				console.log("Cant get portfolio details in goal selection");
 			if (result.rows.length > 0) {
@@ -3704,18 +3704,14 @@ module.exports = function (app, passport) {
 
 	//Investment
 	app.get('/Investment', isLoggedIn, function (req, res) {
-
 		currentPage = req.session.activePage = "/Investment";
-
 		loginStatus = checkLoginStatus(req);
 		mobile = req.useragent["isMobile"]
 		if (mobile) {
 			res.render('investmentMobile.ejs', {
-
 			});
 		} else {
 			res.render('yourStory.ejs', {
-
 				user: req.user,
 				selectorDisplay: "show",
 				loggedIn: loginStatus,
