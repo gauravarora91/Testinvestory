@@ -3605,7 +3605,10 @@ module.exports = function (app, passport) {
 		currentPage = req.session.activePage = "/Invoices";
 
 		loginStatus = checkLoginStatus(req);
-
+    //   var date = new date();
+    //   date = date.toLocaleDateString("en-US"); 
+	var today = new Date();
+	var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
 		mobile = req.useragent["isMobile"];
 		if (mobile)
 			pageName = "myInvoicesMobile";
@@ -3636,7 +3639,8 @@ module.exports = function (app, passport) {
 					path1: 'accountInvoicesData',
 					footerDisplay: "hide",
 					footerData1: "Blog",
-					footerData2: "FAQs"
+					footerData2: "FAQs",
+					date: date
 				});
 			}
 
