@@ -29,7 +29,8 @@
                         <p id="data1"></p>
                     </div>
 
-                    <input class="form-control PANnumber" placeholder="PAN number" type="text" id="pan" name="pan" maxlength="10">
+                    <input class="form-control PANnumber panNumber panNumber" placeholder="PAN number" type="text" id="pan" name="pan" maxlength="10">
+                    <p class="panErr" style="display: none; color: red" >Please Enter a valid Pan Number</p>
                     <div class="dotHr loader">
                         <button class="btn btn-lg moodNav  pricing RP1 pull-left submit submitPan" style="margin-top:10%;width:5.5em;" id="panCheck" type="submit"
                             onclick="checkPanStaus()"> Submit </button>
@@ -52,7 +53,7 @@
                     <button class="btn btn-lg moodNav  pricing RP1 pull-left submit " style="margin-top:2%;width:5.5em;display:none;" id="bseInvest"  type="submit">Proceed </button> 
             </form>	
             -->
-                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit btn-Next-Pan-Modal" style="margin-top:2%;width:5.5em;" data-toggle="modal"
+                    <button class="btn btn-lg moodNav  pricing RP1 pull-right submit btn-Next-Pan-Modal" style="margin-top:2%;width:5.5em; display: none" data-toggle="modal"
                         data-target="#uploadModal" data-dismiss="modal">Next </button>
 
                 </div>
@@ -79,19 +80,19 @@
                             <!--  <label for="file" style="font-size:1em;">Choose a file</label>-->
                             <!-- <button class="captureButton pull-right">Capture</button>-->
                             <br/>
-                            <label class="control-label" style="" title="">Id proof</label>
+                            <label class="control-label" style="" title="">ID Proof</label>
                             <input type="file" name="doc" id="file" class="inputfile" />
 
                             <!--<label for="file" style="font-size:1em;">Choose a file</label>-->
                             <!-- <button class="captureButton pull-right">Capture</button>-->
                             <br/>
-                            <label class="control-label" style="" title="">Siganture Proof</label>
+                            <label class="control-label" style="" title="">Signature Proof</label>
                             <input type="file" name="doc" id="file" class="inputfile" />
 
                             <!-- <label for="file" style="font-size:1em;">Choose a file</label>-->
                             <!--<button class="captureButton pull-right">Capture</button>-->
                             <br/>
-                            <label class="control-label" style="" title="">KYC video</label>
+                            <label class="control-label" style="" title="">KYC Video</label>
                             <input type="file" name="doc" id="file" class="inputfile" />
 
                             <!-- <label for="file" style="font-size:1em;">Choose a file</label>-->
@@ -167,10 +168,11 @@
                         </ul>
 
                         <div class="contentMood">
-                            <p id="Indicator">Goal Selection >
-                                <span id="goalSelected"></span>
-                                <span id="rpText">> Risk Profiling ></span>
-                                <span id="riskSelected"></span>
+                            <p id="Indicator">
+                                
+								<span id="goalSelected">></span>
+                                <span id="rpText">></span>
+                                <span id="riskSelected">></span>
                                 <span id="yp">> Your Plan</span>
                             </p>
 
@@ -215,8 +217,8 @@
                                     <button type="" class="btn btn-lg moodNav next page3Sub"> Next </button>
                                     <!--<button type="" class="btn btn-lg moodNav save page3Sub" > Save </button>-->
                                 </div>
-                                <p id="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
-                                <p id="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
+                                <p class="page2VldMsg" style="color: red; display: none;">Monthly Inevstment should be minimum INR 1000</p>
+                                <p class="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
                                 <div class="dotHr"></div>
                             </div>
 
@@ -326,7 +328,7 @@
                                             </button>
                                             <div class="riskProfiling">
                                                 <label id="mood">  <input type="Radio" id="Q1" name="Q1" value="0" >Low risk taker</label>
-                                                <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</labe;>
+                                                <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</label>
                                                 <label id="mood"> <input type="Radio" id="Q1" name="Q1"  value="2">High risk taker</label>
                                             </div>
                                             <button class="accordion">
@@ -349,7 +351,7 @@
                                             </div>
                                             <button class="accordion">
                                                 <div class="col-sm-1 btn btn-default btn-circle">4</div>
-                                                <div class="col-sm-11"><label for="Q4">4.Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label></div>
+                                                <div class="col-sm-11"><label for="Q4">Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label></div>
                                             </button>
                                             <div class="riskProfiling">
                                                 <label id="mood"><input type="Radio" id="Q4" name="Q4" value="0" >About the same rate as from bank fixed deposits</label>
@@ -553,36 +555,41 @@
     
         
         function checkPanStaus() {
+            if($('.panNumber').val().length == 10){
+                $('.panErr').slideUp();
+                $('.btn.pricing.RP1.submitPan').parent().html('<img src = "images/loader.gif" >');
+                var data = {};
+                data.pan = document.getElementById("pan").value;
+                console.log("pan" + data.pan);
+                //alert(data.pan);
 
-            $('.btn.pricing.RP1.submitPan').parent().html('<img src = "images/loader.gif" >');
-            var data = {};
-            data.pan = document.getElementById("pan").value;
-            console.log("pan" + data.pan);
-            //alert(data.pan);
+                <% if(loggedIn) {%>
+                    
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/PANValidation',
+                        success: function (data) {
+                            // console.log('success');
+                            $("#myPanModal .loader").html('');
+                            var myObj = JSON.parse(data);
 
-            <% if(loggedIn) {%>
-                
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    url: '/PANValidation',
-                    success: function (data) {
-                        // console.log('success');
-                        $("#myPanModal .loader").html('');
-                        var myObj = JSON.parse(data);
+                            //document.getElementById("responseData").style.display='none';
+                            document.getElementById("bseInvest").style.display = 'block';
+                            document.getElementById("pan").style.display = 'none';
+                            // document.getElementById("panCheck").style.display = 'none';
 
-                        //document.getElementById("responseData").style.display='none';
-                        document.getElementById("bseInvest").style.display = 'block';
-                        document.getElementById("pan").style.display = 'none';
-                        // document.getElementById("panCheck").style.display = 'none';
+                            var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
+                            document.getElementById("data1").innerHTML = displayMsg;
+                            $('.btn-Next-Pan-Modal').css('display', 'block');
+                        }
+                    })
+                    <% }%>
+            } else {
+                $('.panErr').slideDown();
+            }
 
-                        var displayMsg = "Hi " + myObj.name + " your PAN No. " + myObj.pan + " is " + myObj.msg;
-                        document.getElementById("data1").innerHTML = displayMsg;
-                        $('.btn-Next-Pan-Modal').css('display', 'block');
-                    }
-                })
-                <% }%>
         }
         
         
@@ -1298,9 +1305,9 @@
 
             $('#invest').bind("DOMSubtreeModified",function(){
                 if( $('#invest').html() >= 1000 ) {
-                    $('#page2VldMsg').slideUp();
+                    $('.page2VldMsg').slideUp();
                 } else {
-                    $('#page2VldMsg').slideDown();
+                    $('.page2VldMsg').slideDown();
                 }
             });
 
@@ -1347,23 +1354,20 @@
 
             var initializeTabs = function () {
                 try {
+                    // debugger;
                     var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
                     if (loggedIn && tempGoals.currentPage) {
-
                         selectTab(tempGoals.currentPage);
                         $('.frogImageMoods #setMood').attr('src', tempGoals.mood);
                         $("#eqAmt, #eqAmt1").html(tempGoals.amt1);
                         $("#hybAmt, #hybAmt1").html(tempGoals.amt2);
                         $("#debAmt, #debAmt1").html(tempGoals.amt3);
-
                         $("#eqPer, #eqPer1").html(tempGoals.alloc1 + "%");
                         $("#hybPer, #hybPer1").html(tempGoals.alloc2 + "%");
                         $("#debPer, #debPer1").html(tempGoals.alloc3 + "%");
-
                         $("#invest").html(tempGoals.mn);
                         $("#invest1").html(tempGoals.mn);
                         $("#invest2").html(tempGoals.mn);
-
                         $("#amount").val(tempGoals.goalAmount);
                         $('#time').val(Number(tempGoals.time));
                         console.log(JSON.parse(sessionStorage.getItem('sessionStorage')));
@@ -1372,7 +1376,6 @@
                             // showRiskProfile(tempGoals.riskProfile);
                         $('#riskSelected').html(tempGoals.riskProfile);
                         // }
-
                         $('#Indicator span').css('display', 'inline');
                         var moodId = tempGoals.moodText;
                         var local;
@@ -1386,9 +1389,7 @@
                         }
                         $('p:contains(' + tempGoals.goal + ')').children('span').css('background', 'yellow');
                         $('span#goalSelected').html(tempGoals.goal);
-
                         sessionStorage.removeItem('tempGoals');
-
                     }
 
                 } catch (e) {

@@ -54,7 +54,7 @@
     <div class="panel">
      
       <div class="panel-body text-center" >
-        <%- JSON.stringify(invest) %>
+        
         <% var investmentCount = 0; %>
 		  <% goalCount = 0;for(i=0;i<invest.length; i++){ %>
 		<%  investmentCount += Number(invest[i].count); %>
@@ -208,13 +208,13 @@
                 </div>
                 <div class="col-md-4 froggie">
                   <img src="images/animHow/5%20GOALS<%= tadpole %>.png" alt="Tadpole"><br>
-                  <% if(goalCount < 10) {%>
+                  <% if(goalCount < 10 && goalCount > 4) {%>
                   <div id="yCircle" class="yellow"></div>
                   <% } %>
                 </div>
                 <div class="col-md-4 froggie">
                   <img src="images/animHow/10%20GOALS<%= froglet %>.png" alt="Froglet"><br>
-                  <% if(goalCount < 15 ) {%>
+                  <% if(goalCount < 15 && goalCount > 9 ) {%>
                   <div id="yCircle" class="yellow"></div>
                   <% } %>                  
                 </div>

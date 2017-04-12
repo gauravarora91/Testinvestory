@@ -388,8 +388,8 @@ module.exports = function (app, passport) {
 					productinfo: productinfo,
 					email: email,
 					phone: phone,
-					surl: 'http://localhost:3000/Pricing/success',
-					furl: 'http://localhost:3000/Pricing/failure',
+					surl: 'http://54.152.36.19:3000/Pricing/success',
+					furl: 'http://54.152.36.19:3000/Pricing/failure',
 					hash: hash,
 					service_provider: 'payu_paisa',
 					action: 'https://test.payu.in/_payment'
@@ -1513,7 +1513,7 @@ module.exports = function (app, passport) {
 						'cache-control': 'no-cache',
 						'content-type': 'application/soap+xml; charset=utf-8'
 					},
-					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://localhost:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
+					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://54.152.36.19:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
 				};
 
 				request(options, function (error, response, body) {
@@ -2042,7 +2042,7 @@ module.exports = function (app, passport) {
 						'cache-control': 'no-cache',
 						'content-type': 'application/soap+xml; charset=utf-8'
 					},
-					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://localhost:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
+					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://54.152.36.19:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
 				};
 
 				request(options, function (error, response, body) {
@@ -3605,7 +3605,10 @@ module.exports = function (app, passport) {
 		currentPage = req.session.activePage = "/Invoices";
 
 		loginStatus = checkLoginStatus(req);
-
+    //   var date = new date();
+    //   date = date.toLocaleDateString("en-US"); 
+	var today = new Date();
+	var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
 		mobile = req.useragent["isMobile"];
 		if (mobile)
 			pageName = "myInvoicesMobile";
@@ -3614,7 +3617,7 @@ module.exports = function (app, passport) {
 
 
 		console.log("invoices", req.session.user.userid);
-		var query = client.query("select to_char(a.userinvestmentorderdate,'dd-Mon-yyyy') as investdate, b.name, a.amount,NULLIF(a.units,0) as units from userinvestmentorders a, schemesmaster b where a.schemeid = b.schemeid and a.userid=$1 order by 1 desc", [req.session.user.userid], function (err, result) {
+		var query = client.query("select to_char(a.userinvestmentorderdate,'dd-Mon-yyyy') as investdate, b.name, a.amount,NULLIF(a.units,0) as units from userinvestmentorders a, schemesmaster b where a.schemeid = b.schemeid and a.amount > 0 and a.userid=$1 order by 1 desc", [req.session.user.userid], function (err, result) {
 			if (err)
 				console.log("Cant get portfolio details in goal selection");
 			if (result.rows.length > 0) {
@@ -3636,7 +3639,8 @@ module.exports = function (app, passport) {
 					path1: 'accountInvoicesData',
 					footerDisplay: "hide",
 					footerData1: "Blog",
-					footerData2: "FAQs"
+					footerData2: "FAQs",
+					date: date
 				});
 			}
 
@@ -3704,18 +3708,14 @@ module.exports = function (app, passport) {
 
 	//Investment
 	app.get('/Investment', isLoggedIn, function (req, res) {
-
 		currentPage = req.session.activePage = "/Investment";
-
 		loginStatus = checkLoginStatus(req);
 		mobile = req.useragent["isMobile"]
 		if (mobile) {
 			res.render('investmentMobile.ejs', {
-
 			});
 		} else {
 			res.render('yourStory.ejs', {
-
 				user: req.user,
 				selectorDisplay: "show",
 				loggedIn: loginStatus,

@@ -12,7 +12,7 @@ function getLumpsum(){
 	 localStorage.lumpYears = totalYears;
 	 localStorage.lumpsumInvestment = true;	
 	console.log("years"+totalYears+"amt"+lumpsum);
-	
+sessionStorage.setItem('tempGoals', JSON.stringify({currentPage:4}));
 	window.location.href = "/GoalSelection";
 	
 }

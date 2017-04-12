@@ -1,7 +1,6 @@
 var totalYears;
 var sip;
 function getSIP(){
-	
 	// debugger;	
 	//alert("dad");
 	var sipInvestValue = $('#sip').val();
@@ -21,6 +20,7 @@ function getSIP(){
 		localStorage.years = totalYears;
 		localStorage.sipInvestment = true;	
 		console.log("years"+totalYears+"time"+sip);
+		sessionStorage.setItem('tempGoals', JSON.stringify({currentPage:4}));
 		window.location.href = "/GoalSelection";
 	}
 }

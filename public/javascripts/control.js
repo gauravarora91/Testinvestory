@@ -264,10 +264,10 @@ $(".selectMode a.tooltips span#"+pr).hide();
         case 'bp1': return;
              break;
         
-        case 'bp2': tipData ="personalized call every month";   
+        case 'bp2': tipData ="Personalized call every month";   
              break;
              
-        case 'bp3': tipData ="online meeting twice a year";
+        case 'bp3': tipData ="Online meeting twice a year";
              break;
              
      }
@@ -310,7 +310,7 @@ $(".selectMode a.tooltips span#"+pr).hide();
              
         case 'Bstp6': tipData ="Market analytics and insights from our team of experts";
              break;
-                case 'Bstp7': tipData ="new and old product research to stay up to date";   
+                case 'Bstp7': tipData ="New and old product research to stay up to date";   
              break;
              
         case 'Bstp8': tipData ="Quick reports on world events like Brexit, Union budget, Elections etc";
@@ -1033,13 +1033,13 @@ var movingTo= 0;
         if(  $('#time').val() <= 50 && $('#time').val() >= 1 ) {
             setProfile(0,1,0);
             selectTab(3);
-            $("#page2VldMsg2").slideUp();
+            $(".page2VldMsg2").slideUp();
         } else {
-            $("#page2VldMsg2").slideDown();
+            $(".page2VldMsg2").slideDown();
         }
-
     });
-    $(".page4 .selectMode button").not('#dontKnow').click( function() { selectTab(5, this) });
+
+    $(".page4 .selectMode button, .sub-page4 .done").not('#dontKnow').click( function() { selectTab(5, this) });
     var once = true;
     selectTab = function(tabNo, e) {
         currentPage = tabNo;
@@ -1055,7 +1055,6 @@ var movingTo= 0;
         switch (tabNo) {
             case 1:
                 $('.pagination li:nth-child(1) a').addClass('active');
-
                 $('.contentMood > div').not('.page1').hide();
                 $('.contentMood .page1').show();
                 break;
@@ -1234,7 +1233,6 @@ var movingTo= 0;
 //         $(".pagination li:nth-child("+movingTo+") a").css({"background-color":"#FFDE15","color":"#35BFD3","border-color":"#FFDE15"});
 		
 });
-    // debugger;
 		if (localStorage.sipInvestment) {
     showSIP();
 			
