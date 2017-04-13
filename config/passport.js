@@ -55,8 +55,12 @@ var config = {
 
 
 var pg = require('pg');
+<<<<<<< HEAD
 var conString = "postgres://postgres:postgres@localhost:5432/investory";
 //var conString = "postgres://user1:12345@localhost:5432/investorydb";
+=======
+var conString = "postgres://development:123@localhost:5432/investory";
+>>>>>>> origin/master
 
 var client = new pg.Client(conString);
 client.connect();
