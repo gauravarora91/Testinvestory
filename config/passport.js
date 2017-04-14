@@ -40,9 +40,9 @@ var pg = require('pg');
 // note: all config is optional and the environment variables
 // will be read if the config is not present
 var config = {
-  user: 'development', //env var: PGUSER
-  database: 'investory', //env var: PGDATABASE
-  password: '123', //env var: PGPASSWORD
+  user: 'user1', //env var: PGUSER
+  database: 'investorydb', //env var: PGDATABASE
+  password: '12345', //env var: PGPASSWORD
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: -1, // max number of clients in the pool
@@ -55,7 +55,8 @@ var config = {
 
 
 var pg = require('pg');
-var conString = "postgres://development:123@localhost:5432/investory";
+//var conString = "postgres://postgres:postgres@localhost:5432/investory";
+var conString = "postgres://user1:12345@localhost:5432/investorydb";
 
 var client = new pg.Client(conString);
 client.connect();
@@ -316,14 +317,22 @@ var newUser= new User();
     passport.use(new FacebookStrategy({
     clientID: '1620502528254783',
     clientSecret: '724b87f6243da3bae2f2e5ddcc7e729d',
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+
+    callbackURL: 'http://ec2-54-152-36-19.compute-1.amazonaws.com:3000/auth/facebook/callback',
          profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
+        
         
   },
   function(accessToken, refreshToken, profile,done) {
+        
+      
+        
    process.nextTick(function(){
+       
+         async.waterfall([function(callback){ 
+
              // User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-       var query=client.query("SELECT * FROM users where facebookid=$1",[profile.id],function(err,result){
+       var query=client.query("SELECT * FROM users where facebookid=$1 OR email=$2",[profile.id,profile.emails[0].value],function(err,result){
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -359,10 +368,11 @@ var newUser= new User();
                         
                        // console.log(result.rows[0].userid);
                         //newUser.userid=result.rows[0].userid;
-                      newUser.userid=result.rows[0].userid;
-                    zendCreateTicket(newUser.email,'Succesfully Logged in with facebook');
+                      //newUser.userid=result.rows[0].userid;
+                    zendCreateTicket(newUser.userid,'Succesfully Logged in with facebook');
                      //req.session.userEmail = email;
-                    return done(null, newUser);
+                    //return done(null, newUser);
+                    callback(null, newUser);
                 });
                 
             }
@@ -370,17 +380,34 @@ var newUser= new User();
 
         });
 
-       
-       
-   });
-  }
-));
+             },function(newUser,callback){
+//insert the assets
+var   	creation_date=new Date();
+ var    modified_date=new Date();
+			
+				
+ var query=client.query("INSERT INTO profile(userid,created,modified,createdby) values($1,$2,$3,$4) RETURNING profileid",[newUser.userid, creation_date,modified_date,newUser.name],function(err, result) {
+ if(err){
+console.log("cant insert assets header allocation data",err);
+res.send("false");
+}else{
+  //res.send(1);
+ console.log("profileid"+result.rows[0]['profileid']);
+callback(null,newUser)
+            }
+ });
+ 
+}],function(err,result){
+return done(null, result);
+});
+  });
+    }));
     let em;
     passport.use(new GoogleStrategy({
 
-        clientID        : '87658927996-i8ovbtoljd8tir2e9pki4i8uagshb38c.apps.googleusercontent.com',
+       clientID        : '87658927996-i8ovbtoljd8tir2e9pki4i8uagshb38c.apps.googleusercontent.com',
         clientSecret    : 'vUjKOhsz8f1_ovtzN4weOT7u',
-        callbackURL     : 'http://localhost:3000/auth/google/callback',
+        callbackURL     : 'http://ec2-54-152-36-19.compute-1.amazonaws.com:3000/auth/google/callback',
 
     },
     function(token, refreshToken, profile, done) {
@@ -388,10 +415,10 @@ var newUser= new User();
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
         process.nextTick(function() {
-
+	async.waterfall([function(callback){ 
             // try to find the user based on their google id
           
-             var query=client.query("SELECT * FROM users where googleid=$1",[profile.id],function(err,result){ 
+             var query=client.query("SELECT * FROM users where googleid=$1 OR email=$2",[profile.id,profile.emails[0].value],function(err,result){ 
             if (err)
                 return done(err);
                 
@@ -412,28 +439,11 @@ var newUser= new User();
                     newUser.g_token = token;
                     newUser.name  = profile.displayName;
                     newUser.email = profile.emails[0].value; // pull the first email
-                    
-                    
-                    newUser.email = profile.emails[0].value;     
-                    // save the user
                newUser.creation_date=new Date();
                     newUser.modified_date=new Date();
                  
-                
-               /*if(result.rows[0].email==newUser.email){
-                   var query=client.query("UPDATE users SET name=$2,modified=$3,googleid=$4,g_token=5$ WHERE email=$1",[newUser.email,newUser.name,newUser.modified_date,newUser.googleid,newUser.g_token],function(err,result)
-                     {
-                       if(err)     
-                        console.log("cant create new user",err);
-                                          
-                      newUser.userid=result.rows[0].userid;
-                     //req.session.userEmail = email;
-                    return done(null, newUser);
-                
-                   });
-                  }
-               else{
-				*/// save the user
+              
+				/// save the user
                 var query=client.query("insert into users(email,name,created,modified,createdby,googleid,g_token) values($1,$2,$3,$4,$5,$6,$7) RETURNING userid",[newUser.email,newUser.name,newUser.creation_date,newUser.modified_date,newUser.name,newUser.googleid,newUser.g_token],
                     function(err, result) {
                     if(err)     
@@ -446,16 +456,36 @@ var newUser= new User();
                     email=result.rows[0]['email'];
                  zendCreateTicket(email,'Succesfully Logged in with google+');
               
-                    return done(null, newUser);
+                    //return done(null, newUser);
+                    callback(null, newUser);
                 });
                }
                     
-              //  }
+         
              });
-            });
-    }
-
-    ));
+            
+         },function(newUser,callback){
+//insert the assets
+var   	creation_date=new Date();
+ var    modified_date=new Date();
+			
+				
+ var query=client.query("INSERT INTO profile(userid,created,modified,createdby) values($1,$2,$3,$4) RETURNING profileid",[newUser.userid, creation_date,modified_date,newUser.name],function(err, result) {
+ if(err){
+console.log("cant insert assets header allocation data",err);
+res.send("false");
+}else{
+  //res.send(1);
+ console.log("profileid"+result.rows[0]['profileid']);
+callback(null,newUser)
+            }
+ });
+ 
+}],function(err,result){
+return done(null, result);
+});
+  });
+    }));
 
     	function mail(from, to, subject, text){
 		

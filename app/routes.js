@@ -68,7 +68,10 @@ function getTransactionID(userid) {
 	return year + month + day + hour + min + sec + userid;
 }
 
-var conString = "postgres://development:123@localhost:5432/investory";
+var conString = "postgres://user1:12345@localhost:5432/investorydb";
+
+//var conString = "postgres://postgres:postgres@localhost:5432/investory";
+
 var client = new pg.Client(conString);
 client.connect();
 
@@ -2420,7 +2423,7 @@ module.exports = function (app, passport) {
 							var schemeagamnthy = 0, schemeagamnteq = 0, schemeagamnteq = 0;
 							//select * from schemesmaster where $1 between sipfrom and sipto and $2 between yearfrom and yearto and riskprofile = $3
 							var j = 0, k = 0, l = 0;
-							var query = client.query("select * from schemesmaster where $1 between sipfrom and sipto and $2 between yearfrom and yearto and riskprofile = $3", [sip, time, riskProfile],
+							var query = client.query("select * from schemesmaster where $1 between sipfrom and sipto and $2 between yearfrom and yearto and riskprofile = $3 order by category ", [sip, time, riskProfile],
 								function (err, result) {
 									if (err)
 										console.log("Cant get assets values");
@@ -3359,53 +3362,50 @@ module.exports = function (app, passport) {
 		});
 	});
 
-	app.get('/profile', isLoggedIn, function (req, res) {
-		currentPage = req.session.activePage = "/profile";
-
-		mobile = req.useragent["isMobile"];
-		if (mobile)
-			pageName = "profileMobile";
-		else
-			pageName = "yourStory";
-
-
-		loginStatus = checkLoginStatus(req);
-
-		//profile
-
-
-
-		var query = client.query("select * from users inner join profile on users.userid = profile.userid where users.userid=$1 ", [req.session.user.userid], function (err, result) {
-			if (err)
-				console.log("Cant get profile details from users table" + err);
-			console.log(result.rows);
-			if (result.rows.length > 0) {
-
-				var len = result.rows.length;
-				console.log(result.rows[0]);
-
-				res.render(pageName, {
-
-					user: req.user,
-					profile: result.rows[0],
-					message: 'updated',
-					selectorDisplay: "show",
-					loggedIn: loginStatus,
-					smessage: req.flash('signupMessage'),
-					lmessage: req.flash('loginMessage'),
-					path: 'profileData',
-
-					footerDisplay: "hide",
-					footerData1: "Blog",
-					footerData2: "FAQs"
-				});
-
-			}
-
-		});
-
+    app.get('/profile',isLoggedIn, function(req, res){
+	currentPage = req.session.activePage = "/profile";
+	
+	  mobile = req.useragent["isMobile"];
+    if(mobile)
+   		pageName = "profileMobile";
+	else
+		pageName = "yourStory";
+		 
+	
+	loginStatus = checkLoginStatus(req);
+	
+    //profile
+     
+   var query=client.query("select * from users inner join profile on users.userid = profile.userid where users.userid=$1",[req.session.user.userid],function(err,result){
+            if(err)
+                console.log("Cant get profile details from users table");
+            if(result.rows.length>0)
+                {
+                    
+                    var len=result.rows.length;
+    
+                    console.log("Profile",result.rows[0]);
+	               res.render(pageName,{
+	  
+	  	           user : req.user ,
+				   profile: result.rows[0],
+                   message: 'updated',
+	  	           selectorDisplay: "show",
+	  		       loggedIn: loginStatus,
+	               smessage: req.flash('signupMessage'),
+		           lmessage: req.flash('loginMessage'),
+	  	            path:'profileData',
+	 
+	  	            footerDisplay: "hide",
+	                footerData1: "Blog",
+	               footerData2: "FAQs"
+  });
+			
+		}
+		
 	});
-
+  
+});
 	app.post('/signup', askForPayment, passport.authenticate('local-signup', {
 		successRedirect: '/saveAssetOffline', // redirect to the secure profile section
 		failureRedirect: '/tocurrent', // redirect back to the signup page if there is an error
@@ -3426,33 +3426,47 @@ module.exports = function (app, passport) {
 		failureFlash: true // allow flash messages
 	}));
 
-	app.post('/profile', isLoggedIn, function (req, res) {
-		currentPage = req.session.activePage = "/profile";
-
-		loginStatus = checkLoginStatus(req);
-
-		var dob = req.body.calendar;
-		var age = req.body.age;
-		var gender = req.body.gender;
-		var maritalstatus = req.body.maritalstatus;
-		var address = req.body.address;
-		var pincode = req.body.pincode;
-		var city = req.body.city;
-		var pan = req.body.pan;
-
-
-		console.log(dob, age, gender, maritalstatus, address, pincode, city, pan);
-		console.log("profile Post", req.session.user.userid);
-		var query = client.query("INSERT INTO profile(userid,age,gender,maritalstatus,address,pincode,city,pan,createdby) values($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING userid", [req.session.user.userid, age, gender, maritalstatus, address, pincode, city, pan, req.session.user.name], function (err, result) {
-			if (err)
-				console.log("Cant get update profile details from users table", err);
-			if (result.rows.length > 0) {
-				console.log("Insert to profile details Success..!");
-			}
-
-			res.redirect("/profile");
-		});
+    
+      app.post('/profile', isLoggedIn, function(req, res) {
+		   currentPage = req.session.activePage = "/profile";
+	
+	loginStatus = checkLoginStatus(req);
+ 
+                    var dob=req.body.calendar;
+                    var age=req.body.age;
+                    var gender=req.body.gender;
+                    var maritalstatus=req.body.maritalstatus;
+                    var address=req.body.address;
+                    var pincode=req.body.pincode;
+                    var city=req.body.city;
+                    var pan=req.body.pan;
+         // console.log("dob",dob);
+                     // name:req.body.username,
+                    //email:req.body.email,
+                    //mobile:req.body.mnumber,
+                    // bank_details:req.body.bankdetails     
+				   //email:req.session.userEmail
+                    //var created//new date();
+                    //var modified=//new date();    ,$10,$11 ,created,modified
+           
+          // console.log(dob,age,gender,maritalstatus,address,pincode,city,pan);
+            console.log("profile Post",req.user.userid);
+   var query=client.query("update profile set userid=$1,age=$2,gender=$3,maritalstatus=$4,address=$5,pincode=$6,city=$7,pan=$8,createdby=$9,dob=to_date($10, 'DD-MM-YYYY') where userid=$1", [req.session.user.userid, age, gender, maritalstatus, address, pincode, city, pan, req.session.user.name,dob
+],function(err,result){
+            if(err)
+                console.log("Cant get update profile details from users table",err);
+            if(result.rows.length>0)
+                {
+            		 console.log("Insert to profile details Success..!");
+			  }
+    
+        res.redirect("/profile");
+   });
 	});
+
+
+    
+    
 
 	app.get('/myStory', isLoggedIn, function (req, res) {
 		currentPage = req.session.activePage = "/myStory";
@@ -3836,7 +3850,7 @@ module.exports = function (app, passport) {
 
 	app.get('/auth/google/callback',
 		passport.authenticate('google', {
-			successRedirect: '/profile',
+			successRedirect: '/tocurrent',
 			failureRedirect: '/'
 		}));
 
