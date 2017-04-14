@@ -40,9 +40,15 @@ var pg = require('pg');
 // note: all config is optional and the environment variables
 // will be read if the config is not present
 var config = {
+<<<<<<< HEAD
   user: 'user1', //env var: PGUSER
   database: 'investorydb', //env var: PGDATABASE
   password: '12345', //env var: PGPASSWORD
+=======
+  user: 'postgres', //env var: PGUSER
+  database: 'investory', //env var: PGDATABASE
+  password: 'postgres', //env var: PGPASSWORD
+>>>>>>> origin/master
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: -1, // max number of clients in the pool
@@ -55,8 +61,17 @@ var config = {
 
 
 var pg = require('pg');
+<<<<<<< HEAD
 //var conString = "postgres://postgres:postgres@localhost:5432/investory";
 var conString = "postgres://user1:12345@localhost:5432/investorydb";
+=======
+<<<<<<< HEAD
+var conString = "postgres://postgres:postgres@localhost:5432/investory";
+//var conString = "postgres://user1:12345@localhost:5432/investorydb";
+=======
+var conString = "postgres://development:123@localhost:5432/investory";
+>>>>>>> origin/master
+>>>>>>> origin/master
 
 var client = new pg.Client(conString);
 client.connect();
@@ -439,6 +454,13 @@ return done(null, result);
                     newUser.g_token = token;
                     newUser.name  = profile.displayName;
                     newUser.email = profile.emails[0].value; // pull the first email
+<<<<<<< HEAD
+=======
+                    
+                    
+                   // newUser.email = profile.emails[0].value;     
+                    // save the user
+>>>>>>> origin/master
                newUser.creation_date=new Date();
                     newUser.modified_date=new Date();
                  

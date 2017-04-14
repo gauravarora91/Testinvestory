@@ -1040,7 +1040,14 @@ var movingTo= 0;
     });
 
     $(".page4 .selectMode button, .sub-page4 .done").not('#dontKnow').click( function() { selectTab(5, this) });
+<<<<<<< HEAD
     $(".contentMood #sip").css({"color": "black","font-size":"1.2em"});
+=======
+<<<<<<< HEAD
+    $(".contentMood #sip").css({"color": "black","font-size":"1.2em"});
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
     var once = true;
     selectTab = function(tabNo, e) {
         currentPage = tabNo;
@@ -1129,7 +1136,14 @@ var movingTo= 0;
                 $('.contentMood .page5').show();
                 $("#riskSelected").text(rp);
                 localStorage.clear();
+<<<<<<< HEAD
                 $(".contentMood .page4 #sip").css({"color": "black","font-size":"1.2em"});
+=======
+<<<<<<< HEAD
+                $(".contentMood .page4 #sip").css({"color": "black","font-size":"1.2em"});
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
                 // $("#displayModal").modal("show");
                 // $("#displayModal h3").html("You are a "+rp+" risk taker and we have recommended you the best.");
                 // $(".contentMood .page4").hide();
