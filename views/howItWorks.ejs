@@ -20,34 +20,18 @@
 
 
 
+
           <h2 style="padding-top: 0;" class="">Pricing Packages</h2>
          <h4 style="margin-bottom: 0;">Choose your pack</h4>
 
 
 
-             <div class="row pricingPanelRow" >
+           <div class="row pricingPanelRow" >
 
     <div class="col-lg-4   col-md-4 col-sm-4   ">
     <h3 class="h2hstyle shrinkleft1" >No cut</h3>
                 <p  class="shrinkpara" >We get no cut from fund houses, so our recommendations are unbiased.</p>
-        
-    </div>
-
-    <div class="col-lg-4  col-md-4 col-sm-4 "><h3 class="h2hstyle" >No charges</h3>
-                  <p class="shrinkpara">We do not charge you any percentage for the amount you invest.</p>
-         
-    </div>
-
-    <div class="col-lg-4  col-md-4 col-sm-4">
-    <h3 class="h2hstyle" >Only direct</h3>
-                  <p class="shrinkpara">See how direct schemes give you much higher returns than retail schemes</p>
-        
-        
-    </div>
-         </div>
-         <div class="row pricingPanelRow">
-                 <div class="col-lg-4  col-md-4 col-sm-4">
-         <a href="#" class="tooltips">
+        <a href="#" class="tooltips">
                   <div class="panel panel-default">
         <div class="panel-heading">
           <h2 id="GoodPlan">Good Plan</h2>
@@ -70,9 +54,11 @@
       </div>
 
             <span id="GpData"></span>  </a>
-             </div>
-           
-             <div class="col-lg-4  col-md-4 col-sm-4 ">
+
+    </div>
+
+    <div class="col-lg-4  col-md-4 col-sm-4 "><h3 class="h2hstyle" >No charges</h3>
+                  <p class="shrinkpara">We do not charge you any percentage for the amount you invest.</p>
           <a href="#" class="tooltips">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -99,7 +85,10 @@
             <span id="BpData"></span>  </a>
     </div>
 
-             <div class="col-lg-4  col-md-4 col-sm-4"> <a href="#" class="tooltips">
+    <div class="col-lg-4  col-md-4 col-sm-4">
+    <h3 class="h2hstyle" >Only direct</h3>
+                  <p class="shrinkpara">See how direct schemes give you much higher returns than retail schemes</p>
+        <a href="#" class="tooltips">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2>Best Plan</h2>
@@ -123,17 +112,8 @@
 
       </div>
                     <span id="BstpData"></span>  </a>
-       </div>
-
-         
+    </div>
          </div>
-         
-         
-         
-         
-         
-         
-         
             <div class="btn-hr-wrapper" >
 
 
@@ -147,10 +127,13 @@
       			  	 <button type="submit"  class="btn btn-white btn-lg moodNav pay" >Pay</button>
       			  </form>
       			 <%} else if(loggedIn && paid) {%>
+      <!--			 <form action="/GoalSelection" method="get">
+      			  <input type="hidden" id="askScheme" name="askScheme" value='true'>
+      			  	 <button type="submit"  class="btn btn-lg moodNav pay" >saved plans</button>
 
-      			  <form action="/GoalSelection" method="get" >
-                    <input type="hidden" name="tab" value="6" />
-                    <button type="submit" class="btn btn-white btn-lg moodNav pay" >Invest</button>
+      			  </form>-->
+      			  <form action="/GoalInvest" method="get" >
+      <button type="submit"   class="btn btn-white btn-lg moodNav pay" >Invest</button>
 
       			  </form>
 
@@ -372,7 +355,7 @@
                 <div class="column PAN" style="top:2em">
 
                     <img src="images/frog_pan.png" alt="Sign up with PAN number" width="65%" style="top:0"><br>
-                    <p  style="  margin-top: 1em;">Sign up with <br />PAN number</p>
+                    <p  style="top:2.5em">Sign up with <br />PAN number</p>
                 </div>
 
                 <div class="column Package" >
@@ -384,22 +367,22 @@
                 <div class="column investing" style="top:1.5em">
 
                     <img src="images/frog_coin.png" alt="Start investing" width="70%"><br>
-                    <p style="margin-top: 1em;">Start <br /> investing</p>
+                    <p>Start <br /> investing</p>
                 </div>
 
                 <div class="column Withdraw" style="top:3em">
 
                     <img src="images/frog_note.png" alt="Withdraw anytime" width="90%" style="left:0; top: 0.5em"><br>
-                    <p style="margin-top: 1.8em;">Withdraw <br /> anytime</p>
+                    <p>Withdraw <br /> anytime</p>
                 </div>
 
             </div>
 
 <div class="btn-hr-wrapper"  style="">
-       <!--  <button type="" data-toggle="modal" data-target="#signUp" class="btn btn-white btn-lg moodNav signUp" >Sign Up</button> </div>-->
+         <button type="" data-toggle="modal" data-target="#signUp" class="btn btn-white btn-lg moodNav signUp" >Sign Up</button> </div>
 
         </div>
-         <div class="container pricingFooter">
+         <div class="pricingFooter">
            <% include partials/footer %>
              </div>
 <!--    </section>-->

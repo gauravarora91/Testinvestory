@@ -3,18 +3,8 @@ var router = express.Router();
 var async = require('async');
 var path=require('path');
 var pg = require('pg');
-<<<<<<< HEAD
-//var conString = process.env.DATABASE_URL ||  "postgres://postgres:postgres@localhost:5432/investory";
 var conString = process.env.DATABASE_URL ||  "postgres://user1:12345@localhost:5432/investorydb";
-=======
-<<<<<<< HEAD
-var conString = process.env.DATABASE_URL ||  "postgres://postgres:postgres@localhost:5432/investory";
-//var conString = process.env.DATABASE_URL ||  "postgres://user1:12345@localhost:5432/investorydb";
-=======
-var conString = process.env.DATABASE_URL ||  "postgres://development:123@localhost:5432/investory";
 
->>>>>>> origin/master
->>>>>>> origin/master
 /*var conString = {
   user: 'user1', //env var: PGUSER
   database: 'investory', //env var: PGDATABASE
@@ -41,7 +31,7 @@ destination: function (req, file, callback)
 {
     if(pan)
       {
-        var name = '/home/ubuntu/panuploads/'+pan; //location for directory to store documents 
+        var name = '../panuploads/'+pan; //location for directory to store documents 
         fs.mkdir(name, 0777, true, function (err) 
         {
           if (err) 
@@ -219,7 +209,7 @@ router.get('/reconcile/get',function(req,res)
 router.get('/failedorders',function(req,res)
 {
     
-     res.render("Admin/failedOrders");
+     res.render("Admin/failedorders");
    
 });
 router.get('/failedorders/get',function(req,res)
@@ -280,8 +270,8 @@ var store =   multer.diskStorage({
                 destination: function (req, file, callback) 
                     {
 
-        				callback(null,'/home/ubuntu/dbfiles');
-                        //callback(null, '../dbfiles');
+        
+                        callback(null, '../dbfiles');
 
       
                      },
@@ -317,8 +307,7 @@ router.post('/uploadcamsfile',function(req,res,next)
 
                    console.log("in upload ",file_name);
                 
-                //var paths="../dbfiles/"+file_name;
-				 var paths="/home/ubuntu/dbfiles/"+file_name;
+                var paths="../dbfiles/"+file_name;
                 callback(null,paths)
                 });
             
@@ -362,8 +351,8 @@ router.post('/uploadkarvysfile',function(req,res,next)
                     file_name=req.file.originalname;
 
                    console.log("in upload ",file_name);
-                var paths="/home/ubuntu/dbfiles/"+file_name;
-              //  var paths="../dbfiles/"+file_name;
+                
+                var paths="../dbfiles/"+file_name;
                 callback(null,paths)
                 });
             
@@ -407,14 +396,14 @@ router.post('/uploadftfile',function(req,res,next)
                     file_name=req.file.originalname;
 
                    console.log("in upload ",file_name);
-                var paths="/home/ubuntu/dbfiles/"+file_name;
-               // var paths="../dbfiles/"+file_name;
+                
+                var paths="../dbfiles/"+file_name;
                 callback(null,paths)
                 });
             
             
         },
-       function(paths,callback)
+       function(path,callback)
          {
            updateuploaddumplog(tbl,paths); 
             updatedumplogfromft();
@@ -528,7 +517,7 @@ function updatedumplogfromft()
         if(err){
             return console.log("Could not connect to postgres",err);
         }
-        var query=client.query("INSERT INTO dumplog(foliono,scheme,schemecode,amount,transaction_type,transaction_id,transaction_ref,transaction_status,transaction_mode,transaction_date,remarks,nav,units,trade_date,post_date,kyc_id,pan) SELECT folio_no,SCHEME_NA,SCHEME_CO0,AMOUNT,TRXN_TYPE,TRXN_ID,TRXN_NO,TRXN_STAT,TRXN_MODE,TRXN_DATE,remarks,NAV,UNITS,CREA_DATE,POSTDT_DA3,KYC_ID,it_pan_no1 from fttrxnlog",function(err,result){
+        var query=client.query("INSERT INTO dumplog(foliono,scheme,schemecode,amount,transaction_type,transaction_id,transaction_ref,transaction_status,transaction_mode,transaction_date,remarks,nav,units,trade_date,post_date,kyc_id,pan) SELECT folio_no,SCHEME_NA,SCHEME_CO0,AMOUNT,TRXN_TYPE,TRXN_ID,TRXN_NO,TRXN_STAT,TRXN_MODE,TRXN_DATE,remarks,NAV,,UNITS,CREA_DATE,POSTDT_DA3,KYC_ID,it_pan_no1 from fttrxnlog",function(err,result){
             
             if(err)
                 console.log("Cant insert to dumplog from fttrxnlog",err);

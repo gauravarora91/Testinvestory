@@ -2,19 +2,8 @@
 var pg = require('pg');
 //var waterfall = require('async-waterfall');
 
-<<<<<<< HEAD
-//var conString = process.env.DATABASE_URL ||  "postgres://postgres:postgres@localhost:5432/investory";
 var conString = process.env.DATABASE_URL ||  "postgres://user1:12345@localhost:5432/investorydb";
-=======
-<<<<<<< HEAD
-var conString = process.env.DATABASE_URL ||  "postgres://postgres:postgres@localhost:5432/investory";
-//var conString = process.env.DATABASE_URL ||  "postgres://user1:12345@localhost:5432/investorydb";
-=======
-var conString = process.env.DATABASE_URL ||  "postgres://development:123@localhost:5432/investory";
->>>>>>> origin/master
->>>>>>> origin/master
 /*
-
 var conString = {
   user: 'user1', //env var: PGUSER
   database: 'investory', //env var: PGDATABASE

@@ -24,7 +24,7 @@ var useragent = require('express-useragent');
 //var dbOperations = require("./dbOperations.js");
 var port = 3000;
 
-pp(passport); 
+pp(passport);
 
 
 var app = express();
@@ -72,6 +72,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
