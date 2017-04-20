@@ -4,51 +4,32 @@
         
                 <div class="page31" style="    margin-top: 4em;">
                                  
-                       <div class="table-responsive tableAccounts"style="" >
+                       <div class="table-responsive tableAccounts investmentTable"style="" >
                         <table class="table table1"  style="  "  >
     <thead >
       <tr >
-          
-          <th   class="thDates" >Dates</th>  
-        <th  class="thInvoices">Invoices</th>
-        <th class="thAllocation"> Units</th>
-        <th class="thAmount">Amount (&#x20B9;)</th>
+        <th class="thDates" >Subscription Id</th>
+        <th class="thInvoices" style= "border-right: 1px solid #35BFD3; width: 140px">Order Date</th>
+        <th class="thAmount" style= "border-right: 1px solid #35BFD3; width: 70px">Duration</th>
+        <th class="thAllocation" style= "border-right: 1px solid #35BFD3">Amount</th>
+        <th style= "border-right: 1px solid #35BFD3">Payment Reference</th>
+        <th class="thAmount" style="width: 140px">Renewal Date</th>
       </tr>
                             </thead>    </table>         
     
    <table class="table table2" style=" " >
-       <tbody class="scrollbar"  id="ex3"    >
-                          
-      <tr  >
-          
-          <td>20 Sep 2016</td>
-        <td >Fund Yesno Bank</td>
-        <td >50%</td>
-        <td>4,000,00</td>
-      </tr>
-      <tr>
-          <td>13 Mar 2017</td>
-        <td>Bank fund Trade centre</td>
-        <td>40%</td>
-        <td>4,000,00</td>
-      </tr>
-      <tr>
-          <td>09 JAn 2017</td>
-       <td>Debit fund</td>
-        <td>50%</td>
-        <td>4,000,00</td>
-      </tr>
-             <tr>
-          <td>09 JAn 2017</td>
-       <td>Debit fund</td>
-        <td>50%</td>
-        <td>4,000,00</td>
-      </tr>
-    
-       
-       
-       </tbody>
-       
+      <tbody class="scrollbar"  id="ex3">
+          <% for(i=0; i < stmt.length; i++) {%>   
+        <tr>
+          <td><%= stmt[i].usersubscriptionorderid %></td>
+          <td style= "border-right: 1px solid #35BFD3; width: 140px"><%= stmt[i].orderdate %></td>
+          <td style= "border-right: 1px solid #35BFD3; width: 70px"><%= stmt[i].durationdays %></td>
+          <td style= "border-right: 1px solid #35BFD3"><%= stmt[i].amount %></td>
+          <td style= "border-right: 1px solid #35BFD3"><%= stmt[i].paymentreference %></td>
+          <td style="width: 140px"><%= stmt[i].planrenewaldate %></td>
+        </tr>
+          <% } %>
+      </tbody>
   </table>
              
      <table class="table table3"  style=" "  >                

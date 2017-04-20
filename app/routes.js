@@ -1088,10 +1088,35 @@ function(paid,assets,callback){
 			function(callback){
 
 
+<<<<<<< HEAD
 				var paid=false;
 var query=client.query(" select * from usersubscriptions where userid="+req.session.user.userid+" and current_date <= planrenewaldate",function(err,result){
             if(err)
                 console.log("Cant get portfolio details in goal selection");
+=======
+	app.get('/Pricing', isLoggedIn, function (req, res) {
+		currentPage = req.session.activePage = "/Pricing";
+		loginStatus = checkLoginStatus(req);
+		mobile = req.useragent["isMobile"]
+		if (mobile)
+			pageName = "howItWorksMobile";
+		else
+			pageName = "howItWorks";
+		if (req.session.payU) {
+			console.log(req.session.payU);
+			payUData = JSON.parse(JSON.stringify(req.session.payU))
+			req.session.payU.flashMessage = false;
+		} else {
+			console.log("is data undefined")
+			payUData = "";
+		}
+		console.log("pay u data" + payUData.amount);
+		if (req.session.ForPayment) {
+			schemeAsked = true;
+		} else {
+			schemeAsked = false;
+		}
+>>>>>>> origin/master
 
 	console.log("Lenght"+result.rows.length);
 
@@ -1151,6 +1176,7 @@ callback(null,asetData)
 	  footerData1: "Blog",
 	  footerData2: "FAQs"
 
+<<<<<<< HEAD
       });
 
 				}
@@ -1165,6 +1191,26 @@ callback(null,asetData)
 
 					var x=1;
 		var y=headerData.length;
+=======
+	app.post('/Pricing/failure', isLoggedIn, function (req, res) {
+		loginStatus = checkLoginStatus(req);
+		currentPage = req.session.activePage = "/Pricing/failure";
+		req.session.payU = req.body;
+		req.session.payU.flashMessage = true;
+		req.session.payU.status = "fail"
+		console.log(res.json(req.body));
+		res.redirect("/Pricing");
+	});
+
+	app.post('/Pricing/success', isLoggedIn, function (req, res) {
+		loginStatus = checkLoginStatus(req);
+		currentPage = req.session.activePage = "/Pricing/success";
+
+		// res.json(req.body);
+		req.session.payU = req.body;
+		req.session.payU.flashMessage = true;
+		console.log("initailze the payU " + req.session.payU.amount);
+>>>>>>> origin/master
 
 for(i=0;i<headerData.length;i++){
 	var asetDataAllocationDetail = [];
@@ -1941,7 +1987,73 @@ callback(null,asetData)
 
 
 
+<<<<<<< HEAD
 					}
+=======
+				var options = {
+					method: 'POST',
+					url: 'http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic',
+					headers: {
+						'cache-control': 'no-cache',
+						'content-type': 'application/soap+xml; charset=utf-8'
+					},
+					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://localhost:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
+				};
+
+				request(options, function (error, response, body) {
+					if (error) throw new Error(error);
+
+					parseString(body, function (err, results) {
+						// Get The Result From The Soap API and Parse it to JSON
+
+						//console.log(results);
+						//
+						var link = results["s:Envelope"]["s:Body"][0]["MFAPIResponse"][0]["MFAPIResult"][0];
+						//console.log("myFault"+results["Fault"]["Reason"][0]["Text"]);
+						bseLinkArray = link.toString().split("|");
+						console.log("Payment link " + bseLinkArray[1]);
+						// callback(null,bseLinkArray[1])
+						res.render('bseRedirect', { data: bseLinkArray[1] });
+
+					})
+
+				});
+
+				//Check the Payment Status
+				/*		 	 var options = {
+									method: 'POST',
+									url: 'http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic',
+					headers: {
+									'cache-control': 'no-cache',
+									'content-type': 'application/soap+xml; charset=utf-8'
+						},
+					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>11</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>'+uploadPass+'</ns:EncryptedPassword>\n         <ns:param>SOHANTEST1|720191|BSEMF</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>' };
+				
+				  request(options, function (error, response, body) {
+					if (error) throw new Error(error);
+				
+						parseString(body, function(err, results){
+					// Get The Result From The Soap API and Parse it to JSON
+							
+							  //console.log(results);
+							//
+						   var link = results["s:Envelope"]["s:Body"][0]["MFAPIResponse"][0]["MFAPIResult"][0];
+						   //console.log("myFault"+results["Fault"]["Reason"][0]["Text"]);
+							bsePaymentStatus = link.toString().split("|");
+						   console.log("Payment Status "+bsePaymentStatus[1]);
+							//return bsePaymentStatus[1];
+						 // callback(null,bseLinkArray[1])
+						   
+				   })
+					  
+				  });	
+						 */
+			}],
+			function (err, result) {
+
+				if (err)
+					throw err;
+>>>>>>> origin/master
 
 
             });
@@ -2545,6 +2657,18 @@ var ePass = ""; //= "FjFMCDg4YPtsxrGRtJmeVQ%3d%3d";
 			var status = 'active';
 	console.log('body: ' + req.body);
 
+<<<<<<< HEAD
+=======
+				var options = {
+					method: 'POST',
+					url: 'http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic',
+					headers: {
+						'cache-control': 'no-cache',
+						'content-type': 'application/soap+xml; charset=utf-8'
+					},
+					body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://bsestarmfdemo.bseindia.com/2016/01/" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">\n   <soap:Header>\n   <a:Action >http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI</a:Action>\n   <a:To>http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc/Basic</a:To>\n   </soap:Header>\n   <soap:Body>\n      <ns:MFAPI  xmlns="http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/MFAPI">\n         <ns:Flag>03</ns:Flag>\n		 <ns:UserId>109401</ns:UserId>\n         <ns:EncryptedPassword>' + uploadPass + '</ns:EncryptedPassword>\n         <ns:param>10940|SOHANDEMO2|http://localhost:3000/BsePaymentStatus</ns:param>\n            </ns:MFAPI>\n   </soap:Body>\n</soap:Envelope>'
+				};
+>>>>>>> origin/master
 
 			async.waterfall([
 				function(callback){
@@ -3811,6 +3935,7 @@ app.get('/Accounts',isLoggedIn, function(req, res){
                     console.log("statements");
 
 
+<<<<<<< HEAD
                     var len=result.rows.length;
 
 
@@ -3874,6 +3999,44 @@ app.get('/Invoices',isLoggedIn, function(req, res){
             if(result.rows.length>0)
                 {
                     console.log("statements");
+=======
+	app.get('/Invoices', isLoggedIn, function (req, res) {
+		currentPage = req.session.activePage = "/Invoices";
+		loginStatus = checkLoginStatus(req);
+		var today = new Date();
+		var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+		mobile = req.useragent["isMobile"];
+		if (mobile)
+			pageName = "myInvoicesMobile";
+		else
+			pageName = "yourStory";
+		console.log("invoices", req.session.user.userid);
+		var query = client.query("select to_char(a.userinvestmentorderdate,'dd-Mon-yyyy') as investdate, b.name, a.amount,NULLIF(a.units,0) as units from userinvestmentorders a, schemesmaster b where a.schemeid = b.schemeid and a.amount > 0 and a.userid=$1 order by 1 desc", [req.session.user.userid], function (err, result) {
+			if (err)
+				console.log("Cant get portfolio details in goal selection");
+			if (result.rows.length > 0) {
+				console.log("statements");
+				var len = result.rows.length;
+				res.render(pageName, {
+					user: req.user,
+					stmt: result.rows,
+					length: len,
+					selectorDisplay: "show",
+					loggedIn: loginStatus,
+					path: 'accountData',
+					smessage: req.flash('signupMessage'),
+					lmessage: req.flash('loginMessage'),
+					path1: 'accountInvoicesData',
+					footerDisplay: "hide",
+					footerData1: "Blog",
+					footerData2: "FAQs",
+					date: date,
+					currentPage: currentPage
+				});
+			}
+		});
+	});
+>>>>>>> origin/master
 
 
                 var len=result.rows.length;
@@ -3897,13 +4060,92 @@ app.get('/Invoices',isLoggedIn, function(req, res){
 
     });
 
+<<<<<<< HEAD
 
+=======
+			user: req.user,
+			selectorDisplay: "show",
+			loggedIn: loginStatus,
+			path: 'accountData',
+			smessage: req.flash('signupMessage'),
+			lmessage: req.flash('loginMessage'),
+			path1: 'accountSettingsData',
+			footerDisplay: "hide",
+			footerData1: "Blog",
+			footerData2: "FAQs",
+			currentPage: currentPage
+		});
+	});
+>>>>>>> origin/master
 
 
 });
 
+<<<<<<< HEAD
 
 app.get('/Settings',isLoggedIn, function(req, res){
+=======
+		loginStatus = checkLoginStatus(req);
+		mobile = req.useragent["isMobile"]
+		if (mobile) {
+			res.render('transactionMobile.ejs', {
+
+			});
+		} else {
+			res.render('yourStory.ejs', {
+
+				user: req.user,
+				selectorDisplay: "show",
+				loggedIn: loginStatus,
+				path: 'accountData',
+				smessage: req.flash('signupMessage'),
+				lmessage: req.flash('loginMessage'),
+				path1: 'accountTransactionData',
+				footerDisplay: "hide",
+				footerData1: "Blog",
+				footerData2: "FAQs",
+				currentPage: currentPage
+			});
+		}
+	});
+
+	app.get('/Investment', isLoggedIn, function (req, res) {
+		currentPage = req.session.activePage = "/Investment";
+		loginStatus = checkLoginStatus(req);
+		var today = new Date();
+		var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+		mobile = req.useragent["isMobile"];
+		if (mobile)
+			pageName = "myInvoicesMobile";
+		else
+			pageName = "yourStory";
+		console.log("invoices", req.session.user.userid);
+		var query = client.query("SELECT a.usersubscriptionorderid, to_char(orderdate, 'dd-Mon-yyyy') AS orderdate, amount, paymentreference, durationdays, to_char(planrenewaldate, 'dd-Mon-yyyy') AS planrenewaldate  FROM usersubscriptionsorder a, usersubscriptions b WHERE a.userid = b.userid AND a.usersubscriptionorderid = b.usersubscriptionorderid AND a.status = 'success' AND a.userid = $1 ORDER BY 3 DESC", [req.session.user.userid], function (err, result) {
+			if (err) {
+				console.log("Cant get portfolio details in goal selection");
+			} else if (result.rows.length > 0) {
+				console.log("statements");
+				var len = result.rows.length;
+				res.render(pageName, {
+					user: req.user,
+					stmt: result.rows,
+					length: len,
+					selectorDisplay: "show",
+					loggedIn: loginStatus,
+					path: 'accountData',
+					smessage: req.flash('signupMessage'),
+					lmessage: req.flash('loginMessage'),
+					path1: 'accountInvestmentData',
+					footerDisplay: "hide",
+					footerData1: "Blog",
+					footerData2: "FAQs",
+					date: date,
+					currentPage: currentPage
+				});
+			}
+		});
+	});
+>>>>>>> origin/master
 
 	currentPage = req.session.activePage = "/Settings";
 

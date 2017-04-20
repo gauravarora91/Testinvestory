@@ -99,10 +99,281 @@
                                  <div></div>
                                 <div></div>
                                 
+<<<<<<< HEAD
                                
                                
                                 
                             
+=======
+								<span id="goalSelected">></span>
+                                <span id="rpText">></span>
+                                <span id="riskSelected"></span>
+                                <span id="yp">> Your Plan</span>
+                            </p>-->
+                                 <p id="Indicator">Goal Selection > 
+                                <span id="goalSelected"></span>
+                                <span id="rpText">> Risk Profiling ></span>
+                                <span id="riskSelected"></span>
+                                <span id="yp">> Your Plan</span>
+                            </p>
+
+
+                            <!--Tab 1-->
+                            <div class="page1">
+                                <h2>Please select your goal</h2>
+                                <p>You can always add or change a goal after you have signed up</p>
+                                <div class="col-sm-12 below">
+                                    <div class="goal" id="">
+                                        <img src="images/goals/Rich/Crorepati.png" mood="Rich" alt="Home view">
+                                        <p id="mood"><span></span>Crorepati</p>
+                                    </div>
+
+                                    <div class="goal" id="">
+                                        <img src="images/goals/Rich/Fancy%20Car.png" mood="Rich" alt="Home view">
+                                        <p id="mood"><span></span>Fancy Car</p>
+                                    </div>
+
+                                    <div class="goal" id="">
+                                        <img src="images/goals/Rich/Double%20the%20money.png" mood="Rich" alt="Home view">
+                                        <p id="mood"><span></span>Double the money</p>
+                                    </div>
+                                </div><div class="clearfix"></div>
+                                <div class="worksBtn">
+                                    <!--<div class="login-btn text-center page-buttons">
+                                        <button type="" class="btn btn-lg moodNav skip" > Skip </button>
+                                    </div>-->
+                                    <div class="btn-hr-wrapper clean">
+                                        <button type="" class="btn btn-lg moodNav next pull-left" disabled="disabled"> Next </button><div class="clearfix"></div>
+                                    </div>
+                                    <div class="login-btn text-center page-buttons"></div>
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <!--Tab 2-->
+                            <div class="page2" style="display: none; text-align: left; padding: 10px 0 15px">
+                                <p style="display: inline-block;vertical-align: bottom; margin-right: 47px">I need INR <input style="box-shadow: -2px 5px 0px -3px #333; border: 0"name="amount" id="amount" placeholder="" min="1000" max="10000000" value="" />
+                                <!-- <span ng-show="signUpForm.mnumber.$touched && signUpForm.mnumber.$invalid">Phone number is invalid.</span>-->
+                                in<input style="margin: 0 10px; width: 50px;padding:0px"class="blankInput" type="number" min="1" max="50" placeholder="" id="time" value="" /> (Years)</p>
+                                <div  style="display: inline-block">
+                                    <button type="button" id="go" class="btn btn-lg moodNav go"> Go </button>
+                                    <button type="" class="btn btn-lg moodNav next page3Sub"> Next </button>
+                                    <!--<button type="" class="btn btn-lg moodNav save page3Sub" > Save </button>-->
+                                </div>
+                                <p class="page2VldMsg" style="color: red; display: none;">Monthly Investment should be minimum INR 1000</p>
+                                <p class="page2VldMsg2" style="color: red; display: none;">Please Select years between 1 t0 50</p>
+                                <div class="dotHr"></div>
+                            </div>
+
+                            <!--Tab 3-->
+                            <div class="page3" style="display: none">
+                                <p>So, you need to invest INR <span id="invest"></span> Monthly</p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Allocation percent</th>
+                                                <th>Amount (&#x20B9;)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+
+                                                <td>Equity</td>
+                                                <td id="eqPer">0%</td>
+                                                <td id="eqAmt">NA</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Hybrid</td>
+                                                <td id="hybPer">0% </td>
+                                                <td id="hybAmt">NA</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Debt</td>
+                                                <td id="debPer">0%</td>
+                                                <td id="debAmt">NA</td>
+                                            </tr>
+                                            <tfoot >
+                                            <tr style="border:4px solid black;">
+                                                <th style="text-align:right; font-size:1em;font-weight:900;" colspan="2">Total :</th>
+                                                <td id="total" style="font-size:1em;font-weight:900;"></td>
+                                            </tr>
+                                        </tfoot>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p style="text-align: center;">* Risk Profile - Conservative</p>
+                            </div>
+
+                            <!--Tab 4-->
+                            <div class="page4" style="display: none">
+                                <p id="invest">You need to invest INR <span id="invest2"></span> monthly in Conservative mode.</p>
+                                <!--<h2>Risk Profiling</h2>-->
+                                <p><em>Risk profiling will help you choose right fund to invest in based on your comfort</em></p>
+                                <div class="selectMode">
+                                    <div class="dotHr">
+                                        <a href="#" class="tooltips">
+                                            <button id="Conservative" type="" class="btn btn-lg moodNav" profile="c" onclick="setProfile(0,2,1)"> Conservative </button>
+                                            <span id="c">I am a low risk taker. When I hear the word Risk, I think of the danger it represents. When faced with a financial decision, I am always concerned of the possible losses. I would be satisfied if I got returns similar to FDs. I would be concerned with any loss on my portfolio in the short term even if the investments are for the long term.</span>
+                                        </a>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <a href="#" class="tooltips">
+                                            <button id="Moderate" type="" class="btn btn-lg moodNav" profile="m" onclick="setProfile(1,2,1)"> Moderate </button>
+                                            <span id="m">I am an average risk taker. When I hear the word Risk, I think of the uncertainty it represents. When faced with a financial decision, I am usually concerned of the possible losses. I would be satisfied if I got returns slightly higher than FDs. I would be concerned with a small loss on my portfolio in the short term even if the investments are for the long term.</span>
+                                        </a>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <a href="#" class="tooltips">
+                                            <button id="Aggressive" type="" class="btn btn-lg moodNav" profile="a" onclick="setProfile(2,2,1)"> Aggressive </button>
+                                            <span id="a">I am a high risk taker. When I hear the word Risk, I think of the opportunity it represents. When faced with a financial decision, I am concerned of the possible gains. I would be satisfied if I got returns which are much higher when compared to FDs. I would not be concerned with any loss on my portfolio in the short term even if the investments are for the long term.</span>
+                                        </a>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div id="moodPagination"></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <a href="#" class="tooltips">
+                                            <button id="dontKnow" type="" profile="d" class="btn btn-lg moodNav ">I don't know</button>
+                                            <span id="d">Click to know your Risk Profile.</span>
+                                        </a>
+                                    </div>
+                                </div><div class="clearfix"></div>
+
+                                <div class="sub-page4">
+                                    <div class="sliderRiskProfile">
+                                        <div id="riskHeight">
+                                            <button class="accordion">
+                                                <div class="col-sm-1 btn btn-default btn-circle">1</div>
+                                                <div class="col-sm-11"> <label for="Q1" id="1">Compared to others, how do you rate your willingness to take financial risks?</label></div>
+                                            </button>
+                                            <div class="riskProfiling">
+                                                <label id="mood">  <input type="Radio" id="Q1" name="Q1" value="0" >Low risk taker</label>
+                                                <label id="mood"><input type="Radio" id="Q1" name="Q1" value="1" >Average risk taker</label>
+                                                <label id="mood"> <input type="Radio" id="Q1" name="Q1"  value="2">High risk taker</label>
+                                            </div>
+                                            <button class="accordion">
+                                                <div class="col-sm-1 btn btn-default btn-circle">2</div>
+                                                <div class="col-sm-11"><label for="Q2">When you think of the word 'risk' in a financial context, which of the following words come to mind first?</label></div>
+                                            </button>
+                                            <div class="riskProfiling">
+                                                <label id="mood"> <input type="Radio" id="Q2" name="Q2"  value="0" >Danger</label>
+                                                <label id="mood"><input type="Radio" id="Q2" name="Q2"  value="1" >Uncertainty</label>
+                                                <label id="mood"> <input type="Radio" id="Q2"  name="Q2" value="2">Opportunity</label>
+                                            </div>
+                                            <button class="accordion">
+                                                <div class="col-sm-1 btn btn-default btn-circle">3</div>
+                                                <div class="col-sm-11">  <label for="Q3">When faced with a major financial decision, are you most concerned about the possible losses or the possible gains?</label></div>
+                                            </button>
+                                            <div class="riskProfiling">
+                                                <label id="mood"> <input type="Radio" id="Q3" name="Q3" value="0" >Always the possible losses</label>
+                                                <label id="mood"><input type="Radio" id="Q3" name="Q3"  value="1" >Usually the possible losses</label>
+                                                <label id="mood"> <input type="Radio" id="Q3" name="Q3"  value="2">Always the possible gains</label>
+                                            </div>
+                                            <button class="accordion">
+                                                <div class="col-sm-1 btn btn-default btn-circle">4</div>
+                                                <div class="col-sm-11"><label for="Q4">Think of the average return you would expect to earn on an investment portfolio over a fixed deposit the next ten years.</label></div>
+                                            </button>
+                                            <div class="riskProfiling">
+                                                <label id="mood"><input type="Radio" id="Q4" name="Q4" value="0" >About the same rate as from bank fixed deposits</label>
+                                                <label id="mood"><input type="Radio" id="Q4" name="Q4"  value="1" >About one and half time the rate from bank fixed deposits</label>
+                                                <label id="mood"><input type="Radio" id="Q4" name="Q4"  value="2">About twice the rate from bank fixed deposits</label>
+                                            </div>
+                                            <button class="accordion">
+                                                <div class="col-sm-1 btn btn-default btn-circle">5</div>
+                                                <div class="col-sm-11"><label for="Q5">Which of the following statement best describes your attitude about the next six month's performance of the investment?</label></div>
+                                            </button>
+                                            <div class="riskProfiling">
+                                                <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="0" >I would have a concern with any sort of loss</label>
+                                                <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="1" >I'd get concerned if the loss was greater than 10%</label>
+                                                <label id="mood"><input type="Radio" id="Q5" name="Q5"  value="2">I wouldn't worry about losses in that time frame</label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <div class="worksBtn">
+                                        <div class="btn-hr-wrapper clean" style="margin-top: 16px ">
+                                            <button type="" class="btn btn-lg moodNav done pull-left " onclick="myScore();" disabled="disabled"> Done </button><div class="clearfix"></div>
+                                        </div>
+                                        <div class="login-btn text-center page-buttons">
+                                            <!--<button type="" class="btn btn-lg moodNav save " > Save </button>-->
+                                        </div>
+                                        <div class="login-btn text-center page-buttons"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Tab 5-->
+                            <div class="page5" style="display: none">
+                                <p>So, you need to invest INR <span id="invest1"></span> Monthly</p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr><th>Category</th>
+                                                <th>Allocation %</th>
+                                                <th>Amount (&#x20B9;)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Equity</td>
+                                                <td id="eqPer1">0%</td>
+                                                <td id="eqAmt1">NA</td>
+                                            </tr>
+                                            <tr><td>Hybrid</td>
+                                                <td id="hybPer1">0% </td>
+                                                <td id="hybAmt1">NA</td>
+                                            </tr>
+                                            <tr><td>Debt</td>
+                                                <td id="debPer1">0%</td>
+                                                <td id="debAmt1">NA</td>
+                                            </tr>
+                                            <tfoot>
+                                            <tr>
+                                               <th style="text-align:right; font-size:1em;font-weight:900;" colspan="2">Total :</th>
+                                                <td id="total1" style="font-size:1em;font-weight:900;"></td>
+                                            </tr>
+                                            </tfoot>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="btn-hr-wrapper clean showDataSchemes">
+                                    <% if(loggedIn && paid){ %>
+                                        <button type="submit" class="btn btn-lg moodNav signUp pull-left" id="schemeNext"> Next </button>
+                                    <%  } else if(loggedIn && !paid) { %>
+                                        <form action="/Pricing" method="get">
+                                            <button type="submit" class="btn btn-lg moodNav signUp pull-left">Pay </button>
+                                        </form>
+                                    <%  } else { %>
+                                        <button type="" data-toggle="modal" data-target="#loginModal" class="btn btn-lg moodNav signUp pull-left"> login </button>
+                                    <% } %>
+                                <div class="clearfix"></div></div>
+>>>>>>> origin/master
                             </div>
    <!--</form>-->  
                         </div>
@@ -1607,7 +1878,28 @@ function myinit(riskRate, chooseTable, storeAllocation)
                         else
                            alloc3=alloc3-1
                         }
+<<<<<<< HEAD
     
+=======
+                        tempGoals.mn = mn;
+                        sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                    }
+                } catch(e) {
+                    console.log("Session Storage thing didn't work >>> "+ e );
+                }
+
+                console.log(sessionStorage.getItem("tempGoals"));
+                $("#invest").html(mn).promise().done(function() {
+                    if( $('#invest').html() >= 1000 ) {
+                        $('.page2VldMsg').slideUp();
+                    } else {
+                        $('.page2VldMsg').slideDown();
+                    }
+                });
+                document.getElementById("invest2").innerHTML = mn;
+                document.getElementById("total").innerHTML = mn;
+                document.getElementById("total1").innerHTML = mn;
+>>>>>>> origin/master
                 
             else{
                    allo=Math.max(alloc1,alloc2,alloc3);
@@ -1981,7 +2273,93 @@ str = "0" + str;
 
 var decpoint = str.length - decplaces;
 
+<<<<<<< HEAD
 return (str.substring(0,decpoint) + "." + str.substring(decpoint,str.length));
+=======
+            // Get User Status
+            $.getJSON("user_data", function (data) {
+            }).done(function (data) {
+                loggedIn = data.loggedIn;
+                console.log(data);
+                initializeTabs();
+            });
+
+            $("#dontKnow").click(function() {
+                $(".sub-page4").show();
+            });
+
+            $('.page2 #amount').change(function () {
+                var amount = $('.page2 #amount').val();
+                if(!loggedIn) {
+                    try {
+                        var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
+                        tempGoals.goalAmount = amount;
+                        sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                        console.log(sessionStorage.getItem("tempGoals"));
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+            });
+
+            $('.page2 #time').change(function () {
+                var time = $('.page2 #time').val();
+                if(!loggedIn) {
+                    try{
+                        var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
+                        tempGoals.time = time;
+                        sessionStorage.setItem('tempGoals', JSON.stringify(tempGoals));
+                        console.log(sessionStorage.getItem("tempGoals"));
+                    } catch(e) {
+                        console.log(e);
+                    }
+                }
+            });
+
+
+            var initializeTabs = function () {
+                try {
+                    // debugger;
+                    var tempGoals = JSON.parse(sessionStorage.getItem('tempGoals'));
+                    if (loggedIn && tempGoals.currentPage) {
+                        selectTab(tempGoals.currentPage);
+                        $('.frogImageMoods #setMood').attr('src', tempGoals.mood);
+                        $("#eqAmt, #eqAmt1").html(tempGoals.amt1);
+                        $("#hybAmt, #hybAmt1").html(tempGoals.amt2);
+                        $("#debAmt, #debAmt1").html(tempGoals.amt3);
+                        $("#eqPer, #eqPer1").html(tempGoals.alloc1 + "%");
+                        $("#hybPer, #hybPer1").html(tempGoals.alloc2 + "%");
+                        $("#debPer, #debPer1").html(tempGoals.alloc3 + "%");
+                        $("#invest").html(tempGoals.mn);
+                        $("#invest1").html(tempGoals.mn);
+                        $("#total").html(tempGoals.mn);
+                        $("#total1").html(tempGoals.mn);
+                        $("#total2").html(tempGoals.mn);
+                        $("#invest2").html(tempGoals.mn);
+                        $("#amount").val(tempGoals.goalAmount);
+                        $('#time').val(Number(tempGoals.time));
+                        console.log(JSON.parse(sessionStorage.getItem('sessionStorage')));
+                        // debugger;
+                        // if (tempGoals.riskProfile) {
+                            // showRiskProfile(tempGoals.riskProfile);
+                        $('#riskSelected').html(tempGoals.riskProfile);
+                        // }
+                        $('#Indicator span').css('display', 'inline');
+                        var moodId = tempGoals.moodText;
+                        var local;
+                        local = getGoals(moodId);
+                        // $(".frogImageMoods img").attr("src", "images/" + moodImgName + $imgExtension);
+                        $(".frogImageMoods img").attr("src", tempGoals.mood);
+                        $(".frogImageMoods h1").html("Feeling " + moodId);
+                        $(".below").empty();
+                        for (i = 0; i < local.length; i++) {
+                            $(".below").append("<div class='goal' id=''><img src='images/goals/" + moodId + "/" + local[i] + ".png' mood=" + moodId + " alt='Home view'><p id='mood'><span></span>" + local[i] + "</p></div>");
+                        }
+                        $('p:contains(' + tempGoals.goal + ')').children('span').css('background', 'yellow');
+                        $('span#goalSelected').html(tempGoals.goal);
+                        sessionStorage.removeItem('tempGoals');
+                    }
+>>>>>>> origin/master
 
 }
 		   

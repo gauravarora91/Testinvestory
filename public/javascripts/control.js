@@ -1,7 +1,11 @@
 
 var selectTab;
 $(document).ready(function(){
-
+    
+    $('.faqsNav a').click(function(e) { 
+        $('.faqsNav a').removeClass('active');
+        $(e.target).addClass('active');
+    });
 
     
 
@@ -623,8 +627,10 @@ function getParameterByName(name) {
 
 var source = getParameterByName('mood');
 var sourceGoal = getParameterByName('goal');
+if ( source != "" && sourceGoal != "" ) {
+    $('.page1 .next').removeAttr('disabled');
+}
 
-	
 
 	
 	/*if(source && sourceGoal){
@@ -784,12 +790,42 @@ var $smartGoals = "smartGoals";
         }
     
 
+<<<<<<< HEAD
     $(".emergency-funds > p").click(function(){
         
         var sipMood = $(this).attr("id");
              window.location.href = "GoalSelection?smartGoal="+$emergencyFunds+"&smood="+sipMood;
         
     });
+=======
+        $(".emergency-funds").click(function () {
+            var sipMood = $(this).children('p').attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $emergencyFunds + "&smood=" + sipMood;
+
+        });
+
+
+        $(".tax-savings").click(function () {
+
+            var sipMood = $(this).children('p').attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $taxSavings + "&smood=" + sipMood;
+
+        });
+
+
+        $(".build-wealth").click(function () {
+
+            var sipMood = $(this).children('p').attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $buildWealth + "&smood=" + sipMood;
+
+        });
+
+
+        $(".smart-goals").click(function () {
+            var sipMood = $(this).children('p').attr("id");
+            window.location.href = "GoalSelection?smartGoal=" + $smartGoals + "&smood=" + sipMood;
+        });
+>>>>>>> origin/master
     
     
         $(".tax-savings > p").click(function(){
